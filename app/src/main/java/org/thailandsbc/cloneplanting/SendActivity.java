@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.google.zxing.qrcode.encoder.QRCode;
+
 import org.thailandsbc.cloneplanting.adapter.SendRecyclerListAdapter;
 import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
 import org.thailandsbc.cloneplanting.dialog.SelectPlaceToSendDialog;
@@ -48,7 +50,7 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QrCodeScannerDialog dialog = QrCodeScannerDialog.newInstance(1);
+                QrCodeScannerDialog dialog = QrCodeScannerDialog.newInstance(QRMode.MODE_SEND_FAMILY);
                 dialog.show(getSupportFragmentManager(), "QR code Scanner");
             }
         });

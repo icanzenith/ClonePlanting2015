@@ -40,15 +40,15 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
     private onFragmentInteractionListener mListener;
 
     private static String ARG_SCANNER_Mode = "mode";
-    private int mScannerMode;
+    private String mScannerMode;
 
     public QrCodeScannerDialog() {
     }
 
-    public static QrCodeScannerDialog newInstance(int ModeMenu) {
+    public static QrCodeScannerDialog newInstance(String ModeMenu) {
         QrCodeScannerDialog dialog = new QrCodeScannerDialog();
         Bundle bundle = new Bundle();
-        bundle.putInt("ARG_SCANNER_Mode", ModeMenu);
+        bundle.putString(ARG_SCANNER_Mode, ModeMenu);
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -65,7 +65,8 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         if (getArguments()!=null){
-            mScannerMode = getArguments().getInt(ARG_SCANNER_Mode);
+            mScannerMode = getArguments().getString(ARG_SCANNER_Mode);
+
         }
     }
 
@@ -93,12 +94,16 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         buttonCancle.setOnClickListener(this);
     }
 
-    private void setModeTitle(int ModeMenu) {
+    private void setModeTitle(String ModeMenu) {
 
-        switch (ModeMenu) {
-            case 1:
-                textViewScannerTitle.setText(getResources().getString(R.string.qr_scanner_dialog_title_send));
-                break;
+        if (ModeMenu.equals(QRMode.MODE_SEND_FAMILY)) {
+
+            textViewScannerTitle.setText(getResources().getString(R.string.qr_scanner_dialog_title_send));
+        }
+
+        if (ModeMenu.equals(QRMode.MODE_RECEIVE_FAMILY)){
+
+            textViewScannerTitle.setText(getResources().getString(R.string.qr_scanner_dialog_title_receive));
         }
     }
 
@@ -132,7 +137,7 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         mAmount = Integer.parseInt(editTextAmount.getText().toString());
         result.setFamilyCode(mFamilyCode);
         result.setAmount(mAmount);
-        mListener.onFragmentInteraction(QRMode.MODE_SEND_FAMILY,result);
+        mListener.onFragmentInteraction(mScannerMode,result);
         dismiss();
 
     }

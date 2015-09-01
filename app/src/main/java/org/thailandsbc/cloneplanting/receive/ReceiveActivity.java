@@ -9,10 +9,8 @@ import android.view.View;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.adapter.ReceiveRecyclerListAdapter;
-import org.thailandsbc.cloneplanting.adapter.SendRecyclerListAdapter;
 import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
 import org.thailandsbc.cloneplanting.model.ScannerResult;
-import org.thailandsbc.cloneplanting.model.SendFamilyModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
@@ -43,7 +41,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QrCodeScannerDialog dialog = QrCodeScannerDialog.newInstance(1);
+                QrCodeScannerDialog dialog = QrCodeScannerDialog.newInstance(QRMode.MODE_RECEIVE_FAMILY);
                 dialog.show(getSupportFragmentManager(), "QR code Scanner");
             }
         });
@@ -73,18 +71,19 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
             ScannerResult result = (ScannerResult) object;
             addNewDataToList(result);
         }
-        if (TAG.equals(SelectionMode.MODE_DELETE_SEND_CLONE)){
+        if (TAG.equals(SelectionMode.MODE_DELETE_RECEIVE_CLONE)){
             ReceiveFamilyModel result = (ReceiveFamilyModel) object;
             deleteDataFromList(result, ((ReceiveFamilyModel) object).getPositionInList());
         }
     }
 
     private void addNewDataToList(ScannerResult result) {
-
+        ReceiveFamilyModel item = castScannerResultToReceiveModel(result);
+        mAdapter.addNewDataItem(item);
     }
 
     private void deleteDataFromList(ReceiveFamilyModel data,int listPosition) {
-        mAdapter.deleteDataItem(data,listPosition);
+        mAdapter.deleteDataItem(data, listPosition);
     }
 
     private List<ReceiveFamilyModel> createDataSet() {
@@ -101,7 +100,15 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
 
         }
         return dataSet;
+        
+    }
 
-
+    private ReceiveFamilyModel castScannerResultToReceiveModel(ScannerResult result) {
+        ReceiveFamilyModel m = new ReceiveFamilyModel();
+        //TODO set Latest order
+        m.setOrder(0);
+        m.setFamilyCode(result.getFamilyCode());
+        m.setSendAmount(result.getAmount());
+        return m;
     }
 }

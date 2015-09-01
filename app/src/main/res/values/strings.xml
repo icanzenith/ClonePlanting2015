@@ -25,4 +25,5 @@
     <string name="delete">ลบ</string>
     <string name="title_activity_family_details">FamilyDetailsActivity</string>
     <string name="title_activity_receive">ReceiveActivity</string>
+    <string name="qr_scanner_dialog_title_receive">กรุณาระบุจำนวนที่รับ</string>
 </resources>
