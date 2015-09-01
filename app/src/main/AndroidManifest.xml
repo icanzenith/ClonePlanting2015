@@ -38,6 +38,7 @@
             android:name=".receive.ReceiveActivity"
             android:label="@string/title_activity_receive" >
         </activity>
+
     </application>
 
 </manifest>
