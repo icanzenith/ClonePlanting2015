@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ClonePlanting</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="send">ส่ง</string>
+    <string name="receive">รับ</string>
+    <string name="plant">ปลุก</string>
+    <string name="check">เช็ค</string>
+    <string name="pic">Pic</string>
+    <string name="text">Text</string>
+    <string name="title_activity_send">SendActivity</string>
+    <string name="title_activity_main222">MainActivity222</string>
+    <string name="amount_hint">จำนวน</string>
+    <string name="finish">สำเร็จ</string>
+    <string name="cancle">ยกเลิก</string>
+    <string name="qr_scanner_dialog_title_send">กรุณาระบุจำนวนที่ส่ง</string>
+    <string name="open">เปิด</string>
+    <string name="fix">แก้ไข</string>
+    <string name="delete">ลบ</string>
+    <string name="title_activity_family_details">FamilyDetailsActivity</string>
+</resources>

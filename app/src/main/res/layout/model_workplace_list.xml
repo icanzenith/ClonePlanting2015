@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frameSymbol"
+        android:layout_centerVertical="true"
+        android:layout_width="@dimen/model_list_symbol_default_width"
+        android:layout_height="@dimen/model_list_symbol_default_height"
+        android:layout_margin="@dimen/model_list_symbol_default_margin"
+        android:background="@drawable/bg_workplace_symbol">
+
+        <TextView
+            android:id="@+id/textViewSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/fab_stroke_top_outer_color"
+            android:textSize="@dimen/model_list_symbol_default_text_size"
+            tools:text="A" />
+
+    </FrameLayout>
+
+    <TextView
+
+        android:layout_marginLeft="16dp"
+        android:textSize="16sp"
+        android:text="Kasetsart university"
+        android:layout_centerVertical="true"
+        android:id="@+id/texViewFullName"
+        android:layout_toRightOf="@+id/frameSymbol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

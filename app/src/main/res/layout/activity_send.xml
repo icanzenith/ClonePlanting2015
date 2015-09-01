@@ -1,0 +1,27 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="org.thailandsbc.cloneplanting.SendActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sendRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:src="@drawable/ic_add_black_24dp"
+        android:id="@+id/fabSend"
+        app:fabSize="normal"
+        android:layout_gravity="end|bottom"
+        app:borderWidth="0dp"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_behavior="org.thailandsbc.cloneplanting.utils.ScrollAwareFABBehavior"
+        >
+
+    </android.support.design.widget.FloatingActionButton>
+
+</android.support.design.widget.CoordinatorLayout>

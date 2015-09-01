@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/home_menu_default_button_padding">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/buttonSend"
+            android:drawableTop="@android:drawable/btn_star"
+            android:text="@string/send"
+            android:layout_width="@dimen/home_menu_default_button_width"
+            android:layout_height="@dimen/home_menu_default_button_height" />
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/buttonReceive"
+            android:drawableTop="@android:drawable/btn_star"
+            android:text="@string/receive"
+            android:layout_width="@dimen/home_menu_default_button_width"
+            android:layout_height="@dimen/home_menu_default_button_height" />
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/buttonPlant"
+            android:drawableTop="@android:drawable/btn_star"
+            android:text="@string/plant"
+            android:layout_width="@dimen/home_menu_default_button_width"
+            android:layout_height="@dimen/home_menu_default_button_height" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/buttonCheck"
+            android:drawableTop="@android:drawable/btn_star"
+            android:text="@string/check"
+            android:layout_width="@dimen/home_menu_default_button_width"
+            android:layout_height="@dimen/home_menu_default_button_height" />
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/buttonPic"
+            android:drawableTop="@android:drawable/btn_star"
+            android:text="@string/pic"
+            android:layout_width="@dimen/home_menu_default_button_width"
+            android:layout_height="@dimen/home_menu_default_button_height" />
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/buttonText"
+            android:drawableTop="@android:drawable/btn_star"
+            android:text="@string/text"
+            android:layout_width="@dimen/home_menu_default_button_width"
+            android:layout_height="@dimen/home_menu_default_button_height" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
