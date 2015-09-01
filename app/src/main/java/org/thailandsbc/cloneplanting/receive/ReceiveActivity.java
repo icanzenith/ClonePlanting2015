@@ -74,8 +74,8 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
             addNewDataToList(result);
         }
         if (TAG.equals(SelectionMode.MODE_DELETE_SEND_CLONE)){
-            SendFamilyModel result = (SendFamilyModel) object;
-            deleteDataFromList(result, ((SendFamilyModel) object).getPositionInList());
+            ReceiveFamilyModel result = (ReceiveFamilyModel) object;
+            deleteDataFromList(result, ((ReceiveFamilyModel) object).getPositionInList());
         }
     }
 
@@ -83,7 +83,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
 
     }
 
-    private void deleteDataFromList(SendFamilyModel data,int listPosition) {
+    private void deleteDataFromList(ReceiveFamilyModel data,int listPosition) {
         mAdapter.deleteDataItem(data,listPosition);
     }
 

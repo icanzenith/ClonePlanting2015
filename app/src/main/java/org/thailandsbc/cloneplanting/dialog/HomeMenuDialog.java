@@ -15,6 +15,7 @@ import org.thailandsbc.cloneplanting.receive.ReceiveActivity;
 /**
  * Created by Icanzenith on 8/31/15 AD.
  */
+
 public class HomeMenuDialog extends DialogFragment implements View.OnClickListener {
 
     int mNum;

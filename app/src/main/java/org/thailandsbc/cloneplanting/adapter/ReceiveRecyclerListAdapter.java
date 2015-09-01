@@ -62,6 +62,7 @@ public class ReceiveRecyclerListAdapter extends RecyclerView.Adapter<ReceiveRecy
 
     @Override
     public boolean onLongClick(View v) {
+
         ViewHolder holder = (ViewHolder) v.getTag();
         int position = holder.getLayoutPosition();
         ReceiveFamilyModel item = dataSet.get(position);
@@ -91,7 +92,7 @@ public class ReceiveRecyclerListAdapter extends RecyclerView.Adapter<ReceiveRecy
         notifyItemChanged(dataSet.size()-1);
     }
 
-    public void deleteDataItem(SendFamilyModel data, int listPosition) {
+    public void deleteDataItem(ReceiveFamilyModel data, int listPosition) {
         //TODO Keep data
         dataSet.remove(listPosition);
         notifyItemRemoved(listPosition);
