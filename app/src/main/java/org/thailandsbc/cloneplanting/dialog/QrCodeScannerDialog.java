@@ -87,7 +87,7 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         textViewScannerTitle = (TextView) v.findViewById(R.id.textViewScannerTitle);
 
         buttonFinish = (Button) v.findViewById(R.id.buttonFinish);
-        buttonCancle = (Button) v.findViewById(R.id.buttonCancle);
+        buttonCancle = (Button) v.findViewById(R.id.buttonCancel);
 
         buttonFinish.setOnClickListener(this);
         buttonCancle.setOnClickListener(this);
@@ -121,7 +121,7 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
             case R.id.buttonFinish:
                 onFinishScan();
                 break;
-            case R.id.buttonCancle:
+            case R.id.buttonCancel:
                 getDialog().dismiss();
                 break;
         }

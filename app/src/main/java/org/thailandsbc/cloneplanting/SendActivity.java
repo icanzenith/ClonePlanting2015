@@ -137,7 +137,7 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
 
         if (TAG.equals(SelectionMode.MODE_DELETE_SEND_CLONE)){
             SendFamilyModel result = (SendFamilyModel) object;
-            deleteDataFromList(result,((SendFamilyModel) object).getPostionInList());
+            deleteDataFromList(result,((SendFamilyModel) object).getPositionInList());
         }
     }
 

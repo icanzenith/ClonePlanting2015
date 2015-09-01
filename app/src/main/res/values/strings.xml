@@ -24,4 +24,5 @@
     <string name="fix">แก้ไข</string>
     <string name="delete">ลบ</string>
     <string name="title_activity_family_details">FamilyDetailsActivity</string>
+    <string name="title_activity_receive">ReceiveActivity</string>
 </resources>

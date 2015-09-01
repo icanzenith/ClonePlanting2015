@@ -34,6 +34,10 @@
             android:name=".FamilyDetailsActivity"
             android:label="@string/title_activity_family_details" >
         </activity>
+        <activity
+            android:name=".receive.ReceiveActivity"
+            android:label="@string/title_activity_receive" >
+        </activity>
     </application>
 
 </manifest>

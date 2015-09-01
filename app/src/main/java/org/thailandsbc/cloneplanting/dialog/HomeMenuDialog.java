@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.SendActivity;
+import org.thailandsbc.cloneplanting.receive.ReceiveActivity;
 
 /**
  * Created by Icanzenith on 8/31/15 AD.
@@ -118,7 +119,10 @@ public class HomeMenuDialog extends DialogFragment implements View.OnClickListen
                 intent = new Intent(getActivity(), SendActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.buttonReceive:
+                intent = new Intent(getActivity(), ReceiveActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }

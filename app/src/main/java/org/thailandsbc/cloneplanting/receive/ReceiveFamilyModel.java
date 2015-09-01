@@ -1,4 +1,4 @@
-package org.thailandsbc.cloneplanting.model;
+package org.thailandsbc.cloneplanting.receive;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,14 +6,12 @@ import android.os.Parcelable;
 /**
  * Created by Icanzenith on 9/1/15 AD.
  */
-public class SendFamilyModel implements Parcelable {
+public class ReceiveFamilyModel implements Parcelable {
     private int order;
     private String FamilyCode;
     private int SendAmount;
     private String SenderID;
     private int PositionInList;
-
-
 
     public int getOrder() {
         return order;
@@ -55,6 +53,7 @@ public class SendFamilyModel implements Parcelable {
         PositionInList = positionInList;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -69,10 +68,10 @@ public class SendFamilyModel implements Parcelable {
         dest.writeInt(this.PositionInList);
     }
 
-    public SendFamilyModel() {
+    public ReceiveFamilyModel() {
     }
 
-    protected SendFamilyModel(Parcel in) {
+    protected ReceiveFamilyModel(Parcel in) {
         this.order = in.readInt();
         this.FamilyCode = in.readString();
         this.SendAmount = in.readInt();
@@ -80,13 +79,13 @@ public class SendFamilyModel implements Parcelable {
         this.PositionInList = in.readInt();
     }
 
-    public static final Parcelable.Creator<SendFamilyModel> CREATOR = new Parcelable.Creator<SendFamilyModel>() {
-        public SendFamilyModel createFromParcel(Parcel source) {
-            return new SendFamilyModel(source);
+    public static final Parcelable.Creator<ReceiveFamilyModel> CREATOR = new Parcelable.Creator<ReceiveFamilyModel>() {
+        public ReceiveFamilyModel createFromParcel(Parcel source) {
+            return new ReceiveFamilyModel(source);
         }
 
-        public SendFamilyModel[] newArray(int size) {
-            return new SendFamilyModel[size];
+        public ReceiveFamilyModel[] newArray(int size) {
+            return new ReceiveFamilyModel[size];
         }
     };
 }

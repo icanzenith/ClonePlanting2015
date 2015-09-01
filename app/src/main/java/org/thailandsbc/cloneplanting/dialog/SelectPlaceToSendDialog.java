@@ -1,10 +1,7 @@
 package org.thailandsbc.cloneplanting.dialog;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.adapter.ModelWorkplaceListAdapter;
 import org.thailandsbc.cloneplanting.model.WorkPlaceModel;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;

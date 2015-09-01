@@ -22,6 +22,8 @@
             app:fabSize="normal"
             app:elevation="10dp"
             app:borderWidth="0dp"
+            android:src="@drawable/ic_add_black_24dp"
+            app:layout_behavior="org.thailandsbc.cloneplanting.utils.ScrollAwareFABBehavior"
             >
 
         </android.support.design.widget.FloatingActionButton>
