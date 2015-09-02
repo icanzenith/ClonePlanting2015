@@ -1,4 +1,4 @@
-package org.thailandsbc.cloneplanting.dialog;
+package org.thailandsbc.cloneplanting.model;
 
 /**
  * Created by Icanzenith on 9/1/15 AD.

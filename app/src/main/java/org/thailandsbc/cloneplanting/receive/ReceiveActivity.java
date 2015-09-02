@@ -10,7 +10,7 @@ import android.view.View;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.adapter.ReceiveRecyclerListAdapter;
 import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
-import org.thailandsbc.cloneplanting.model.ScannerResult;
+import org.thailandsbc.cloneplanting.model.ScannerResultModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
@@ -68,7 +68,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
     @Override
     public void onFragmentInteraction(String TAG, Object object) {
         if (TAG.equals(QRMode.MODE_RECEIVE_FAMILY)) {
-            ScannerResult result = (ScannerResult) object;
+            ScannerResultModel result = (ScannerResultModel) object;
             addNewDataToList(result);
         }
         if (TAG.equals(SelectionMode.MODE_DELETE_RECEIVE_CLONE)){
@@ -77,7 +77,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
         }
     }
 
-    private void addNewDataToList(ScannerResult result) {
+    private void addNewDataToList(ScannerResultModel result) {
         ReceiveFamilyModel item = castScannerResultToReceiveModel(result);
         mAdapter.addNewDataItem(item);
     }
@@ -103,7 +103,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
         
     }
 
-    private ReceiveFamilyModel castScannerResultToReceiveModel(ScannerResult result) {
+    private ReceiveFamilyModel castScannerResultToReceiveModel(ScannerResultModel result) {
         ReceiveFamilyModel m = new ReceiveFamilyModel();
         //TODO set Latest order
         m.setOrder(0);

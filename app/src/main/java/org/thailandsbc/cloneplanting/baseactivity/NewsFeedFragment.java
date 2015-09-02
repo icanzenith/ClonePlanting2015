@@ -4,14 +4,23 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.adapter.NewsFeedRecyclerAdapter;
+import org.thailandsbc.cloneplanting.adapter.ReceiveRecyclerListAdapter;
 import org.thailandsbc.cloneplanting.dialog.HomeMenuDialog;
+import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
 import org.thailandsbc.cloneplanting.model.UserDataModel;
+import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
+import org.thailandsbc.cloneplanting.utils.QRMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
+
+import java.util.List;
 
 public class NewsFeedFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_USERDATA = "UserData";
@@ -21,6 +30,10 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
     private onFragmentInteractionListener mListener;
 
     private FloatingActionButton fabHome;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private NewsFeedRecyclerAdapter mAdapter;
 
     /**
      * Use this factory method to create a new instance of
@@ -44,7 +57,9 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
+
         }
     }
 
@@ -53,12 +68,36 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_news_feed, container, false);
-        fabHome = (FloatingActionButton) v.findViewById(R.id.fabHome);
-        fabHome.setOnClickListener(this);
+
+        InitializationViews(v);
+
+
         return v;
 
     }
 
+    private void InitializationViews(View v) {
+        fabHome = (FloatingActionButton) v.findViewById(R.id.fabHome);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        fabHome.setOnClickListener(this);
+
+
+        createRecyclerList();
+
+
+    }
+    private void createRecyclerList() {
+
+        //Create Sample DataSet
+//        List<ReceiveFamilyModel> dataSet = createDataSet();
+        mLayoutManager = new LinearLayoutManager(getActivity());
+
+
+        mAdapter = new NewsFeedRecyclerAdapter();
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mAdapter);
+
+    }
 
 
     @Override

@@ -1,6 +1,5 @@
 package org.thailandsbc.cloneplanting.dialog;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,7 @@ import android.widget.TextView;
 import com.google.zxing.Result;
 
 import org.thailandsbc.cloneplanting.R;
-import org.thailandsbc.cloneplanting.model.ScannerResult;
+import org.thailandsbc.cloneplanting.model.ScannerResultModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
@@ -133,7 +132,7 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
     }
 
     private void onFinishScan(){
-        ScannerResult result = new ScannerResult();
+        ScannerResultModel result = new ScannerResultModel();
         mAmount = Integer.parseInt(editTextAmount.getText().toString());
         result.setFamilyCode(mFamilyCode);
         result.setAmount(mAmount);

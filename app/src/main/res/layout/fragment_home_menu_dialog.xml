@@ -11,21 +11,21 @@
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/buttonSend"
-            android:drawableTop="@android:drawable/btn_star"
+            android:drawableTop="@drawable/ic_send_black_24dp"
             android:text="@string/send"
             android:layout_width="@dimen/home_menu_default_button_width"
             android:layout_height="@dimen/home_menu_default_button_height" />
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/buttonReceive"
-            android:drawableTop="@android:drawable/btn_star"
+            android:drawableTop="@drawable/ic_call_received_black_24dp"
             android:text="@string/receive"
             android:layout_width="@dimen/home_menu_default_button_width"
             android:layout_height="@dimen/home_menu_default_button_height" />
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/buttonPlant"
-            android:drawableTop="@android:drawable/btn_star"
+            android:drawableTop="@drawable/ic_plant_v1_24dp"
             android:text="@string/plant"
             android:layout_width="@dimen/home_menu_default_button_width"
             android:layout_height="@dimen/home_menu_default_button_height" />
@@ -38,21 +38,21 @@
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/buttonCheck"
-            android:drawableTop="@android:drawable/btn_star"
+            android:drawableTop="@drawable/ic_check_black_24dp"
             android:text="@string/check"
             android:layout_width="@dimen/home_menu_default_button_width"
             android:layout_height="@dimen/home_menu_default_button_height" />
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/buttonPic"
-            android:drawableTop="@android:drawable/btn_star"
+            android:drawableTop="@drawable/ic_camera_alt_black_24dp"
             android:text="@string/pic"
             android:layout_width="@dimen/home_menu_default_button_width"
             android:layout_height="@dimen/home_menu_default_button_height" />
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/buttonText"
-            android:drawableTop="@android:drawable/btn_star"
+            android:drawableTop="@drawable/ic_textsms_black_24dp"
             android:text="@string/text"
             android:layout_width="@dimen/home_menu_default_button_width"
             android:layout_height="@dimen/home_menu_default_button_height" />

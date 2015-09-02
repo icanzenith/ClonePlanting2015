@@ -8,12 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.google.zxing.qrcode.encoder.QRCode;
-
 import org.thailandsbc.cloneplanting.adapter.SendRecyclerListAdapter;
 import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
 import org.thailandsbc.cloneplanting.dialog.SelectPlaceToSendDialog;
-import org.thailandsbc.cloneplanting.model.ScannerResult;
+import org.thailandsbc.cloneplanting.model.ScannerResultModel;
 import org.thailandsbc.cloneplanting.model.SendFamilyModel;
 import org.thailandsbc.cloneplanting.model.WorkPlaceModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
@@ -133,19 +131,31 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
         }
 
         if (TAG.equals(QRMode.MODE_SEND_FAMILY)) {
-            ScannerResult result = (ScannerResult) object;
-            addNewDataToList(result);
+            ScannerResultModel result = null;
+            try {
+                result = (ScannerResultModel) object;
+                addNewDataToList(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("Throw Exception", "Error Casting Object");
+            }
         }
 
         if (TAG.equals(SelectionMode.MODE_DELETE_SEND_CLONE)){
-            SendFamilyModel result = (SendFamilyModel) object;
-            deleteDataFromList(result,((SendFamilyModel) object).getPositionInList());
+            SendFamilyModel result = null;
+            try {
+                result = (SendFamilyModel) object;
+                deleteDataFromList(result, ((SendFamilyModel) object).getPositionInList());
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d("Throw Exception","Error Casting Object");
+            }
         }
     }
 
 
 
-    private void addNewDataToList(ScannerResult result) {
+    private void addNewDataToList(ScannerResultModel result) {
 
         SendFamilyModel item = castScannerResultToSendModel(result);
         mAdapter.addNewDataItem(item);
@@ -156,7 +166,7 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
         mAdapter.deleteDataItem(data,listPosition);
     }
 
-    private SendFamilyModel castScannerResultToSendModel(ScannerResult result) {
+    private SendFamilyModel castScannerResultToSendModel(ScannerResultModel result) {
         SendFamilyModel m = new SendFamilyModel();
         //TODO set Latest order
         m.setOrder(0);

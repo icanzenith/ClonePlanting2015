@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:elevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- HEADER-->
+        <RelativeLayout
+            android:id="@+id/layoutContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/profileFrame"
+                layout="@layout/profile_with_workplace"/>
+
+            <TextView
+                android:id="@+id/textViewUserFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jitpakorn Rattanadiloknabuket"
+                android:layout_alignTop="@+id/profileFrame"
+                android:layout_toRightOf="@+id/profileFrame"
+                android:layout_toEndOf="@+id/profileFrame"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:textSize="10sp"
+                android:id="@+id/textViewWorkPlaceFullName"
+                android:text="Kasetsart University"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewUserFullName"
+                android:layout_alignLeft="@+id/textViewUserFullName"
+                android:layout_alignStart="@+id/textViewUserFullName" />
+
+        </RelativeLayout>
+        <!-- BODY-->
+        <include layout="@layout/newsfeed_body"/>
+
+        <!-- FooterBar-->
+        <include layout="@layout/newfeeds_footer"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

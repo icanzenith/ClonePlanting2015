@@ -8,8 +8,15 @@ import android.os.Parcelable;
  * for information of user
  */
 public class UserDataModel implements Parcelable {
+
+        public enum TAG
+        {
+            UserID,WorkPlaceCode,WorkPlaceFullName,
+            FullName,Email,Position,Address,TelNumber
+        }
+
     private Integer UserID;
-    private String WorkPlace;
+    private String WorkPlaceCode;
     private String WorkPlaceFullName;
     private String FullName;
     private String Email;
@@ -23,7 +30,7 @@ public class UserDataModel implements Parcelable {
         UserDataModel userDataModel = new UserDataModel();
         userDataModel.UserID = 68 ;
         userDataModel.FullName = "นายสมหมาย สมประสงค์";
-        userDataModel.WorkPlace = "A";
+        userDataModel.WorkPlaceCode = "A";
         userDataModel.WorkPlaceFullName = "Kasetsart University";
         userDataModel.TelNumber = "0915291949";
         userDataModel.Email = "r.jitpakorn@gmail.com";
@@ -40,7 +47,7 @@ public class UserDataModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.UserID);
-        dest.writeString(this.WorkPlace);
+        dest.writeString(this.WorkPlaceCode);
         dest.writeString(this.WorkPlaceFullName);
         dest.writeString(this.FullName);
         dest.writeString(this.Email);
@@ -54,7 +61,7 @@ public class UserDataModel implements Parcelable {
 
     protected UserDataModel(Parcel in) {
         this.UserID = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.WorkPlace = in.readString();
+        this.WorkPlaceCode = in.readString();
         this.WorkPlaceFullName = in.readString();
         this.FullName = in.readString();
         this.Email = in.readString();
@@ -72,4 +79,68 @@ public class UserDataModel implements Parcelable {
             return new UserDataModel[size];
         }
     };
+
+    public Integer getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(Integer userID) {
+        UserID = userID;
+    }
+
+    public String getWorkPlaceCode() {
+        return WorkPlaceCode;
+    }
+
+    public void setWorkPlaceCode(String workPlaceCode) {
+        WorkPlaceCode = workPlaceCode;
+    }
+
+    public String getWorkPlaceFullName() {
+        return WorkPlaceFullName;
+    }
+
+    public void setWorkPlaceFullName(String workPlaceFullName) {
+        WorkPlaceFullName = workPlaceFullName;
+    }
+
+    public String getFullName() {
+        return FullName;
+    }
+
+    public void setFullName(String fullName) {
+        FullName = fullName;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getPosition() {
+        return Position;
+    }
+
+    public void setPosition(String position) {
+        Position = position;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public String getTelNumber() {
+        return TelNumber;
+    }
+
+    public void setTelNumber(String telNumber) {
+        TelNumber = telNumber;
+    }
 }

@@ -4,9 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
+ *
  * Created by Icanzenith on 8/31/15 AD.
+ *
  */
-public class ScannerResult implements Parcelable {
+
+public class ScannerResultModel implements Parcelable {
 
     private String FamilyCode;
     private int Amount;
@@ -24,21 +27,21 @@ public class ScannerResult implements Parcelable {
         dest.writeInt(this.Amount);
     }
 
-    public ScannerResult() {
+    public ScannerResultModel() {
     }
 
-    protected ScannerResult(Parcel in) {
+    protected ScannerResultModel(Parcel in) {
         this.FamilyCode = in.readString();
         this.Amount = in.readInt();
     }
 
-    public static final Parcelable.Creator<ScannerResult> CREATOR = new Parcelable.Creator<ScannerResult>() {
-        public ScannerResult createFromParcel(Parcel source) {
-            return new ScannerResult(source);
+    public static final Parcelable.Creator<ScannerResultModel> CREATOR = new Parcelable.Creator<ScannerResultModel>() {
+        public ScannerResultModel createFromParcel(Parcel source) {
+            return new ScannerResultModel(source);
         }
 
-        public ScannerResult[] newArray(int size) {
-            return new ScannerResult[size];
+        public ScannerResultModel[] newArray(int size) {
+            return new ScannerResultModel[size];
         }
     };
 
