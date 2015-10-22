@@ -3,6 +3,7 @@
     package="org.thailandsbc.cloneplanting" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -39,6 +40,12 @@
             android:label="@string/title_activity_receive" >
         </activity>
 
+        <provider
+            android:name=".database.ClonePlantingContentProvider"
+            android:authorities="ThailandSugarcaneBreedingCenter"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
     </application>
 
 </manifest>

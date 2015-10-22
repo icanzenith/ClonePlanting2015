@@ -42,7 +42,7 @@ public class SendRecyclerListAdapter extends RecyclerView.Adapter<SendRecyclerLi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         dataSet.get(position).setPositionInList(position);
-        holder.textViewOrder.setText("" + dataSet.get(position).getOrder());
+        holder.textViewOrder.setText(""+(position+1));
         holder.textViewFamilyCode.setText(dataSet.get(position).getFamilyCode());
         holder.textViewAmount.setText("" + dataSet.get(position).getSendAmount());
 

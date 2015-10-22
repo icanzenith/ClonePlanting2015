@@ -58,7 +58,7 @@ public class ModelWorkplaceListAdapter extends BaseAdapter {
     }
 
     private void initializeViews(WorkPlaceModel object, ViewHolder holder) {
-        holder.textViewSymbol.setText(object.getWorkPlace());
+        holder.textViewSymbol.setText(object.getWorkPlaceCode());
         holder.texViewFullName.setText(object.getWorkPlaceFullName());
     }
 
@@ -77,7 +77,7 @@ public class ModelWorkplaceListAdapter extends BaseAdapter {
                 "OCSB 01", "OCSB 02", "OCSB 03", "OCSB 04", "F State", "G WorkPlace", "H WorkPlace", "I WorkPlace", "J WorkPlace", "K WorkPlace", "L WorkPlace", "M Work Place",};
         for (int i = 0; i < 12; i++) {
             w[i] = new WorkPlaceModel();
-            w[i].setWorkPlace(symbol[i]);
+            w[i].setWorkPlaceCode(symbol[i]);
             w[i].setWorkPlaceFullName(fullName[i]);
             data.add(w[i]);
         }

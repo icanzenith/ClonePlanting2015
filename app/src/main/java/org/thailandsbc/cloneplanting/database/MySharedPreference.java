@@ -1,4 +1,4 @@
-package org.thailandsbc.cloneplanting.baseactivity;
+package org.thailandsbc.cloneplanting.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;

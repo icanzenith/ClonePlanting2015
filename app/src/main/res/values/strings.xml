@@ -10,6 +10,7 @@
     <string name="title_activity_family_details">รานละเอียดคู่ผสม</string>
     <string name="title_activity_receive">การรับโคลน</string>
 
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send">ส่ง</string>
@@ -27,4 +28,13 @@
     <string name="delete">ลบ</string>
     <string name="qr_scanner_dialog_title_receive">กรุณาระบุจำนวนที่รับ</string>
     <string name="test_text_message">.            ลิสต์ฟิวเจอร์โฟม แกงค์ราชานุญาต สปอร์ตโซนี่ เรซินสะบึมส์เฮียเฟอร์นิเจอร์แฟ็กซ์สันทนาการ แชมป์จีดีพีตรวจทาน ไทเฮาฟอยล์คูลเลอร์ไวกิ้งยะเยือก ฟาสต์ฟู้ดเนอะไหร่ไมค์วาทกรรม โอเวอร์ เรซิน กีวีโอวัลตินคลับโอเคสเตริโอ บาร์บีคิวชัตเตอร์แซ็กโซโฟนเซ็นเซอร์ เปราะบาง เพนตากอนบูมวอล์กเคสรองรับสมาพันธ์ แพนงเชิญมอคค่ามั้ยโอเพ่นติ่มซำเคลม สุริยยาตรฮิตโปรเจ็กเตอร์เพนตากอนปูอัดไลท์ กัมมันตะแอพพริคอท</string>
+
+    <!-- List Navigation Item1-->
+    <string name="navigation_item_home">หน้าแรก</string>
+    <string name="navigation_item_personalInformation">ข้อมูลส่วนตัว</string>
+    <string name="navigation_item_network">เครือข่าย</string>
+    <string name="navigation_item_land_management">การจัดการแปลง</string>
+    <string name="navigation_item_setting">Setting</string>
+    <string name="navigation_item_logout">Logout</string>
+    <string name="sampleName">Jitpakorn Rattanadilok na buket</string>
 </resources>

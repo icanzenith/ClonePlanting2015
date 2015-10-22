@@ -7,15 +7,15 @@ import android.os.Parcelable;
  * Created by Icanzenith on 8/31/15 AD.
  */
 public class WorkPlaceModel implements Parcelable {
-    private String WorkPlace;
+    private String WorkPlaceCode;
     private String WorkPlaceFullName;
 
-    public String getWorkPlace() {
-        return WorkPlace;
+    public String getWorkPlaceCode() {
+        return WorkPlaceCode;
     }
 
-    public void setWorkPlace(String workPlace) {
-        WorkPlace = workPlace;
+    public void setWorkPlaceCode(String workPlaceCode) {
+        WorkPlaceCode = workPlaceCode;
     }
 
     public String getWorkPlaceFullName() {
@@ -33,7 +33,7 @@ public class WorkPlaceModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.WorkPlace);
+        dest.writeString(this.WorkPlaceCode);
         dest.writeString(this.WorkPlaceFullName);
     }
 
@@ -41,7 +41,7 @@ public class WorkPlaceModel implements Parcelable {
     }
 
     protected WorkPlaceModel(Parcel in) {
-        this.WorkPlace = in.readString();
+        this.WorkPlaceCode = in.readString();
         this.WorkPlaceFullName = in.readString();
     }
 

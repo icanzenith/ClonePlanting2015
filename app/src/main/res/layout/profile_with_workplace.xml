@@ -13,13 +13,16 @@
         android:layout_gravity="center"
         android:src="@drawable/ic_profile_sample"
         app:border_color="#FF000000"
-        app:border_width="2dp" />
+        android:elevation="6dp"
+        android:outlineProvider="bounds"
+        />
 
     <FrameLayout
-        android:layout_width="12dp"
-        android:layout_height="12dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:layout_gravity="bottom|right"
-        android:background="@drawable/bg_workplace_symbol">
+        android:background="@drawable/bg_workplace_symbol"
+        >
 
         <TextView
             android:id="@+id/textViewWorkPlaceCode"
@@ -28,6 +31,6 @@
             android:layout_gravity="center"
             android:text="A"
             android:textColor="@color/cardview_light_background"
-            android:textSize="8sp" />
+            android:textSize="12sp" />
     </FrameLayout>
 </FrameLayout>

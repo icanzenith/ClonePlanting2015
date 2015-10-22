@@ -23,6 +23,7 @@ public class UserDataModel implements Parcelable {
     private String Position;
     private String Address;
     private String TelNumber;
+    private String ProfilePictureURL;
 
 
 
@@ -38,47 +39,6 @@ public class UserDataModel implements Parcelable {
         userDataModel.Address = "At Home Street number 1992 android 78892";
         return userDataModel;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.UserID);
-        dest.writeString(this.WorkPlaceCode);
-        dest.writeString(this.WorkPlaceFullName);
-        dest.writeString(this.FullName);
-        dest.writeString(this.Email);
-        dest.writeString(this.Position);
-        dest.writeString(this.Address);
-        dest.writeString(this.TelNumber);
-    }
-
-    public UserDataModel() {
-    }
-
-    protected UserDataModel(Parcel in) {
-        this.UserID = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.WorkPlaceCode = in.readString();
-        this.WorkPlaceFullName = in.readString();
-        this.FullName = in.readString();
-        this.Email = in.readString();
-        this.Position = in.readString();
-        this.Address = in.readString();
-        this.TelNumber = in.readString();
-    }
-
-    public static final Parcelable.Creator<UserDataModel> CREATOR = new Parcelable.Creator<UserDataModel>() {
-        public UserDataModel createFromParcel(Parcel source) {
-            return new UserDataModel(source);
-        }
-
-        public UserDataModel[] newArray(int size) {
-            return new UserDataModel[size];
-        }
-    };
 
     public Integer getUserID() {
         return UserID;
@@ -143,4 +103,55 @@ public class UserDataModel implements Parcelable {
     public void setTelNumber(String telNumber) {
         TelNumber = telNumber;
     }
+
+    public String getProfilePictureURL() {
+        return ProfilePictureURL;
+    }
+
+    public void setProfilePictureURL(String profilePictureURL) {
+        ProfilePictureURL = profilePictureURL;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.UserID);
+        dest.writeString(this.WorkPlaceCode);
+        dest.writeString(this.WorkPlaceFullName);
+        dest.writeString(this.FullName);
+        dest.writeString(this.Email);
+        dest.writeString(this.Position);
+        dest.writeString(this.Address);
+        dest.writeString(this.TelNumber);
+        dest.writeString(this.ProfilePictureURL);
+    }
+
+    public UserDataModel() {
+    }
+
+    protected UserDataModel(Parcel in) {
+        this.UserID = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.WorkPlaceCode = in.readString();
+        this.WorkPlaceFullName = in.readString();
+        this.FullName = in.readString();
+        this.Email = in.readString();
+        this.Position = in.readString();
+        this.Address = in.readString();
+        this.TelNumber = in.readString();
+        this.ProfilePictureURL = in.readString();
+    }
+
+    public static final Parcelable.Creator<UserDataModel> CREATOR = new Parcelable.Creator<UserDataModel>() {
+        public UserDataModel createFromParcel(Parcel source) {
+            return new UserDataModel(source);
+        }
+
+        public UserDataModel[] newArray(int size) {
+            return new UserDataModel[size];
+        }
+    };
 }

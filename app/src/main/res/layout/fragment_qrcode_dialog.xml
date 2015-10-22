@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         >
         <EditText
+            android:inputType="number"
             android:hint="@string/amount_hint"
             android:id="@+id/editTextAmount"
             android:layout_width="match_parent"

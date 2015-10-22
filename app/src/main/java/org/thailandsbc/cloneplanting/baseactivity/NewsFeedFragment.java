@@ -1,18 +1,24 @@
 package org.thailandsbc.cloneplanting.baseactivity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.thailandsbc.cloneplanting.LoginActivity;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.adapter.NewsFeedRecyclerAdapter;
 import org.thailandsbc.cloneplanting.adapter.ReceiveRecyclerListAdapter;
+import org.thailandsbc.cloneplanting.database.MySharedPreference;
 import org.thailandsbc.cloneplanting.dialog.HomeMenuDialog;
 import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
 import org.thailandsbc.cloneplanting.model.UserDataModel;
@@ -34,6 +40,7 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private NewsFeedRecyclerAdapter mAdapter;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -81,9 +88,7 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         fabHome.setOnClickListener(this);
 
-
         createRecyclerList();
-
 
     }
     private void createRecyclerList() {
@@ -91,8 +96,6 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
         //Create Sample DataSet
 //        List<ReceiveFamilyModel> dataSet = createDataSet();
         mLayoutManager = new LinearLayoutManager(getActivity());
-
-
         mAdapter = new NewsFeedRecyclerAdapter();
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
