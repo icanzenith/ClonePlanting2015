@@ -16,9 +16,17 @@ public class ClonePlantingContentProvider extends ContentProvider {
     static final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        matcher.addURI(Database.AUTHORITY, null, 0);
-        matcher.addURI(Database.AUTHORITY, Database.TABLE_FAMILY, 1);
-        matcher.addURI(Database.AUTHORITY, Database.TABLE_LOG, 2);
+        matcher.addURI(Database.AUTHORITY, null                         , 0);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_FAMILY        , 1);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_LOG           , 2);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_SECTOR        , 3);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_SENTCLONE     , 4);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_RECEIVEDCLONE , 5);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_PLANTEDCLONE  , 6);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_LAND          , 7);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_ACTIVITY      , 8);
+        matcher.addURI(Database.AUTHORITY, Database.TABLE_PICTURE       , 9);
+
     }
 
     public ClonePlantingContentProvider() {
@@ -34,13 +42,36 @@ public class ClonePlantingContentProvider extends ContentProvider {
             case 0:
                 break;
             case 1:
-                result = db.delete(Database.TABLE_FAMILY, selection,
-                        selectionArgs);
+                result = db.delete(Database.TABLE_FAMILY, selection,selectionArgs);
                 break;
             case 2:
-                result = db.delete(Database.TABLE_LOG, selection,
-                        selectionArgs);
+                result = db.delete(Database.TABLE_LOG, selection,selectionArgs);
                 break;
+            case 3:
+                result = db.delete(Database.TABLE_SECTOR        , selection,selectionArgs);
+                break;
+            case 4:
+                result = db.delete(Database.TABLE_SENTCLONE     , selection,selectionArgs);
+                break;
+            case 5:
+                result = db.delete(Database.TABLE_RECEIVEDCLONE , selection,selectionArgs);
+                break;
+            case 6:
+                result = db.delete(Database.TABLE_PLANTEDCLONE  , selection,selectionArgs);
+                break;
+            case 7:
+                result = db.delete(Database.TABLE_LAND          , selection,selectionArgs);
+                break;
+            case 8:
+                result = db.delete(Database.TABLE_ACTIVITY      , selection,selectionArgs);
+                break;
+            case 9:
+                result = db.delete(Database.TABLE_PICTURE       , selection,selectionArgs);
+                break;
+            default:
+                break;
+
+
         }
 
         return result;
@@ -67,6 +98,31 @@ public class ClonePlantingContentProvider extends ContentProvider {
             case 2:
                 rowID = db.insert(Database.TABLE_LOG, null, values);
                 break;
+            case 3:
+                rowID = db.insert(Database.TABLE_SECTOR        , null, values);
+                break;
+            case 4:
+                rowID = db.insert(Database.TABLE_SENTCLONE     , null, values);
+                break;
+            case 5:
+                rowID = db.insert(Database.TABLE_RECEIVEDCLONE , null, values);
+                break;
+            case 6:
+                rowID = db.insert(Database.TABLE_PLANTEDCLONE  , null, values);
+                break;
+            case 7:
+                rowID = db.insert(Database.TABLE_LAND          , null, values);
+                break;
+            case 8:
+                rowID = db.insert(Database.TABLE_ACTIVITY      , null, values);
+                break;
+            case 9:
+                rowID = db.insert(Database.TABLE_PICTURE       , null, values);
+                break;
+            default:
+
+                break;
+
         }
         return ContentUris.withAppendedId(uri, rowID);
     }
@@ -91,7 +147,29 @@ public class ClonePlantingContentProvider extends ContentProvider {
             case 2:
                 qb.setTables(Database.TABLE_LOG);
                 break;
-
+            case 3:
+                qb.setTables(Database.TABLE_SECTOR);
+                break;
+            case 4:
+                qb.setTables(Database.TABLE_SENTCLONE);
+                break;
+            case 5:
+                qb.setTables(Database.TABLE_RECEIVEDCLONE);
+                break;
+            case 6:
+                qb.setTables(Database.TABLE_PLANTEDCLONE);
+                break;
+            case 7:
+                qb.setTables(Database.TABLE_LAND);
+                break;
+            case 8:
+                qb.setTables(Database.TABLE_ACTIVITY);
+                break;
+            case 9:
+                qb.setTables(Database.TABLE_PICTURE);
+                break;
+            default:
+                break;
         }
         SQLiteDatabase db = mySQLiteOpenHelper.getReadableDatabase();
         return qb.query(db, projection, selection, selectionArgs, null,
@@ -109,13 +187,35 @@ public class ClonePlantingContentProvider extends ContentProvider {
             case 0:
                 break;
             case 1:
-                rowID = db.update(Database.TABLE_FAMILY, values, selection,
-                        selectionArgs);
+                rowID = db.update(Database.TABLE_FAMILY, values, selection,selectionArgs);
                 break;
             case 2:
-                rowID = db.update(Database.TABLE_LOG, values, selection,
-                        selectionArgs);
+                rowID = db.update(Database.TABLE_LOG, values, selection,selectionArgs);
                 break;
+            case 3:
+                rowID = db.update(Database.TABLE_SECTOR        , values, selection,selectionArgs);
+                break;
+            case 4:
+                rowID = db.update(Database.TABLE_SENTCLONE     , values, selection,selectionArgs);
+                break;
+            case 5:
+                rowID = db.update(Database.TABLE_RECEIVEDCLONE , values, selection,selectionArgs);
+                break;
+            case 6:
+                rowID = db.update(Database.TABLE_PLANTEDCLONE  , values, selection,selectionArgs);
+                break;
+            case 7:
+                rowID = db.update(Database.TABLE_LAND          , values, selection,selectionArgs);
+                break;
+            case 8:
+                rowID = db.update(Database.TABLE_ACTIVITY      , values, selection,selectionArgs);
+                break;
+            case 9:
+                rowID = db.update(Database.TABLE_PICTURE       , values, selection,selectionArgs);
+                break;
+           default:
+                break;
+
         }
         return rowID;
     }

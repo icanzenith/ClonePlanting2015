@@ -25,6 +25,7 @@
         </activity>
         <activity
             android:name=".baseactivity.BaseActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_base" >
         </activity>
         <activity

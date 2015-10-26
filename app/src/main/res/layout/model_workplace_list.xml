@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/fab_stroke_top_outer_color"
+            android:textColor="@color/cardview_light_background"
             android:textSize="@dimen/model_list_symbol_default_text_size"
             tools:text="A" />
 
