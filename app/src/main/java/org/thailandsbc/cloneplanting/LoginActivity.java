@@ -96,12 +96,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void CreateSessionLogin(userLoginModel object) {
+
+
         UserDataModel data = new UserDataModel();
+        Log.d("object",object.getName()+"");
         data.setUserID(object.getUserID());
         data.setFullName(object.getName());
         data.setWorkPlaceCode(object.getSector());
         data.setProfilePictureURL(object.getPicURL());
-
         m.CreatedSessionLogin(data);
         Intent loginIntent = new Intent(LoginActivity.this, BaseActivity.class);
         loginIntent.putExtra(TAG_USERDATA, object);

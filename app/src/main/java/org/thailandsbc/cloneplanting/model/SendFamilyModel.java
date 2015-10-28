@@ -7,20 +7,63 @@ import android.os.Parcelable;
  * Created by Icanzenith on 9/1/15 AD.
  */
 public class SendFamilyModel implements Parcelable {
-    private int order;
     private String FamilyCode;
+    private String SentBy;
+    private String SentTo;
     private int SendAmount;
-    private String SenderID;
+    private String UserSender;
     private int PositionInList;
+    private String MotherCode;
+    private String FatherCode;
+    private String createdTime;
+    private String updatedTime;
 
-
-
-    public int getOrder() {
-        return order;
+    public String getSentBy() {
+        return SentBy;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setSentBy(String sentBy) {
+        SentBy = sentBy;
+    }
+
+    public String getSentTo() {
+        return SentTo;
+    }
+
+    public void setSentTo(String sentTo) {
+        SentTo = sentTo;
+    }
+
+    public String getMotherCode() {
+        return MotherCode;
+    }
+
+    public void setMotherCode(String motherCode) {
+        MotherCode = motherCode;
+    }
+
+    public String getFatherCode() {
+        return FatherCode;
+    }
+
+    public void setFatherCode(String fatherCode) {
+        FatherCode = fatherCode;
+    }
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public String getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(String updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
     public String getFamilyCode() {
@@ -39,12 +82,12 @@ public class SendFamilyModel implements Parcelable {
         SendAmount = sendAmount;
     }
 
-    public String getSenderID() {
-        return SenderID;
+    public String getUserSender() {
+        return UserSender;
     }
 
-    public void setSenderID(String senderID) {
-        SenderID = senderID;
+    public void setUserSender(String userSender) {
+        UserSender = userSender;
     }
 
     public int getPositionInList() {
@@ -55,6 +98,7 @@ public class SendFamilyModel implements Parcelable {
         PositionInList = positionInList;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -62,22 +106,32 @@ public class SendFamilyModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.order);
         dest.writeString(this.FamilyCode);
+        dest.writeString(this.SentBy);
+        dest.writeString(this.SentTo);
         dest.writeInt(this.SendAmount);
-        dest.writeString(this.SenderID);
+        dest.writeString(this.UserSender);
         dest.writeInt(this.PositionInList);
+        dest.writeString(this.MotherCode);
+        dest.writeString(this.FatherCode);
+        dest.writeString(this.createdTime);
+        dest.writeString(this.updatedTime);
     }
 
     public SendFamilyModel() {
     }
 
-    protected SendFamilyModel(Parcel in) {
-        this.order = in.readInt();
+    private SendFamilyModel(Parcel in) {
         this.FamilyCode = in.readString();
+        this.SentBy = in.readString();
+        this.SentTo = in.readString();
         this.SendAmount = in.readInt();
-        this.SenderID = in.readString();
+        this.UserSender = in.readString();
         this.PositionInList = in.readInt();
+        this.MotherCode = in.readString();
+        this.FatherCode = in.readString();
+        this.createdTime = in.readString();
+        this.updatedTime = in.readString();
     }
 
     public static final Parcelable.Creator<SendFamilyModel> CREATOR = new Parcelable.Creator<SendFamilyModel>() {

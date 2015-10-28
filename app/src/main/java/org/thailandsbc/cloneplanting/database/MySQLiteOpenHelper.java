@@ -109,7 +109,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.ReceivedClone.RowNumber + INTEGER +
             ColumnName.ReceivedClone.OrderInRow + INTEGER +
             ColumnName.ReceivedClone.PlantedTime + TEXT +
-            ColumnName.ReceivedClone.LandID + " INTEGER)";
+            ColumnName.ReceivedClone.LandID + " INTEGER, " +
+            "FOREIGN KEY("+ColumnName.ReceivedClone.LandID+") REFERENCES Land("+ColumnName.Activity.LandID+"))";
 
     private final String CREATE_TABLE_PLANTEDCLONE = "" +
             "CREATE TABLE PlantedClone(" +
@@ -119,8 +120,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.PlantedClone.createdTime+TEXT+
             ColumnName.PlantedClone.updatedTime+TEXT+
             ColumnName.PlantedClone.FamilyCode+TEXT+
-            ColumnName.PlantedClone.LandID+TEXT+
-            ")";
+            ColumnName.PlantedClone.LandID+
+            "INTEGER)";
 
     private final String CREATE_TABLE_LAND = "" +
             "CREATE TABLE Land(" +
@@ -138,8 +139,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Land.YearCrossing+TEXT+
             ColumnName.Land.SugarcaneSelectionType+INTEGER+
             ColumnName.Land.createdTime+TEXT+
-            ColumnName.Land.updatedTime+TEXT+
-            ")";
+            ColumnName.Land.updatedTime+
+            "TEXT)";
 
     private final String CREATE_TABLE_ACTIVITY = "" +
             "CREATE TABLE Activity(" +
@@ -151,9 +152,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Activity.createdTime+TEXT+
             ColumnName.Activity.updatedTime+TEXT+
             ColumnName.Activity.LandID+INTEGER+
-            ColumnName.Activity.Message+TEXT+
-            "FOREIGN KEY("+ColumnName.Activity.LandID+") REFERENCE LAND("+ColumnName.Activity.LandID+")" +INTEGER+
-            ")";
+            ColumnName.Activity.Message+" TEXT,"+
+            "FOREIGN KEY("+ColumnName.Activity.LandID+") REFERENCES Land("+ColumnName.Activity.LandID+
+            "))";
 
     private final String CREATE_TABLE_COMMENT ="" +
             "CREATE TABLE Comment(" +
@@ -163,9 +164,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Comment.UserID     +INTEGER+
             ColumnName.Comment.Message    +TEXT+
             ColumnName.Comment.createdTime+TEXT+
-            ColumnName.Comment.updatedTime+TEXT+
-            "FOREIGN KEY("+ColumnName.Comment.ActivityID+") REFERENCE ACTIVITY("+ColumnName.Comment.ActivityID+")" +INTEGER+
-            ")";
+            ColumnName.Comment.updatedTime+" TEXT,"+
+            "FOREIGN KEY("+ColumnName.Comment.ActivityID+") REFERENCES Activity("+ColumnName.Comment.ActivityID+
+            "))";
 
     private final String CREATE_TABLE_PICTURE = "" +
             "CREATE TABLE Picture(" +
@@ -174,9 +175,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Picture.ActivityID +INTEGER+
             ColumnName.Picture.PictureURL +TEXT+
             ColumnName.Picture.createdTime+TEXT+
-            ColumnName.Picture.updatedTime+TEXT+
-            "FOREIGN KEY("+ColumnName.Picture.ActivityID+") REFERENCE ACTIVITY("+ColumnName.Picture.ActivityID+")" +INTEGER+
-            ")";
+            ColumnName.Picture.updatedTime+" TEXT,"+
+            "FOREIGN KEY("+ColumnName.Picture.ActivityID+") REFERENCES Activity("+ColumnName.Picture.ActivityID+
+            "))";
 
 
 

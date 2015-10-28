@@ -39,9 +39,7 @@ public class ListManagementDialog extends DialogFragment implements View.OnClick
         ListManagementDialog dialog = new ListManagementDialog();
         Bundle bundle = new Bundle();
         try {
-
             bundle.putParcelable(ARG_TAG_OBJECT, (Parcelable) object);
-
         } catch (Exception e) {
             e.printStackTrace();
             Log.d("Throw Exeption","Object Must be extends with Parcelable");
@@ -101,7 +99,9 @@ public class ListManagementDialog extends DialogFragment implements View.OnClick
             case R.id.buttonFix:
                 fixObject(object);
                 break;
+
         }
+        dismiss();
     }
 
     private void deleteObject(Object object){
@@ -122,6 +122,8 @@ public class ListManagementDialog extends DialogFragment implements View.OnClick
 
     private void fixObject(Object object){
         //TODO Show Dialog Change
+        EditDialog editDialog = EditDialog.newInstance("จำนวนที่ส่ง",SelectionMode.MODE_EDIT_SENT_CLONE, (Parcelable) object);
+        editDialog.show(getActivity().getSupportFragmentManager(),SelectionMode.MODE_EDIT_SENT_CLONE);
 
     }
 

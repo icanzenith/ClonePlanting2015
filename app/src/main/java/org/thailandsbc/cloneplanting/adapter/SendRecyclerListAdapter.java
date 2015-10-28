@@ -27,6 +27,14 @@ public class SendRecyclerListAdapter extends RecyclerView.Adapter<SendRecyclerLi
         this.activity = (AppCompatActivity) activity;
     }
 
+    public List<SendFamilyModel> getDataSet() {
+        return dataSet;
+    }
+
+    public void setDataSet(List<SendFamilyModel> dataSet) {
+        this.dataSet = dataSet;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())

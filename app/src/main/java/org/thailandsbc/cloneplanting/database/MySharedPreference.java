@@ -38,7 +38,6 @@ public class MySharedPreference {
         mEditor.putString(UserDataModel.TAG.Address.toString(), userData.getAddress());
         mEditor.putString(UserDataModel.TAG.Position.toString(),userData.getPosition());
         mEditor.putString(UserDataModel.TAG.TelNumber.toString(),userData.getTelNumber());
-
         mEditor.putBoolean(IS_LOGIN, true);
         mEditor.commit();
     }
