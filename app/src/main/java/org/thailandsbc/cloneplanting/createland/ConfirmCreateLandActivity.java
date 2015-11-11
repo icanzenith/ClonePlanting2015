@@ -3,9 +3,7 @@ package org.thailandsbc.cloneplanting.createland;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -25,7 +22,7 @@ import org.thailandsbc.cloneplanting.BaseApplication;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.model.ColumnName;
-import org.thailandsbc.cloneplanting.planting.LandDetailModel;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
 
 public class ConfirmCreateLandActivity extends AppCompatActivity implements OnMapReadyCallback{
 

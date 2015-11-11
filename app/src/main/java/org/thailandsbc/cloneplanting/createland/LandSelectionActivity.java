@@ -14,7 +14,7 @@ import android.view.View;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.model.ColumnName;
-import org.thailandsbc.cloneplanting.planting.LandDetailModel;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 

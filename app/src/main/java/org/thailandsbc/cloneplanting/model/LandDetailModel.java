@@ -1,4 +1,4 @@
-package org.thailandsbc.cloneplanting.planting;
+package org.thailandsbc.cloneplanting.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

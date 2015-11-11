@@ -10,13 +10,14 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.model.ColumnName;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
+import org.thailandsbc.cloneplanting.utils.Land;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +53,7 @@ public class RowListActivity extends AppCompatActivity {
             }
         });
 
-        mLand = getIntent().getParcelableExtra("LandDetail");
-        Log.d("TAG mLand ",mLand.getLandID()+"");
+        mLand = getIntent().getParcelableExtra(Land.LAND_DETAIL);
         InitializeViews();
     }
 

@@ -4,9 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,9 +17,7 @@ import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
 import org.thailandsbc.cloneplanting.model.ColumnName;
-import org.thailandsbc.cloneplanting.model.FamilyModel;
-import org.thailandsbc.cloneplanting.model.ScannerResultModel;
-import org.thailandsbc.cloneplanting.model.WorkPlaceModel;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.PlantStatus;
 import org.thailandsbc.cloneplanting.utils.QRMode;
@@ -95,7 +91,7 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         TextView textViewRowNumber = (TextView) findViewById(R.id.textViewRowNumber);
         TextView textViewLandName = (TextView) findViewById(R.id.textViewLandName);
 
-        textViewLandName.setText(mLandName);
+        textViewLandName.setText(mLandDetail.getLandName());
         textViewRowNumber.setText("แถวที่ " + mRowNumber);
 
     }

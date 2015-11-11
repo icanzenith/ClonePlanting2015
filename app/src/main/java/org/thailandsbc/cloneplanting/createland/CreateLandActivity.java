@@ -25,7 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.SugarcaneSelectionType;
-import org.thailandsbc.cloneplanting.planting.LandDetailModel;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
 
 public class CreateLandActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener, View.OnClickListener,

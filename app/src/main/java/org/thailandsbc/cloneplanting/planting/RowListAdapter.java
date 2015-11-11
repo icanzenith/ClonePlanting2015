@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
 
 import java.util.List;
 

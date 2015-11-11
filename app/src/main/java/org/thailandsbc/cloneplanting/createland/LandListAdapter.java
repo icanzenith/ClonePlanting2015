@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,11 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
-import org.thailandsbc.cloneplanting.model.SendFamilyModel;
-import org.thailandsbc.cloneplanting.planting.LandDetailModel;
-import org.thailandsbc.cloneplanting.planting.PlantingCloneActivity;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.planting.RowListActivity;
-import org.thailandsbc.cloneplanting.utils.SelectionMode;
+import org.thailandsbc.cloneplanting.utils.Land;
 
 import java.util.List;
 
@@ -72,8 +69,7 @@ public class LandListAdapter extends RecyclerView.Adapter<LandListAdapter.ViewHo
         ViewHolder d = (ViewHolder) v.getTag();
         if (SelectionMode.equals(org.thailandsbc.cloneplanting.utils.SelectionMode.MODE_PLANT_CLONE)) {
             Intent intent = new Intent(activity, RowListActivity.class);
-            intent.putExtra("LandDetail", d.model);
-            Log.d("Tag Land Detail",d.model.getLandID()+"");
+            intent.putExtra(Land.LAND_DETAIL, d.model);
             activity.startActivity(intent);
         }
 
