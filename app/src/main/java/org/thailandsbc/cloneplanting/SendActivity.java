@@ -83,7 +83,6 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
     }
 
     private void createRecyclerList() {
-
         //Create DataSet here
         List<SendFamilyModel> dataSet = createDataSet(mWorkPlace);
         mLayoutManager = new LinearLayoutManager(this);

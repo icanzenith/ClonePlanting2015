@@ -100,6 +100,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.ReceivedClone.FamilyCode + TEXT +
             ColumnName.ReceivedClone.SentBy + TEXT +
             ColumnName.ReceivedClone.ReceivedBy + TEXT +
+            ColumnName.ReceivedClone.UserReceiver + TEXT +
+            ColumnName.ReceivedClone.ReceivedAmount + TEXT +
             ColumnName.ReceivedClone.createdTime + TEXT +
             ColumnName.ReceivedClone.updatedTime + TEXT +
             ColumnName.ReceivedClone.MotherCode + TEXT +
@@ -109,6 +111,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.ReceivedClone.RowNumber + INTEGER +
             ColumnName.ReceivedClone.OrderInRow + INTEGER +
             ColumnName.ReceivedClone.PlantedTime + TEXT +
+            ColumnName.ReceivedClone.PlantedAmount + INTEGER+
             ColumnName.ReceivedClone.LandID + " INTEGER, " +
             "FOREIGN KEY("+ColumnName.ReceivedClone.LandID+") REFERENCES Land("+ColumnName.Activity.LandID+"))";
 
@@ -121,11 +124,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.PlantedClone.updatedTime+TEXT+
             ColumnName.PlantedClone.FamilyCode+TEXT+
             ColumnName.PlantedClone.LandID+
-            "INTEGER)";
+            " INTEGER)";
 
     private final String CREATE_TABLE_LAND = "" +
             "CREATE TABLE Land(" +
-            ColumnName.Land.ObjectID+INTEGER+
+            ColumnName.Land.ObjectID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
             ColumnName.Land.LandID+INTEGER+
             ColumnName.Land.LandName+TEXT+
             ColumnName.Land.LandLength+REAL+
@@ -139,8 +142,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Land.YearCrossing+TEXT+
             ColumnName.Land.SugarcaneSelectionType+INTEGER+
             ColumnName.Land.createdTime+TEXT+
-            ColumnName.Land.updatedTime+
-            "TEXT)";
+            ColumnName.Land.updatedTime+TEXT+
+            ColumnName.Land.MaximumRow+INTEGER+
+            ColumnName.Land.MaximumFamilyPerRow+INTEGER+
+            ColumnName.Land.MaximumClonePerFamily+
+            " INTEGER)";
 
     private final String CREATE_TABLE_ACTIVITY = "" +
             "CREATE TABLE Activity(" +

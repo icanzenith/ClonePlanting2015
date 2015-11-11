@@ -11,13 +11,16 @@ import android.widget.TextView;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.dialog.ListManagementDialog;
 import org.thailandsbc.cloneplanting.model.SendFamilyModel;
+import org.thailandsbc.cloneplanting.utils.SelectionMode;
 
 import java.util.List;
 
 /**
  * Created by Icanzenith on 8/31/15 AD.
  */
-public class SendRecyclerListAdapter extends RecyclerView.Adapter<SendRecyclerListAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
+public class SendRecyclerListAdapter extends
+        RecyclerView.Adapter<SendRecyclerListAdapter.ViewHolder>
+        implements View.OnClickListener, View.OnLongClickListener {
 
     private List<SendFamilyModel> dataSet;
     private AppCompatActivity activity;
@@ -53,8 +56,6 @@ public class SendRecyclerListAdapter extends RecyclerView.Adapter<SendRecyclerLi
         holder.textViewOrder.setText(""+(position+1));
         holder.textViewFamilyCode.setText(dataSet.get(position).getFamilyCode());
         holder.textViewAmount.setText("" + dataSet.get(position).getSendAmount());
-
-
     }
 
 
@@ -77,8 +78,7 @@ public class SendRecyclerListAdapter extends RecyclerView.Adapter<SendRecyclerLi
         ViewHolder holder = (ViewHolder) v.getTag();
         int position = holder.getLayoutPosition();
         SendFamilyModel item = dataSet.get(position);
-        //TODO Show ListManagement
-        ListManagementDialog dialog = ListManagementDialog.newInstance(item);
+        ListManagementDialog dialog = ListManagementDialog.newInstance(item, SelectionMode.MODE_EDIT_SENT_CLONE);
         dialog.show(activity.getSupportFragmentManager(), "list");
 
         return true;

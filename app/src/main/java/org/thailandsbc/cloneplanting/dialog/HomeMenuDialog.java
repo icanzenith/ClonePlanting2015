@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.thailandsbc.cloneplanting.createland.LandSelectionActivity;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.SendActivity;
 import org.thailandsbc.cloneplanting.receive.ReceiveActivity;
+import org.thailandsbc.cloneplanting.test.testAddData;
+import org.thailandsbc.cloneplanting.utils.SelectionMode;
 
 /**
  * Created by Icanzenith on 8/31/15 AD.
@@ -77,6 +80,15 @@ public class HomeMenuDialog extends DialogFragment implements View.OnClickListen
                 break;
             case R.id.buttonReceive:
                 intent = new Intent(getActivity(), ReceiveActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.buttonPlant:
+                intent = new Intent(getActivity(), LandSelectionActivity.class);
+                intent.putExtra(SelectionMode.MODE, SelectionMode.MODE_PLANT_CLONE);
+                startActivity(intent);
+                break;
+            case R.id.buttonText:
+                intent = new Intent(getActivity(),testAddData.class);
                 startActivity(intent);
                 break;
         }

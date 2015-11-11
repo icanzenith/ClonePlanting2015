@@ -37,4 +37,43 @@
     <string name="navigation_item_setting">Setting</string>
     <string name="navigation_item_logout">Logout</string>
     <string name="sampleName">Jitpakorn Rattanadilok na buket</string>
+    <string name="title_activity_received_clone">รับโคลน</string>
+    <string name="title_activity_blank">BlankActivity</string>
+
+    <string-array name="place">
+
+        <item>ALL</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>G</item>
+        <item>H</item>
+        <item>I</item>
+        <item>J</item>
+        <item>K</item>
+        <item>L</item>
+    </string-array>
+    <string name="title_activity_planting_clone">PlantingCloneActivity</string>
+    <string name="title_activity_row_list_adapter">RowListAdapter</string>
+    <string name="title_activity_land_selection">LandSelectionActivity</string>
+    <string name="title_activity_create_land">CreateLandActivity</string>
+
+
+    <string name="LandName">ชื่อแปลง</string>
+    <string name="LandType">ประเภทแปลง</string>
+    <string name="LandArea">ขนาดแปลง(ไร่)</string>
+    <string name="LandWidth">ความกว้าง(เมตร)</string>
+    <string name="LandLength">ความยาว(เมตร)</string>
+    <string name="Address">ขนาดที่อยู่</string>
+    <string name="Location">ตำแหน่ง</string>
+    <string name="map_api_key">AIzaSyD1aoYGEoZ2PSQzMBEeOlX1fvG8maOveiE</string>
+
+    <string-array name="selectionType">
+        <item>1st Selection</item>
+        <item>2nd Selection</item>
+    </string-array>
+    <string name="title_activity_confirm_create_land">ConfirmCreateLandActivity</string>
+    <string name="qr_scanner_dialog_title_plant">กรุณาระบุจำนวนที่ปลูก</string>
+
 </resources>

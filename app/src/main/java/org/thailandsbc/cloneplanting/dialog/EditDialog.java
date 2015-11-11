@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.model.SendFamilyModel;
+import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
@@ -99,6 +100,19 @@ public class EditDialog extends DialogFragment implements View.OnClickListener{
             if (TAG.equals(SelectionMode.MODE_EDIT_SENT_CLONE)){
                 SendFamilyModel item = (SendFamilyModel) Object;
                 item.setSendAmount(Integer.parseInt(editTextAmount.getText().toString()));
+                mListener.onFragmentInteraction(TAG, Object);
+                dismiss();
+            }
+            if (TAG.equals(SelectionMode.MODE_EDIT_RECEIVED_CLONE)){
+                ReceiveFamilyModel item = (ReceiveFamilyModel) Object;
+                item.setReceivedAmount(Integer.parseInt(editTextAmount.getText().toString()));
+                mListener.onFragmentInteraction(TAG, Object);
+                dismiss();
+            }
+
+            if (TAG.equals(SelectionMode.MODE_EDIT_PLANT_CLONE)){
+                ReceiveFamilyModel item = (ReceiveFamilyModel) Object;
+                item.setPlantedAmount(Integer.parseInt(editTextAmount.getText().toString()));
                 mListener.onFragmentInteraction(TAG, Object);
                 dismiss();
             }

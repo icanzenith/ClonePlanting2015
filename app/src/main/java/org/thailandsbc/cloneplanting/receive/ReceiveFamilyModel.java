@@ -7,18 +7,31 @@ import android.os.Parcelable;
  * Created by Icanzenith on 9/1/15 AD.
  */
 public class ReceiveFamilyModel implements Parcelable {
-    private int order;
-    private String FamilyCode;
-    private int SendAmount;
-    private String SenderID;
-    private int PositionInList;
+    private String  FamilyCode;
+    private String  SentBy;
+    private String  ReceivedBy;
+    private int     UserReceiver;
+    private int     ReceivedAmount;
+    private String  createdTime;
+    private String  updatedTime;
+    private String  MotherCode;
+    private String  FatherCode;
+    private boolean isPlanted;
+    private int     PlantedBy;
+    private int     PlantedAmount;
+    private int     RowNumber;
+    private int     OrderinRow;
+    private String  PlantedTime;
+    private int     LandID;
+    private int     PositionInList;
 
-    public int getOrder() {
-        return order;
+
+    public int getPlantedAmount() {
+        return PlantedAmount;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setPlantedAmount(int plantedAmount) {
+        PlantedAmount = plantedAmount;
     }
 
     public String getFamilyCode() {
@@ -29,20 +42,116 @@ public class ReceiveFamilyModel implements Parcelable {
         FamilyCode = familyCode;
     }
 
-    public int getSendAmount() {
-        return SendAmount;
+    public String getSentBy() {
+        return SentBy;
     }
 
-    public void setSendAmount(int sendAmount) {
-        SendAmount = sendAmount;
+    public void setSentBy(String sentBy) {
+        SentBy = sentBy;
     }
 
-    public String getSenderID() {
-        return SenderID;
+    public String getReceivedBy() {
+        return ReceivedBy;
     }
 
-    public void setSenderID(String senderID) {
-        SenderID = senderID;
+    public void setReceivedBy(String receivedBy) {
+        ReceivedBy = receivedBy;
+    }
+
+    public int getUserReceiver() {
+        return UserReceiver;
+    }
+
+    public void setUserReceiver(int userReceiver) {
+        UserReceiver = userReceiver;
+    }
+
+    public int getReceivedAmount() {
+        return ReceivedAmount;
+    }
+
+    public void setReceivedAmount(int receivedAmount) {
+        ReceivedAmount = receivedAmount;
+    }
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public String getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(String updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    public String getMotherCode() {
+        return MotherCode;
+    }
+
+    public void setMotherCode(String motherCode) {
+        MotherCode = motherCode;
+    }
+
+    public String getFatherCode() {
+        return FatherCode;
+    }
+
+    public void setFatherCode(String fatherCode) {
+        FatherCode = fatherCode;
+    }
+
+    public boolean isPlanted() {
+        return isPlanted;
+    }
+
+    public void setIsPlanted(boolean isPlanted) {
+        this.isPlanted = isPlanted;
+    }
+
+    public int getPlantedBy() {
+        return PlantedBy;
+    }
+
+    public void setPlantedBy(int plantedBy) {
+        PlantedBy = plantedBy;
+    }
+
+    public int getRowNumber() {
+        return RowNumber;
+    }
+
+    public void setRowNumber(int rowNumber) {
+        RowNumber = rowNumber;
+    }
+
+    public int getOrderinRow() {
+        return OrderinRow;
+    }
+
+    public void setOrderinRow(int orderinRow) {
+        OrderinRow = orderinRow;
+    }
+
+    public String getPlantedTime() {
+        return PlantedTime;
+    }
+
+    public void setPlantedTime(String plantedTime) {
+        PlantedTime = plantedTime;
+    }
+
+    public int getLandID() {
+        return LandID;
+    }
+
+    public void setLandID(int landID) {
+        LandID = landID;
     }
 
     public int getPositionInList() {
@@ -53,7 +162,6 @@ public class ReceiveFamilyModel implements Parcelable {
         PositionInList = positionInList;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -61,10 +169,22 @@ public class ReceiveFamilyModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.order);
         dest.writeString(this.FamilyCode);
-        dest.writeInt(this.SendAmount);
-        dest.writeString(this.SenderID);
+        dest.writeString(this.SentBy);
+        dest.writeString(this.ReceivedBy);
+        dest.writeInt(this.UserReceiver);
+        dest.writeInt(this.ReceivedAmount);
+        dest.writeString(this.createdTime);
+        dest.writeString(this.updatedTime);
+        dest.writeString(this.MotherCode);
+        dest.writeString(this.FatherCode);
+        dest.writeByte(isPlanted ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.PlantedBy);
+        dest.writeInt(this.PlantedAmount);
+        dest.writeInt(this.RowNumber);
+        dest.writeInt(this.OrderinRow);
+        dest.writeString(this.PlantedTime);
+        dest.writeInt(this.LandID);
         dest.writeInt(this.PositionInList);
     }
 
@@ -72,10 +192,22 @@ public class ReceiveFamilyModel implements Parcelable {
     }
 
     protected ReceiveFamilyModel(Parcel in) {
-        this.order = in.readInt();
         this.FamilyCode = in.readString();
-        this.SendAmount = in.readInt();
-        this.SenderID = in.readString();
+        this.SentBy = in.readString();
+        this.ReceivedBy = in.readString();
+        this.UserReceiver = in.readInt();
+        this.ReceivedAmount = in.readInt();
+        this.createdTime = in.readString();
+        this.updatedTime = in.readString();
+        this.MotherCode = in.readString();
+        this.FatherCode = in.readString();
+        this.isPlanted = in.readByte() != 0;
+        this.PlantedBy = in.readInt();
+        this.PlantedAmount = in.readInt();
+        this.RowNumber = in.readInt();
+        this.OrderinRow = in.readInt();
+        this.PlantedTime = in.readString();
+        this.LandID = in.readInt();
         this.PositionInList = in.readInt();
     }
 

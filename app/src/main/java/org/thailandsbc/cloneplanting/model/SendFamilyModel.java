@@ -6,7 +6,7 @@ import android.os.Parcelable;
 /**
  * Created by Icanzenith on 9/1/15 AD.
  */
-public class SendFamilyModel implements Parcelable {
+public class    SendFamilyModel implements Parcelable {
     private String FamilyCode;
     private String SentBy;
     private String SentTo;

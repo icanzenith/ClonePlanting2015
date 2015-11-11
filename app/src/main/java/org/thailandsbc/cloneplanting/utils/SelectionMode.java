@@ -10,4 +10,10 @@ public class SelectionMode {
     public static final String MODE_DELETE_RECEIVE_CLONE = "deletereceiveclone";
 
     public static final String MODE_EDIT_SENT_CLONE = "edit_sent_clone";
+    public static final String MODE_EDIT_RECEIVED_CLONE = "edit_receive_clone";
+    public static final String MODE = "section_mode";
+
+    public static final String MODE_PLANT_CLONE = "plant_clone";
+    public static final String MODE_EDIT_PLANT_CLONE = "plant_edit_clone";
+    public static final String MODE_DELETE_PLANT_CLONE = "plant_delete_clone";
 }

@@ -22,20 +22,23 @@ import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
  */
 public class ListManagementDialog extends DialogFragment implements View.OnClickListener{
 
+    private static final String ARG_MODE = "Mode";
     private Button buttonCancle;
     private Button buttonDelete;
     private Button buttonFix;
     private Button buttonOpen;
 
     private static final String ARG_TAG_OBJECT = "Object";
+    private String MODE;
     private Object object;
     
     private onFragmentInteractionListener mListener;
 
     public ListManagementDialog() {
+
     }
 
-    public static ListManagementDialog newInstance(Object object) {
+    public static ListManagementDialog newInstance(Object object,String mode) {
         ListManagementDialog dialog = new ListManagementDialog();
         Bundle bundle = new Bundle();
         try {
@@ -44,7 +47,7 @@ public class ListManagementDialog extends DialogFragment implements View.OnClick
             e.printStackTrace();
             Log.d("Throw Exeption","Object Must be extends with Parcelable");
         }
-
+        bundle.putString(ARG_MODE, mode);
         dialog.setArguments(bundle);
         return dialog;
     }
@@ -62,6 +65,7 @@ public class ListManagementDialog extends DialogFragment implements View.OnClick
         setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         if (getArguments()!=null){
             object = getArguments().getParcelable(ARG_TAG_OBJECT);
+            MODE = getArguments().getString(ARG_MODE);
         }
     }
 
@@ -105,7 +109,12 @@ public class ListManagementDialog extends DialogFragment implements View.OnClick
     }
 
     private void deleteObject(Object object){
-        mListener.onFragmentInteraction(SelectionMode.MODE_DELETE_SEND_CLONE,object);
+        if (MODE.equals(SelectionMode.MODE_EDIT_SENT_CLONE)) {
+            mListener.onFragmentInteraction(SelectionMode.MODE_DELETE_SEND_CLONE, object);
+        }
+        if (MODE.equals(SelectionMode.MODE_EDIT_RECEIVED_CLONE)){
+            mListener.onFragmentInteraction(SelectionMode.MODE_DELETE_RECEIVE_CLONE,object);
+        }
         dismiss();
     }
 
@@ -121,9 +130,19 @@ public class ListManagementDialog extends DialogFragment implements View.OnClick
     }
 
     private void fixObject(Object object){
-        //TODO Show Dialog Change
-        EditDialog editDialog = EditDialog.newInstance("จำนวนที่ส่ง",SelectionMode.MODE_EDIT_SENT_CLONE, (Parcelable) object);
-        editDialog.show(getActivity().getSupportFragmentManager(),SelectionMode.MODE_EDIT_SENT_CLONE);
+        EditDialog editDialog = null;
+        if (MODE.equals(SelectionMode.MODE_EDIT_SENT_CLONE)) {
+            editDialog = EditDialog.newInstance("จำนวนที่แก้ไข", SelectionMode.MODE_EDIT_SENT_CLONE, (Parcelable) object);
+            editDialog.show(getActivity().getSupportFragmentManager(),SelectionMode.MODE_EDIT_SENT_CLONE);
+        }
+        if (MODE.equals(SelectionMode.MODE_EDIT_RECEIVED_CLONE)){
+            editDialog = EditDialog.newInstance("จำนวนที่แก้ไข", SelectionMode.MODE_EDIT_RECEIVED_CLONE, (Parcelable) object);
+            editDialog.show(getActivity().getSupportFragmentManager(),SelectionMode.MODE_EDIT_RECEIVED_CLONE);
+        }
+        if (MODE.equals(SelectionMode.MODE_EDIT_PLANT_CLONE)){
+            editDialog = EditDialog.newInstance("จำนวนที่แก้ไข", SelectionMode.MODE_EDIT_PLANT_CLONE, (Parcelable) object);
+            editDialog.show(getActivity().getSupportFragmentManager(),SelectionMode.MODE_EDIT_PLANT_CLONE);
+        }
 
     }
 

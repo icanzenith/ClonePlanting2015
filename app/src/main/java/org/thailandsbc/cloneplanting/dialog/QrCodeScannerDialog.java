@@ -1,6 +1,7 @@
 package org.thailandsbc.cloneplanting.dialog;
 
 import android.content.Context;
+import android.graphics.AvoidXfermode;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -13,8 +14,11 @@ import android.widget.TextView;
 
 import com.google.zxing.Result;
 
+import org.thailandsbc.cloneplanting.FamilyDetailsActivity;
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.model.ScannerResultModel;
+import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
@@ -23,7 +27,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 /**
  * Created by Icanzenith on 8/31/15 AD.
  */
-public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerView.ResultHandler ,View.OnClickListener{
+public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerView.ResultHandler, View.OnClickListener {
 
     private String mFamilyCode;
     private int mAmount;
@@ -63,9 +67,8 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-        if (getArguments()!=null){
+        if (getArguments() != null) {
             mScannerMode = getArguments().getString(ARG_SCANNER_Mode);
-
         }
     }
 
@@ -80,7 +83,7 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         return v;
     }
 
-    private void InitializationViews(View v){
+    private void InitializationViews(View v) {
         editTextAmount = (EditText) v.findViewById(R.id.editTextAmount);
         textViewQRCodeResult = (TextView) v.findViewById(R.id.textViewQRCodeResult);
         mScannerView = (ZXingScannerView) v.findViewById(R.id.scannerView);
@@ -96,13 +99,15 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
     private void setModeTitle(String ModeMenu) {
 
         if (ModeMenu.equals(QRMode.MODE_SEND_FAMILY)) {
-
             textViewScannerTitle.setText(getResources().getString(R.string.qr_scanner_dialog_title_send));
         }
 
-        if (ModeMenu.equals(QRMode.MODE_RECEIVE_FAMILY)){
-
+        if (ModeMenu.equals(QRMode.MODE_RECEIVE_FAMILY)) {
             textViewScannerTitle.setText(getResources().getString(R.string.qr_scanner_dialog_title_receive));
+        }
+
+        if (ModeMenu.equals(QRMode.MODE_PLANT_FAMILY)) {
+            textViewScannerTitle.setText(getResources().getString(R.string.qr_scanner_dialog_title_plant));
         }
     }
 
@@ -112,16 +117,17 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         mScannerView.setResultHandler(this);
         mScannerView.startCamera();
     }
+
     @Override
     public void handleResult(Result result) {
-        mFamilyCode = result.getText().toString();
-
+        mFamilyCode = result.getText();
         textViewQRCodeResult.setText(mFamilyCode);
         textViewQRCodeResult.setVisibility(View.VISIBLE);
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.buttonFinish:
                 onFinishScan();
                 break;
@@ -131,12 +137,19 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         }
     }
 
-    private void onFinishScan(){
-        ScannerResultModel result = new ScannerResultModel();
+    private void onFinishScan() {
         mAmount = Integer.parseInt(editTextAmount.getText().toString());
-        result.setFamilyCode(mFamilyCode);
-        result.setAmount(mAmount);
-        mListener.onFragmentInteraction(mScannerMode,result);
+        if (mScannerMode.equals(QRMode.MODE_PLANT_FAMILY)){
+            ReceiveFamilyModel result = new ReceiveFamilyModel();
+            result.setFamilyCode(mFamilyCode);
+            result.setPlantedAmount(mAmount);
+            mListener.onFragmentInteraction(mScannerMode,result);
+        }else{
+            ScannerResultModel result = new ScannerResultModel();
+            result.setFamilyCode(mFamilyCode);
+            result.setAmount(mAmount);
+            mListener.onFragmentInteraction(mScannerMode, result);
+        }
         dismiss();
 
     }

@@ -12,6 +12,7 @@ import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.dialog.ListManagementDialog;
 import org.thailandsbc.cloneplanting.model.SendFamilyModel;
 import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
+import org.thailandsbc.cloneplanting.utils.SelectionMode;
 
 import java.util.List;
 
@@ -42,9 +43,9 @@ public class ReceiveRecyclerListAdapter extends RecyclerView.Adapter<ReceiveRecy
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         dataSet.get(position).setPositionInList(position);
-        holder.textViewOrder.setText(""+dataSet.get(position).getOrder());
+        holder.textViewOrder.setText(""+(position+1));
         holder.textViewFamilyCode.setText(dataSet.get(position).getFamilyCode());
-        holder.textViewAmount.setText(""+dataSet.get(position).getSendAmount());
+        holder.textViewAmount.setText(""+dataSet.get(position).getReceivedAmount());
     }
 
     @Override
@@ -67,7 +68,7 @@ public class ReceiveRecyclerListAdapter extends RecyclerView.Adapter<ReceiveRecy
         int position = holder.getLayoutPosition();
         ReceiveFamilyModel item = dataSet.get(position);
         //TODO Show ListManagement
-        ListManagementDialog dialog = ListManagementDialog.newInstance(item);
+        ListManagementDialog dialog = ListManagementDialog.newInstance(item, SelectionMode.MODE_EDIT_RECEIVED_CLONE);
         dialog.show(activity.getSupportFragmentManager(),"list");
         return true;
     }
@@ -99,4 +100,11 @@ public class ReceiveRecyclerListAdapter extends RecyclerView.Adapter<ReceiveRecy
         notifyDataSetChanged();
     }
 
+    public List<ReceiveFamilyModel> getDataSet() {
+        return dataSet;
+    }
+
+    public void setDataSet(List<ReceiveFamilyModel> dataSet) {
+        this.dataSet = dataSet;
+    }
 }
