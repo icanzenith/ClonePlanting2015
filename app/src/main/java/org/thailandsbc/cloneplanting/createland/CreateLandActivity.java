@@ -136,7 +136,7 @@ public class CreateLandActivity extends AppCompatActivity implements OnMapReadyC
 
     private LandDetailModel setLandDetail() {
         LandDetailModel d = new LandDetailModel();
-        d.setLandName(editTextLandAddress.getText().toString());
+        d.setLandName(editTextLandName.getText().toString());
         d.setLatitude(mMap.getMyLocation().getLatitude());
         d.setLongitude(mMap.getMyLocation().getLongitude());
         d.setAddress(editTextLandAddress.getText().toString());

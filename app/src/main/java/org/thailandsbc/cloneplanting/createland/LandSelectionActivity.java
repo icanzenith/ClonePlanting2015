@@ -57,7 +57,6 @@ public class LandSelectionActivity extends AppCompatActivity implements onFragme
 
     private void InitializeViews() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        createLandList();
 
     }
 
@@ -69,6 +68,12 @@ public class LandSelectionActivity extends AppCompatActivity implements onFragme
         recyclerView.setAdapter(mAdapter);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        createLandList();
     }
 
     private List<LandDetailModel> createDataSet() {
