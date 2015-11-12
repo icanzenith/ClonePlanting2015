@@ -2,7 +2,9 @@ package org.thailandsbc.cloneplanting.planting;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +28,7 @@ import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CyclicBarrier;
 
 public class PlantingCloneActivity extends AppCompatActivity implements onFragmentInteractionListener {
 
@@ -128,6 +131,28 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
 
     }
 
+    public void generateCloneData(ReceiveFamilyModel m){
+        for (int i  = 0 ; i < m.getPlantedAmount();i++ ){
+            String CurrentTime = baseApplication.getTimeUTC();
+            ContentValues v = new ContentValues();
+            v.put(ColumnName.PlantedClone.CloneCode,String.format(m.getFamilyCode() + "-%03d", (i + 1)));
+            Log.d("CloneCode", String.format(m.getFamilyCode() + "-%03d", (i + 1)));
+            v.put(ColumnName.PlantedClone.FamilyCode, m.getFamilyCode());
+            v.put(ColumnName.PlantedClone.LandID, mLandID);
+            v.put(ColumnName.PlantedClone.isDead,0);
+            v.put(ColumnName.PlantedClone.updatedTime, CurrentTime);
+            v.put(ColumnName.PlantedClone.createdTime, CurrentTime);
+            Uri uri = getContentResolver().insert(Database.PLANTEDCLONE,v);
+        }
+    }
+
+    public void deleteCloneData(ReceiveFamilyModel m){
+
+        String selection = ColumnName.PlantedClone.FamilyCode+" = ? AND "+ColumnName.PlantedClone.LandID+" = "+mLandID;
+        long delete = getContentResolver().delete(Database.PLANTEDCLONE,selection,null);
+        Log.d("TAG Delete data"," "+delete);
+    }
+
 
     public void updateDataToDatabase(ReceiveFamilyModel m) {
 
@@ -202,6 +227,7 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         if (TAG.equals(QRMode.MODE_PLANT_FAMILY)) {
             //Add TO Database
             Log.d("Tag ",((ReceiveFamilyModel)object).getPlantedAmount()+"");
+            generateCloneData(((ReceiveFamilyModel) object));
             updateDataToDatabase((ReceiveFamilyModel) object);
         }
         if (TAG.equals(SelectionMode.MODE_EDIT_PLANT_CLONE)){

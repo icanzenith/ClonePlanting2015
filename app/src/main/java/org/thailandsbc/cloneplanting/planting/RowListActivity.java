@@ -10,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ public class RowListActivity extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
-    private static RecyclerView.LayoutManager  layoutManager;
+    private static RecyclerView.LayoutManager layoutManager;
     private List<Integer> RowDataSet;
 
     @Override
@@ -70,25 +71,25 @@ public class RowListActivity extends AppCompatActivity {
         TextView textViewRowAmount = (TextView) findViewById(R.id.textViewRowAmount);
         TextView textViewLandName = (TextView) findViewById(R.id.textViewLandName);
 
-        textViewLandName.setText(mLand.getLandName().toString());
-        //TODO Query Land Databefore
-//        textViewRowAmount.setText();
-
         createRecyclerView();
-        textViewTotalClone.setText("" + mTotalClonePlanted);
-        textViewRowAmount.setText("");
+
+        textViewLandName.setText(mLand.getLandName().toString());
+        textViewTotalClone.setText("" + countClonePlanted());
+        textViewRowAmount.setText(""+getRowNumber());
+        textViewTotalFamily.setText("" + countPlantedFamily());
 
     }
 
-    private void createRecyclerView(){
+    private void createRecyclerView() {
         getCurrentLandData();
         layoutManager = new LinearLayoutManager(this);
-        RowListAdapter mAdapter = new RowListAdapter(RowDataSet,this,mLand);
+        RowListAdapter mAdapter = new RowListAdapter(RowDataSet, this, mLand);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
 
 
     }
+
     private void getCurrentLandData() {
         RowDataSet = new ArrayList<>();
         Integer mMaximumRow = 0;
@@ -112,29 +113,57 @@ public class RowListActivity extends AppCompatActivity {
         //Count Clone
         selection = ColumnName.PlantedClone.LandID + " = " + mLand.getLandID();
         c = getContentResolver().query(uri, null, selection, null, null);
-        if (c != null){
+        if (c != null) {
             mTotalClonePlanted = c.getCount();
-        }else{
+        } else {
             mTotalClonePlanted = 0;
         }
         c.close();
 
         //get row Number
-        selection = ColumnName.Land.LandID + " = " + mLand.getLandID();
+        getRowNumber();
+        countPlantedFamily();
 
-        c = getContentResolver().query(Database.LAND, null, selection, null, null);
-        if (c != null){
-            if (c.moveToFirst()){
+
+    }
+    private Integer countClonePlanted(){
+        Integer cloneAmount = 0;
+        String selection = ColumnName.PlantedClone.LandID + " = " + mLand.getLandID();
+        Cursor c = getContentResolver().query(Database.RECEIVEDCLONE, null, selection, null, null);
+        if (c != null) {
+            while (c.moveToNext()){
+                cloneAmount = cloneAmount+c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.PlantedAmount));
+            }
+        } else {
+            mTotalClonePlanted = 0;
+        }
+        c.close();
+        return cloneAmount;
+    }
+
+    private Integer getRowNumber(){
+        Integer mMaximumRow = 0;
+        String selection = ColumnName.Land.LandID + " = " + mLand.getLandID();
+
+        Cursor c = getContentResolver().query(Database.LAND, null, selection, null, null);
+        if (c != null) {
+            if (c.moveToFirst()) {
                 mMaximumRow = c.getInt(c.getColumnIndex(ColumnName.Land.MaximumRow));
             }
-        }else{
-                mMaximumRow = 0;
+        } else {
+            mMaximumRow = 0;
         }
         for (int i = 0; i < mMaximumRow; i++) {
-            RowDataSet.add(i+1);
+            RowDataSet.add(i + 1);
         }
         c.close();
 
+        return mMaximumRow;
+    }
 
+    private Integer countPlantedFamily() {
+        String selection = ColumnName.ReceivedClone.LandID+" = "+mLand.getLandID();
+        Cursor c = getContentResolver().query(Database.RECEIVEDCLONE, null, selection, null, null);
+        return c.getCount();
     }
 }

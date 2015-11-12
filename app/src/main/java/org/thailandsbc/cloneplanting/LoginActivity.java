@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d("Callback", object.toString());
                 } else {
                     Toast.makeText(getApplication(), "ไม่สามารถ Login ได้", Toast.LENGTH_LONG).show();
-                    //TODO
                     CreateSessionLogin(null);
                 }
             }
@@ -99,20 +98,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void CreateSessionLogin(userLoginModel object) {
 
-
         UserDataModel data = new UserDataModel();
-//        Log.d("object",object.getName()+"");
-//        data.setUserCreate(object.getUserCreate());
-//        data.setFullName(object.getName());
-//        data.setWorkPlaceCode(object.getSector());
-//        data.setProfilePictureURL(object.getPicURL());
-        //TODO FIX THIS after Login URL Complete
-//        m.CreatedSessionLogin(data);
-        m.CreatedSessionLogin(data.createSample());
+        Log.d("object",object.getName()+"");
+        data.setUserID(object.getUserID());
+        data.setFullName(object.getName());
+        data.setWorkPlaceCode(object.getSector());
+        data.setProfilePictureURL(object.getPicURL());
+        m.CreatedSessionLogin(data);
+//        m.CreatedSessionLogin(data.createSample());
         Intent loginIntent = new Intent(LoginActivity.this, BaseActivity.class);
         loginIntent.putExtra(TAG_USERDATA, object);
         startActivity(loginIntent);
         finish();
-
     }
 }

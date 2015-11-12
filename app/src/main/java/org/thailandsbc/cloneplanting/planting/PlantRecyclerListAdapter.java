@@ -1,5 +1,6 @@
 package org.thailandsbc.cloneplanting.planting;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.checkclone.CheckCloneActivity;
 import org.thailandsbc.cloneplanting.dialog.ListManagementDialog;
 import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.model.SendFamilyModel;
@@ -78,6 +80,9 @@ implements  View.OnClickListener,View.OnLongClickListener{
         ViewHolder holder = (ViewHolder) v.getTag();
         int position = holder.getLayoutPosition();
         ReceiveFamilyModel item = dataSet.get(position);
+        Intent intent = new Intent(activity, CheckCloneActivity.class);
+        intent.putExtra("Item",item);
+        activity.startActivity(intent);
     }
 
     @Override

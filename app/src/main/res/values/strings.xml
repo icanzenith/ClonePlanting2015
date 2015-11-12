@@ -75,5 +75,6 @@
     </string-array>
     <string name="title_activity_confirm_create_land">ConfirmCreateLandActivity</string>
     <string name="qr_scanner_dialog_title_plant">กรุณาระบุจำนวนที่ปลูก</string>
+    <string name="title_activity_check_clone">CheckCloneActivity</string>
 
 </resources>
