@@ -3,6 +3,7 @@ package org.thailandsbc.cloneplanting.planting;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,7 @@ implements  View.OnClickListener,View.OnLongClickListener{
         ViewHolder holder = (ViewHolder) v.getTag();
         int position = holder.getLayoutPosition();
         ReceiveFamilyModel item = dataSet.get(position);
+        Log.d("RowNumber",""+item.getRowNumber());
         Intent intent = new Intent(activity, CheckCloneActivity.class);
         intent.putExtra("Item",item);
         activity.startActivity(intent);

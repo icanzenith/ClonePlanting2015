@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import org.thailandsbc.cloneplanting.LoginActivity;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.database.MySharedPreference;
+import org.thailandsbc.cloneplanting.personal.PersonalProfile;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
 public class BaseActivity extends AppCompatActivity implements onFragmentInteractionListener {
@@ -36,6 +37,11 @@ public class BaseActivity extends AppCompatActivity implements onFragmentInterac
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         break;
+                    case R.id.navigation_item_2:
+                        Intent intent1 = new Intent(BaseActivity.this, PersonalProfile.class);
+                        startActivity(intent1);
+                        break;
+
                 }
                 return true;
             }

@@ -76,5 +76,10 @@
     <string name="title_activity_confirm_create_land">ConfirmCreateLandActivity</string>
     <string name="qr_scanner_dialog_title_plant">กรุณาระบุจำนวนที่ปลูก</string>
     <string name="title_activity_check_clone">CheckCloneActivity</string>
+    <string name="title_activity_personal_profile">PersonalProfile</string>
+    <string name="timline">TimeLine</string>
+    <string name="personal_profile">ข้อมูลส่วนตัว</string>
+    <string name="land_list">ข้อมูลแปลง</string>
+    <string name="title_activity_edit_profile">EditProfileActivity</string>
 
 </resources>

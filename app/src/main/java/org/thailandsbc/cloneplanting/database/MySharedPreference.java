@@ -2,6 +2,7 @@ package org.thailandsbc.cloneplanting.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import org.thailandsbc.cloneplanting.model.UserDataModel;
 
@@ -30,6 +31,7 @@ public class MySharedPreference {
     public void CreatedSessionLogin(UserDataModel userData) {
 
         //Create First LoginHere
+        Log.d("TAG userData",""+userData.getEmail());
         mEditor.putInt(UserDataModel.TAG.UserID.toString(), userData.getUserID());
         mEditor.putString(UserDataModel.TAG.FullName.toString(), userData.getFullName());
         mEditor.putString(UserDataModel.TAG.WorkPlaceCode.toString(), userData.getWorkPlaceCode());

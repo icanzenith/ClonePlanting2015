@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.database.Database;
@@ -25,6 +27,10 @@ public class CheckCloneActivity extends AppCompatActivity {
     protected RecyclerView.LayoutManager layoutManager;
     private CloneListAdapter mAdapter;
     private ReceiveFamilyModel receiveFamilyModel;
+
+    private TextView textViewOrderInRow;
+    private TextView textViewRowNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,35 +52,41 @@ public class CheckCloneActivity extends AppCompatActivity {
         setRecyclerView();
     }
 
-    private void InitializeViews(){
-            recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+    private void InitializeViews() {
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        textViewOrderInRow = (TextView) findViewById(R.id.textViewOrder);
+        textViewRowNumber = (TextView) findViewById(R.id.textViewRowNumber);
 
     }
-    private void InitializeData(){
+
+    private void InitializeData() {
         layoutManager = new LinearLayoutManager(this);
-        mAdapter = new CloneListAdapter(getCloneCodeList(receiveFamilyModel),this);
+        mAdapter = new CloneListAdapter(getCloneCodeList(receiveFamilyModel), this);
+
+        textViewRowNumber.setText("แถวที่ "+receiveFamilyModel.getRowNumber());
+        textViewOrderInRow.setText("ลำดับที่ "+receiveFamilyModel.getOrderinRow());
     }
 
-    private void setRecyclerView(){
+    private void setRecyclerView() {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
     }
 
-    private ArrayList<CloneData> getCloneCodeList(ReceiveFamilyModel m){
+    private ArrayList<CloneData> getCloneCodeList(ReceiveFamilyModel m) {
         ArrayList<CloneData> cloneListData = new ArrayList<>();
-        String selection = ColumnName.PlantedClone.FamilyCode+" = ? AND "+ColumnName.PlantedClone.LandID + " = "+m.getLandID();
+        String selection = ColumnName.PlantedClone.FamilyCode + " = ? AND " + ColumnName.PlantedClone.LandID + " = " + m.getLandID();
         String[] selectionArgs = {m.getFamilyCode()};
-        String sortOrder = ColumnName.PlantedClone.CloneCode+" ASC";
-        Cursor c = getContentResolver().query(Database.PLANTEDCLONE,null,selection,selectionArgs,sortOrder);
-        if (c!=null){
-            while (c.moveToNext()){
+        String sortOrder = ColumnName.PlantedClone.CloneCode + " ASC";
+        Cursor c = getContentResolver().query(Database.PLANTEDCLONE, null, selection, selectionArgs, sortOrder);
+        if (c != null) {
+            while (c.moveToNext()) {
                 CloneData clone = new CloneData();
                 clone.setCloneCode(c.getString(c.getColumnIndex(ColumnName.PlantedClone.CloneCode)));
                 clone.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.PlantedClone.FamilyCode)));
                 clone.setCreateTime(c.getString(c.getColumnIndex(ColumnName.PlantedClone.createdTime)));
-                if (c.getInt(c.getColumnIndex(ColumnName.PlantedClone.isDead))==1){
+                if (c.getInt(c.getColumnIndex(ColumnName.PlantedClone.isDead)) == 1) {
                     clone.setIsDead(true);
-                }else{
+                } else {
                     clone.setIsDead(false);
                 }
                 clone.setLandID(c.getInt(c.getColumnIndex(ColumnName.PlantedClone.LandID)));
