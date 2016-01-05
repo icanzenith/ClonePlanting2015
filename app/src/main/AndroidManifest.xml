@@ -15,7 +15,7 @@
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <meta-data
@@ -33,35 +33,35 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".baseactivity.BaseActivity"
             android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SendActivity"
-            android:label="@string/title_activity_send"></activity>
+            android:label="@string/title_activity_send" />
         <activity
             android:name=".FamilyDetailsActivity"
-            android:label="@string/title_activity_family_details"></activity>
+            android:label="@string/title_activity_family_details" />
         <activity
             android:name=".receive.ReceiveActivity"
-            android:label="@string/title_activity_receive"></activity>
+            android:label="@string/title_activity_receive" />
 
         <provider
             android:name=".database.ClonePlantingContentProvider"
             android:authorities="ThailandSugarcaneBreedingCenter"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
 
         <activity
             android:name=".BlankActivity"
             android:label="@string/title_activity_blank"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".planting.PlantingCloneActivity"
             android:label="@string/title_activity_planting_clone"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".test.testAddData"
             android:label="Test"
@@ -69,31 +69,46 @@
         <activity
             android:name=".planting.RowListActivity"
             android:label="@string/title_activity_row_list_adapter"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".createland.LandSelectionActivity"
             android:label="@string/title_activity_land_selection"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".createland.CreateLandActivity"
             android:label="@string/title_activity_create_land"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".createland.ConfirmCreateLandActivity"
             android:label="@string/title_activity_confirm_create_land"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".checkclone.CheckCloneActivity"
             android:label="@string/title_activity_check_clone"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".personal.PersonalProfile"
             android:label="@string/title_activity_personal_profile"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".personal.EditProfileActivity"
             android:label="@string/title_activity_edit_profile"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".test.TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".landmanagement.LandManagementActivity"
+            android:label="@string/title_activity_land_management"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".customview.CustomViewExampleActivity"
+            android:label="@string/title_activity_custom_view_example"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".setting.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

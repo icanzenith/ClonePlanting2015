@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.landmanagement.LandManagementActivity;
 import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.planting.RowListActivity;
 import org.thailandsbc.cloneplanting.utils.Land;
+import org.thailandsbc.cloneplanting.utils.SelectionMode;
 
 import java.util.List;
 
@@ -70,6 +72,10 @@ public class LandListAdapter extends RecyclerView.Adapter<LandListAdapter.ViewHo
         if (SelectionMode.equals(org.thailandsbc.cloneplanting.utils.SelectionMode.MODE_PLANT_CLONE)) {
             Intent intent = new Intent(activity, RowListActivity.class);
             intent.putExtra(Land.LAND_DETAIL, d.model);
+            activity.startActivity(intent);
+        }
+        if (SelectionMode.equals(org.thailandsbc.cloneplanting.utils.SelectionMode.MODE_LANDMANAGEMENT)){
+            Intent intent = new Intent(activity, LandManagementActivity.class);
             activity.startActivity(intent);
         }
 

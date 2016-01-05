@@ -25,19 +25,14 @@
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageViewProfile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_profile_sample"
-            android:elevation="10dp"
-            />
         <FrameLayout
+            android:elevation="11dp"
             android:background="@drawable/bg_workplace_symbol"
             android:layout_gravity="bottom|right"
             android:layout_width="24dp"
             android:layout_height="24dp">
             <TextView
+
                 android:layout_gravity="center"
                 android:text="A"
                 android:textSize="18dp"
@@ -46,6 +41,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </FrameLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:id="@+id/imageViewProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_profile_sample"
+            android:elevation="10dp"
+            />
+
     </FrameLayout>
 
 

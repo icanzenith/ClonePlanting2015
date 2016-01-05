@@ -63,7 +63,6 @@ public class LandListFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
     }
 
-
     private List<LandDetailModel> createDataSet() {
         List<LandDetailModel> data = new ArrayList<>();
         String[] projection = null;
@@ -95,7 +94,6 @@ public class LandListFragment extends Fragment {
         }
         return data;
     }
-
 
     @Nullable
     @Override

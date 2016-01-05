@@ -18,4 +18,5 @@ public class SelectionMode {
     public static final String MODE_DELETE_PLANT_CLONE = "plant_delete_clone";
 
     public static final String MODE_LANDFRAGMENT = "land_fragment";
+    public static final String MODE_LANDMANAGEMENT = "land_management";
 }

@@ -16,4 +16,5 @@
     <dimen name="model_cardview_default_radius">4dp</dimen>
     <dimen name="model_family_margin_left">48dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>
