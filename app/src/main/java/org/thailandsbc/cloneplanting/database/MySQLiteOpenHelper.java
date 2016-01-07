@@ -94,6 +94,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.SentClone.MotherCode + " TEXT," +
             ColumnName.SentClone.FatherCode + " TEXT)";
 
+
+    //ข้อมูลการรับ เป็น Family และ ข้อมูลตำแหน่งที่ปลูก
+    //TODO Change FamilyCode to NameTent
     private final String CREATE_TABLE_RECEIVEDCLONE = "" +
             "CREATE TABLE ReceivedClone(" +
             ColumnName.ReceivedClone.ObjectID + " INTEGER PRIMARY KEY," +
@@ -119,6 +122,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             "CREATE TABLE PlantedClone(" +
             ColumnName.PlantedClone.ObjectID+INTEGER+
             ColumnName.PlantedClone.CloneCode+TEXT+
+            //is Dead = 1 แสดงว่า ตาย
             ColumnName.PlantedClone.isDead+INTEGER+
             ColumnName.PlantedClone.createdTime+TEXT+
             ColumnName.PlantedClone.updatedTime+TEXT+

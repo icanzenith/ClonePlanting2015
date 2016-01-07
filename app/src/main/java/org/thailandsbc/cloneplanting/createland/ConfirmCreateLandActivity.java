@@ -116,6 +116,8 @@ public class ConfirmCreateLandActivity extends AppCompatActivity implements OnMa
         return Integer.valueOf(String.format("%.0f", maximumRow));
     }
 
+    //TODO  MaximumClonePerFamily Change Online;
+
     private Integer MaximumClonePerFamily = 35;
 
     private Integer getMaximumFamilyPerRow(LandDetailModel landDetail) {

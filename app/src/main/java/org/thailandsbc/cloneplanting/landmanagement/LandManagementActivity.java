@@ -49,8 +49,8 @@ public class LandManagementActivity extends AppCompatActivity {
 
         fragments = new ArrayList<>();
         fragments.add(MapFragment.newInstance());
-        fragments.add(PlaceholderFragment.newInstance(1));
-        fragments.add(PlaceholderFragment.newInstance(2));
+        fragments.add(PlantedLandLayoutFragment.newInstance());
+        fragments.add(LandDetailFragment.newInstance());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -169,7 +169,7 @@ public class LandManagementActivity extends AppCompatActivity {
                 case 1:
                     return "ผังแปลง";
                 case 2:
-                    return "ลำดับ";
+                    return "รายละเอียด";
             }
             return null;
         }

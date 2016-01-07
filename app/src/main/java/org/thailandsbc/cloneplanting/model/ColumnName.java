@@ -103,7 +103,6 @@ public class ColumnName {
         public static final String SugarcaneSelectionType = "SugarcaneSelectionType";
         public static final String createdTime = "createdTime";
         public static final String updatedTime = "updatedTime";
-        //TODO เพิ่ม
         public static final String MaximumRow = "MaximumRow";
         public static final String MaximumFamilyPerRow = "MaximumFamilyPerRow";
         public static final String MaximumClonePerFamily = "MaximumClonePerFamily";

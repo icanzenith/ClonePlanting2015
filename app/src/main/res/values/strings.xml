@@ -145,4 +145,12 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
+    <string-array name="details_topic_list">
+        <item>ส่ง</item>
+        <item>รับ</item>
+        <item>ปลูก</item>
+        <item>รอด</item>
+        <item>โรค</item>
+    </string-array>
+
 </resources>
