@@ -19,7 +19,7 @@
         android:layout_height="wrap_content" />
     <Button
         android:id="@+id/buttonDeleteAllLandData"
-        android:text="ลบข้อมูลจำลองแปลง"
+        android:text="Drop All Databases"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button

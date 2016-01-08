@@ -22,33 +22,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.model.ColumnName;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
+import org.thailandsbc.cloneplanting.utils.Land;
 
 import java.util.ArrayList;
 
 public class LandManagementActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
     private ViewPager mViewPager;
     private ArrayList<Fragment> fragments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land_management);
+        LandDetailModel mLand = null;
+
+        if (getIntent()!=null){
+            mLand = getIntent().getParcelableExtra(Land.LAND_DETAIL);
+        }
+
 
         fragments = new ArrayList<>();
-        fragments.add(MapFragment.newInstance());
+        fragments.add(MapFragment.newInstance(mLand));
         fragments.add(PlantedLandLayoutFragment.newInstance());
         fragments.add(LandDetailFragment.newInstance());
 
@@ -100,42 +98,6 @@ public class LandManagementActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_land_management, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
 
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 

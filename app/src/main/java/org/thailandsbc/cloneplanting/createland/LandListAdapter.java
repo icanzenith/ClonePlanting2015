@@ -76,6 +76,7 @@ public class LandListAdapter extends RecyclerView.Adapter<LandListAdapter.ViewHo
         }
         if (SelectionMode.equals(org.thailandsbc.cloneplanting.utils.SelectionMode.MODE_LANDMANAGEMENT)){
             Intent intent = new Intent(activity, LandManagementActivity.class);
+            intent.putExtra(Land.LAND_DETAIL, d.model);
             activity.startActivity(intent);
         }
 

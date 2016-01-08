@@ -3,6 +3,8 @@ package org.thailandsbc.cloneplanting.test;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,7 @@ import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.SugarcaneSelectionType;
 import org.thailandsbc.cloneplanting.customview.CustomViewExampleActivity;
 import org.thailandsbc.cloneplanting.database.Database;
+import org.thailandsbc.cloneplanting.database.MySQLiteOpenHelper;
 import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.utils.PlantStatus;
 
@@ -65,7 +68,7 @@ public class TestActivity extends AppCompatActivity {
         buttonDeleteAllLandData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeleteSampleLandData();
+                dropAllData();
             }
         });
 
@@ -110,6 +113,7 @@ public class TestActivity extends AppCompatActivity {
 
         ContentValues c = new ContentValues();
         c.put(ColumnName.Land.LandName, "AMM001");
+        c.put(ColumnName.Land.LandID,1);
         c.put(ColumnName.Land.LandLength, 40);
         c.put(ColumnName.Land.LandWidth, 40);
         c.put(ColumnName.Land.LandArea, 1600);
@@ -130,6 +134,7 @@ public class TestActivity extends AppCompatActivity {
         //Land 2
         ContentValues c2 = new ContentValues();
         c2.put(ColumnName.Land.LandName, "AMM002");
+        c2.put(ColumnName.Land.LandID,2);
         c2.put(ColumnName.Land.LandLength, 40);
         c2.put(ColumnName.Land.LandWidth, 40);
         c2.put(ColumnName.Land.LandArea, 1600);
@@ -150,6 +155,7 @@ public class TestActivity extends AppCompatActivity {
 
         ContentValues c3 = new ContentValues();
         c3.put(ColumnName.Land.LandName, "AMM003");
+        c3.put(ColumnName.Land.LandID,3);
         c3.put(ColumnName.Land.LandLength, 40);
         c3.put(ColumnName.Land.LandWidth, 40);
         c3.put(ColumnName.Land.LandArea, 1600);
@@ -241,34 +247,37 @@ public class TestActivity extends AppCompatActivity {
 
 
     private void testAddReceiveData() {
+        int mPlantedAmount = 35;
+
         for (String place : getResources().getStringArray(R.array.place)) {
+            // Place by Place
+            String[] listData = {place + "15380"
+                    , place + "15381"
+                    , place + "15382"
+                    , place + "15383"
+                    , place + "15384"
+                    , place + "15385"
+                    , place + "15386"
+                    , place + "15387"
+                    , place + "15388"
+                    , place + "15389"
+                    , place + "15390"
+                    , place + "15391"
+                    , place + "15392"
+                    , place + "15393"
+                    , place + "15394"
+                    , place + "15395"
+                    , place + "15396"};
             if (place.equals("All")) {
                 //do nothing
             } else {
-                // Place by Place
-                String[] listData = {place + "15380"
-                        , place + "15381"
-                        , place + "15382"
-                        , place + "15383"
-                        , place + "15384"
-                        , place + "15385"
-                        , place + "15386"
-                        , place + "15387"
-                        , place + "15388"
-                        , place + "15389"
-                        , place + "15390"
-                        , place + "15391"
-                        , place + "15392"
-                        , place + "15393"
-                        , place + "15394"
-                        , place + "15395"
-                        , place + "15396"};
+                String nameTent;
 
-                for (String s : listData) {
-
+                for (int i  = 0; i < listData.length ;i++) {
+                    nameTent = listData[i];
                     ContentValues v = new ContentValues();
 
-                    v.put(ColumnName.ReceivedClone.FamilyCode, s);
+                    v.put(ColumnName.ReceivedClone.FamilyCode, listData[i]);
                     v.put(ColumnName.ReceivedClone.SentBy, place);
                     v.put(ColumnName.ReceivedClone.ReceivedBy, "A");
                     v.put(ColumnName.ReceivedClone.UserReceiver, 11);
@@ -277,13 +286,50 @@ public class TestActivity extends AppCompatActivity {
                     v.put(ColumnName.ReceivedClone.updatedTime, baseApplication.getTimeUTC());
                     v.put(ColumnName.ReceivedClone.MotherCode, getParentRandom());
                     v.put(ColumnName.ReceivedClone.FatherCode, getParentRandom());
-                    v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.NOT_Planted);
-
+                    v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.Planted);
+                    v.put(ColumnName.ReceivedClone.RowNumber,(i+1));
+                    v.put(ColumnName.ReceivedClone.OrderInRow,1);
+                    v.put(ColumnName.ReceivedClone.PlantedAmount,mPlantedAmount);
+                    if (place.equals("A")){
+                        v.put(ColumnName.Land.LandID,1);
+                        insertClonePlanted(nameTent,mPlantedAmount,1);
+                    }else if (place.equals("G")){
+                        v.put(ColumnName.Land.LandID,2);
+                        insertClonePlanted(nameTent,mPlantedAmount,2);
+                    }else if(place.equals("L")){
+                        v.put(ColumnName.Land.LandID,3);
+                        insertClonePlanted(nameTent,mPlantedAmount,2);
+                    }
                     Uri insert = getContentResolver().insert(Database.RECEIVEDCLONE, v);
-                    Log.d("Insert", insert.toString());
+
                 }
             }
         }
+    }
+
+    private void insertClonePlanted(String nameTent , int plantedAmount,int landID){
+        //TODO Insert Planted Data
+        for (int j = 0 ; j< plantedAmount; j++){
+            //Uri Planted Amount
+            String cloneCode = String.format(nameTent+ "-%03d", (j + 1));
+            ContentValues c = new ContentValues();
+            c.put(ColumnName.PlantedClone.CloneCode,cloneCode);
+            if (Math.random() < 0.2){
+                c.put(ColumnName.PlantedClone.isDead,0);
+            } else {
+                c.put(ColumnName.PlantedClone.isDead,1);
+            }
+            c.put(ColumnName.PlantedClone.createdTime,baseApplication.getTimeUTC());
+            c.put(ColumnName.PlantedClone.updatedTime,baseApplication.getTimeUTC());
+            c.put(ColumnName.PlantedClone.LandID,landID);
+            c.put(ColumnName.PlantedClone.FamilyCode,nameTent);
+            getContentResolver().insert(Database.PLANTEDCLONE,c);
+        }
+    }
+    private void dropAllData(){
+        MySQLiteOpenHelper q = new MySQLiteOpenHelper(this, Database.AUTHORITY, null, 1);
+        SQLiteDatabase d = q.getReadableDatabase();
+        q.onUpgrade(d,1,1);
     }
 
 

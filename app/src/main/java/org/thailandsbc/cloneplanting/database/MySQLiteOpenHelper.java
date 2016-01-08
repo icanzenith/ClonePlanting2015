@@ -41,7 +41,17 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS familyTable");
+        db.execSQL("DROP TABLE IF EXISTS logTable");
+        db.execSQL("DROP TABLE IF EXISTS Sector");
+        db.execSQL("DROP TABLE IF EXISTS SentClone");
+        db.execSQL("DROP TABLE IF EXISTS ReceivedClone");
+        db.execSQL("DROP TABLE IF EXISTS PlantedClone");
+        db.execSQL("DROP TABLE IF EXISTS Land");
+        db.execSQL("DROP TABLE IF EXISTS Comment");
+        db.execSQL("DROP TABLE IF EXISTS Picture");
+        db.execSQL("DROP TABLE IF EXISTS Activity");
+        onCreate(db);
 
     }
 
@@ -188,7 +198,6 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Picture.updatedTime+" TEXT,"+
             "FOREIGN KEY("+ColumnName.Picture.ActivityID+") REFERENCES Activity("+ColumnName.Picture.ActivityID+
             "))";
-
 
 
 }
