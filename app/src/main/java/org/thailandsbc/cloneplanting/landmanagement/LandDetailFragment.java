@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,10 @@ import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.dialog.SelectPlaceToSendDialog;
 import org.thailandsbc.cloneplanting.model.CloneDetailData;
 import org.thailandsbc.cloneplanting.model.ColumnName;
+import org.thailandsbc.cloneplanting.model.FamilyModel;
+import org.thailandsbc.cloneplanting.model.LandDetailModel;
+import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
+import org.thailandsbc.cloneplanting.utils.Land;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -32,6 +37,7 @@ import java.util.Map;
 
 public class LandDetailFragment extends Fragment {
 
+    private static final String TAG = "LandDetailFragment";
     private ListView mLandDetailList;
     private ListView mListViewOrder;
     private SimpleAdapter mOrderAdapter;
@@ -49,13 +55,19 @@ public class LandDetailFragment extends Fragment {
      */
     private TextView textViewOrder;
 
+    private  LandDetailModel landDetailModel;
+
 
     public LandDetailFragment() {
         // Required empty public constructor
     }
 
-    public static Fragment newInstance() {
+    public static Fragment newInstance(LandDetailModel landDetail) {
+
         Fragment fragment = new LandDetailFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(Land.LAND_DETAIL,landDetail);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -76,6 +88,7 @@ public class LandDetailFragment extends Fragment {
         textViewReceiveAmount   = (TextView) v.findViewById(R.id.textViewReceiveAmount);
         textViewPlantedAmount   = (TextView) v.findViewById(R.id.textViewPlantedAmount);
         textViewSurviveAmount   = (TextView) v.findViewById(R.id.textViewSurviveAmount);
+        textViewOrder = (TextView) v.findViewById(R.id.textViewOrder);
 
 
         return v;
@@ -84,6 +97,23 @@ public class LandDetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments()!=null){
+            landDetailModel = getArguments().getParcelable(Land.LAND_DETAIL);
+            createDataList();
+        }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        PlantedOrderListAdapter mAdapter= new PlantedOrderListAdapter(createDataList(),getActivity());
+        mListViewOrder.setAdapter(mAdapter);
+        mListViewOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                blindViewData((ReceiveFamilyModel) parent.getItemAtPosition(position));
+            }
+        });
     }
 
     @Override
@@ -91,96 +121,68 @@ public class LandDetailFragment extends Fragment {
         super.onDetach();
     }
 
+    private ArrayList<ReceiveFamilyModel> createDataList(){
+        ArrayList<ReceiveFamilyModel> famList = new ArrayList<>();
+        ContentResolver contentResolver = getActivity().getContentResolver();
 
-    private void createOrderList(int landID) {
-        //TODO Query Here to get List of NameTent or FamilyCode of this LandID
-
-        ContentResolver cr = getActivity().getContentResolver();
-        String sortOrder = ColumnName.ReceivedClone.RowNumber+" ASC, "+ColumnName.ReceivedClone.OrderInRow+" ASC";
-        String selection = ColumnName.ReceivedClone.LandID+" = "+landID;
-
-        Cursor c = cr.query(Database.RECEIVEDCLONE,null,selection,null,sortOrder);
-
+        String selection = ColumnName.ReceivedClone.LandID+" = "+landDetailModel.getLandID();
+        String[] selectionArgs  = null;
+        String sortOrder = ColumnName.ReceivedClone.RowNumber+" ASC ,"+ColumnName.ReceivedClone.OrderInRow+" ASC";
+        Cursor c = contentResolver.query(Database.RECEIVEDCLONE,null,selection,selectionArgs,sortOrder);
         while (c.moveToNext()){
+            Log.d(TAG, "createDataList: "+c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
 
+            ReceiveFamilyModel f = new ReceiveFamilyModel();
+
+            f.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
+            f.setFatherCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FatherCode)));
+            f.setMotherCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.MotherCode)));
+            f.setReceivedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)));
+            f.setPlantedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.PlantedAmount)));
+            f.setSurviveAmount(
+                    //นับจำนวนต้นที่รอด
+                    countSurviveAmount(landDetailModel.getLandID(),c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)))
+            );
+            f.setOrder((c.getPosition()+1));
+            famList.add(f);
         }
-        c.close();
 
-        List<HashMap<String, Object>> mList = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            HashMap<String, Object> data = new HashMap<>();
-            data.put("order", "" + (i + 1));
-            data.put("nameTent", "A1500" + i);
-            mList.add(data);
-
-        }
-
-        mOrderAdapter = new SimpleAdapter(getActivity(), mList, R.layout.single_list_clone_in_order,
-                new String[]{"order", "nameTent"}, new int[]{R.id.textViewOrder, R.id.textViewNameTent});
-        mListViewOrder.setAdapter(mOrderAdapter);
-        mListViewOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-//                getCloneDetail();
-            }
-        });
+        return famList;
 
     }
 
-    private void getCloneDetail(int landID) {
+    private int countSurviveAmount(Integer landID, String familyCode) {
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        int surviveAmount = 0;
 
+        String selection =
+                ColumnName.PlantedClone.LandID+" = "+landID+" AND "+
+                ColumnName.PlantedClone.isDead+ " = 0 AND "+
+                ColumnName.PlantedClone.FamilyCode+" = ?";
 
-        CloneDetailData cloneDetail = new CloneDetailData();
-
-
-        ContentResolver cr = getActivity().getContentResolver();
-        String sortOrder = ColumnName.ReceivedClone.RowNumber+" ASC, "+ColumnName.ReceivedClone.OrderInRow+" ASC";
-        String selection = ColumnName.ReceivedClone.LandID+" = "+landID;
-
-
-        Cursor c = cr.query(Database.PLANTEDCLONE, null, selection, null, null);
-        if (c.moveToFirst()) {
-
-            cloneDetail.setMotherName(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.MotherCode)));
-            cloneDetail.setFatherName(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FatherCode)));
-            cloneDetail.setPlantedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.PlantedAmount)) + "");
-            cloneDetail.setReceiveAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)) + "");
-
-        }
+        String[] selectionArgs  = {familyCode};
+        String sortOrder = ColumnName.PlantedClone.CloneCode+" ASC ";
+        Cursor c = contentResolver.query(Database.PLANTEDCLONE,null,selection,selectionArgs,sortOrder);
+        surviveAmount = c.getCount();
         c.close();
-
-        //Check Survive Amount
-        selection = ColumnName.PlantedClone.LandID + " = ? AND " +
-                ColumnName.PlantedClone.FamilyCode + " = ?";
-        c = cr.query(Database.PLANTEDCLONE, null, selection, null, null);
-
-        int countLiveAmount = 0;
-
-        while (c.moveToNext()) {
-            if (c.getInt(c.getColumnIndex(ColumnName.PlantedClone.isDead)) == 1) {
-
-            } else {
-
-                countLiveAmount++;
-            }
+        if (c.isClosed()){
+            Log.d(TAG, "countSurviveAmount: Cursor is Close");
         }
-
-        cloneDetail.setSurvivedAmount(countLiveAmount + "");
-
-        blindViewData(cloneDetail);
+        return surviveAmount;
 
     }
 
-    private void blindViewData(CloneDetailData cloneDetail) {
-        textViewMotherName.setText(cloneDetail.getMotherName());
-        textViewFatherName.setText(cloneDetail.getFatherName());
+
+
+    private void blindViewData(ReceiveFamilyModel cloneDetail) {
+        textViewMotherName.setText(cloneDetail.getMotherCode());
+        textViewFatherName.setText(cloneDetail.getFatherCode());
         textViewOrder.setText(cloneDetail.getOrder()+"");
-        textViewReceiveAmount.setText(cloneDetail.getReceiveAmount());
-        textViewPlantedAmount.setText(cloneDetail.getPlantedAmount());
-        textViewSurviveAmount.setText(cloneDetail.getSurvivedAmount());
-        textViewNameTent.setText(cloneDetail.getNameTent());
+        textViewReceiveAmount.setText(cloneDetail.getReceivedAmount()+"");
+        textViewPlantedAmount.setText(cloneDetail.getPlantedAmount()+"");
+        textViewSurviveAmount.setText(cloneDetail.getSurviveAmount()+"");
+        textViewNameTent.setText(cloneDetail.getFamilyCode());
     }
+
 
 }

@@ -25,14 +25,9 @@ public class ReceiveFamilyModel implements Parcelable {
     private int     LandID;
     private int     PositionInList;
 
+    private int     SurviveAmount;
+    private int     Order;
 
-    public int getPlantedAmount() {
-        return PlantedAmount;
-    }
-
-    public void setPlantedAmount(int plantedAmount) {
-        PlantedAmount = plantedAmount;
-    }
 
     public String getFamilyCode() {
         return FamilyCode;
@@ -110,8 +105,8 @@ public class ReceiveFamilyModel implements Parcelable {
         return isPlanted;
     }
 
-    public void setIsPlanted(boolean isPlanted) {
-        this.isPlanted = isPlanted;
+    public void setPlanted(boolean planted) {
+        isPlanted = planted;
     }
 
     public int getPlantedBy() {
@@ -120,6 +115,14 @@ public class ReceiveFamilyModel implements Parcelable {
 
     public void setPlantedBy(int plantedBy) {
         PlantedBy = plantedBy;
+    }
+
+    public int getPlantedAmount() {
+        return PlantedAmount;
+    }
+
+    public void setPlantedAmount(int plantedAmount) {
+        PlantedAmount = plantedAmount;
     }
 
     public int getRowNumber() {
@@ -162,6 +165,26 @@ public class ReceiveFamilyModel implements Parcelable {
         PositionInList = positionInList;
     }
 
+    public int getSurviveAmount() {
+        return SurviveAmount;
+    }
+
+    public void setSurviveAmount(int surviveAmount) {
+        SurviveAmount = surviveAmount;
+    }
+
+    public int getOrder() {
+        return Order;
+    }
+
+    public void setOrder(int order) {
+        Order = order;
+    }
+
+    public static Creator<ReceiveFamilyModel> getCREATOR() {
+        return CREATOR;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -186,6 +209,8 @@ public class ReceiveFamilyModel implements Parcelable {
         dest.writeString(this.PlantedTime);
         dest.writeInt(this.LandID);
         dest.writeInt(this.PositionInList);
+        dest.writeInt(this.SurviveAmount);
+        dest.writeInt(this.Order);
     }
 
     public ReceiveFamilyModel() {
@@ -209,6 +234,8 @@ public class ReceiveFamilyModel implements Parcelable {
         this.PlantedTime = in.readString();
         this.LandID = in.readInt();
         this.PositionInList = in.readInt();
+        this.SurviveAmount = in.readInt();
+        this.Order = in.readInt();
     }
 
     public static final Parcelable.Creator<ReceiveFamilyModel> CREATOR = new Parcelable.Creator<ReceiveFamilyModel>() {

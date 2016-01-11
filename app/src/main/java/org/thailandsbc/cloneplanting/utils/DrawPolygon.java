@@ -14,6 +14,7 @@ import org.thailandsbc.cloneplanting.model.LandDetailModel;
  */
 public class DrawPolygon {
     private GoogleMap mMap;
+    private LandDetailModel land;
 
     public DrawPolygon(GoogleMap map) {
         this.mMap = map;
@@ -25,7 +26,8 @@ public class DrawPolygon {
         Polygon polygon = mMap.addPolygon(new PolygonOptions().add(latLngs).
                 strokeColor(Color.RED)
                 .fillColor(Color.BLUE));
-
+        this.land = land;
+        drawPolyline();
 
         return polygon;
     }
@@ -44,5 +46,10 @@ public class DrawPolygon {
 
 
         return latLngs;
+    }
+
+    private void drawPolyline(){
+        DrawPlatedLayout drawPlatedLayout = new DrawPlatedLayout(mMap,land);
+        drawPlatedLayout.startDrawMap();
     }
 }

@@ -14,10 +14,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.model.LandDetailModel;
+import org.thailandsbc.cloneplanting.utils.DrawPlatedLayout;
 import org.thailandsbc.cloneplanting.utils.DrawPolygon;
 
 
@@ -77,6 +79,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     public void onMapReady(GoogleMap googleMap) {
         drawPolygon = new DrawPolygon(googleMap);
         drawPolygon.drawSquarePolygon(landDetail);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(landDetail.getLatitude(),landDetail.getLongitude()),15f));
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(landDetail.getLatitude(),landDetail.getLongitude()),2f));
     }
 }

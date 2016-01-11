@@ -48,7 +48,7 @@ public class LandManagementActivity extends AppCompatActivity {
         fragments = new ArrayList<>();
         fragments.add(MapFragment.newInstance(mLand));
         fragments.add(PlantedLandLayoutFragment.newInstance());
-        fragments.add(LandDetailFragment.newInstance());
+        fragments.add(LandDetailFragment.newInstance(mLand));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,6 +59,7 @@ public class LandManagementActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);

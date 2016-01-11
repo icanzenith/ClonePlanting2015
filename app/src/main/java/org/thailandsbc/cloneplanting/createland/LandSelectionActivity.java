@@ -23,6 +23,7 @@ import java.util.List;
 
 public class LandSelectionActivity extends AppCompatActivity implements onFragmentInteractionListener{
 
+    private static final String TAG = "LandSelectionActivity";
     FloatingActionButton fab;
     Toolbar toolbar;
     private String Selection_Mode;
@@ -102,6 +103,10 @@ public class LandSelectionActivity extends AppCompatActivity implements onFragme
                 m.setSugarcaneSelectionType(c.getInt(c.getColumnIndex(ColumnName.Land.SugarcaneSelectionType)));
                 m.setYearCrossing(c.getString(c.getColumnIndex(ColumnName.Land.YearCrossing)));
                 m.setAddress(c.getString(c.getColumnIndex(ColumnName.Land.Address)));
+                m.setMaximumClonePerFamily(c.getInt(c.getColumnIndex(ColumnName.Land.MaximumClonePerFamily)));
+                m.setMaximumFamilyPerRow(c.getInt(c.getColumnIndex(ColumnName.Land.MaximumFamilyPerRow)));
+                Log.d(TAG, "createLatLngsData: familyPerRow"+m.getMaximumFamilyPerRow());
+                m.setMaximumRow(c.getInt(c.getColumnIndex(ColumnName.Land.MaximumRow)));
                 data.add(m);
             }
         }
