@@ -58,7 +58,7 @@ public class SectorBreederFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new SectorListRecyclerViewAdapter(getActivity(), sectorContent.CreateSampleSectorArrayData(), mListener));
+            recyclerView.setAdapter(new SectorListRecyclerViewAdapter(getActivity(), mListener));
         }
         return view;
     }

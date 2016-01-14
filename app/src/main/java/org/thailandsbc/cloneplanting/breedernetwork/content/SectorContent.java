@@ -30,7 +30,7 @@ public class SectorContent {
         String[] symbol = new String[]{"A", "B", "C", "D", "E", "G", "H", "I", "J", "K", "L", "M"};
         for(int i = 0; i < symbol.length ;i++){
             String Place = WorkPlaceData.PLACE_CODE.get(symbol[i]);
-            SectorItem item = new SectorItem(String.valueOf(i),symbol[i], Place);
+            SectorItem item = new SectorItem(symbol[i], Place);
             createSectorItem(item);
         }
         return (ArrayList<SectorItem>) ITEMS;
@@ -40,7 +40,7 @@ public class SectorContent {
 
     public void createSectorItem(SectorItem item){
         ITEMS.add(item);
-        ITEM_MAP.put(item.id,item);
+        ITEM_MAP.put(item.SectorCode,item);
     }
 
 
@@ -50,21 +50,20 @@ public class SectorContent {
 
 
     public static class SectorItem {
-        public final String id;
-        public final String sectorCode;
-        public final String name;
+        public final String SectorCode;
+        public final String FullName;
 
 
-        public SectorItem(String id, String sectorCode, String name) {
-            this.id = id;
-            this.sectorCode = sectorCode;
-            this.name = name;
+        public SectorItem(String sectorCode, String name) {
+            this.SectorCode = sectorCode;
+            this.FullName = name;
 
         }
 
         @Override
         public String toString() {
-            return " URL : "+ sectorCode +" Name : "+ name;
+            return " URL : "+
+                    SectorCode +" Name : "+ FullName;
         }
     }
 }

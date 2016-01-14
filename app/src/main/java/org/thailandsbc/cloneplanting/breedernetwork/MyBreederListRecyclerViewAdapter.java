@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.breedernetwork.content.BreederContent.BreederItem;
+import org.thailandsbc.cloneplanting.utils.DataLoader;
 
 import java.util.List;
 
@@ -21,10 +23,12 @@ public class MyBreederListRecyclerViewAdapter extends RecyclerView.Adapter<MyBre
     private final List<BreederItem> mValues;
     private final OnListFragmentInteractionListener mListener;
     private final Context mContext;
-    public MyBreederListRecyclerViewAdapter(Context context,List<BreederItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public MyBreederListRecyclerViewAdapter(Context context, OnListFragmentInteractionListener listener) {
         mListener = listener;
         mContext = context;
+        DataLoader dataLoader = new DataLoader(context);
+        dataLoader.setAdapter(MyBreederListRecyclerViewAdapter.this);
+        mValues = dataLoader.getBreederListData();
     }
 
 
@@ -39,8 +43,8 @@ public class MyBreederListRecyclerViewAdapter extends RecyclerView.Adapter<MyBre
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mName.setText(mValues.get(position).name);
-        Picasso.with(mContext).load(mValues.get(position).profileURL).fit().centerCrop().into(holder.mImageView);
+        holder.mName.setText(mValues.get(position).Name);
+        Picasso.with(mContext).load(mValues.get(position).PictureURL).fit().centerCrop().into(holder.mImageView);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

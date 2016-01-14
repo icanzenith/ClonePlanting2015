@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.breedernetwork.content.SectorContent;
+import org.thailandsbc.cloneplanting.utils.DataLoader;
 
 import java.util.List;
 
@@ -17,8 +18,12 @@ public class SectorListRecyclerViewAdapter extends RecyclerView.Adapter<SectorLi
     private final List<SectorContent.SectorItem> mValues;
     private final OnListFragmentInteractionListener mListener;
     private final Context mContext;
-    public SectorListRecyclerViewAdapter(Context context, List<SectorContent.SectorItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public SectorListRecyclerViewAdapter(Context context, OnListFragmentInteractionListener listener) {
+
+        DataLoader loader = new DataLoader(context);
+        loader.setAdapter(SectorListRecyclerViewAdapter.this);
+
+        mValues =loader.getSectorListData();
         mListener = listener;
         mContext = context;
     }
@@ -35,8 +40,8 @@ public class SectorListRecyclerViewAdapter extends RecyclerView.Adapter<SectorLi
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mTextViewFullName.setText(mValues.get(position).name);
-        holder.mTextViewSymbol.setText(mValues.get(position).sectorCode);
+        holder.mTextViewFullName.setText(mValues.get(position).FullName);
+        holder.mTextViewSymbol.setText(mValues.get(position).SectorCode);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

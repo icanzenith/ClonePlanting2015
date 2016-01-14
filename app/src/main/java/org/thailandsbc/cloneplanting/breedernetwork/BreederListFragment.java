@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.breedernetwork.content.BreederContent;
+import org.thailandsbc.cloneplanting.utils.DataLoader;
 
 public class BreederListFragment extends Fragment {
 
@@ -58,7 +59,7 @@ public class BreederListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyBreederListRecyclerViewAdapter(getActivity(),breederContent.CreateSampleBreederArrayData(), mListener));
+            recyclerView.setAdapter(new MyBreederListRecyclerViewAdapter(getActivity(), mListener));
         }
         return view;
     }

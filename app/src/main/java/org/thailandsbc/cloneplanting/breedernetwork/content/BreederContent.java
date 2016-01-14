@@ -57,20 +57,20 @@ public class BreederContent {
 
     public static class BreederItem {
         public final String id;
-        public final String profileURL;
-        public final String name;
-        public final int userID;
+        public final String PictureURL;
+        public final String Name;
+        public final int UserID;
 
         public BreederItem(String id, String profileURL, String name, int userID) {
             this.id = id;
-            this.profileURL = profileURL;
-            this.name = name;
-            this.userID = userID;
+            this.PictureURL = profileURL;
+            this.Name = name;
+            this.UserID = userID;
         }
 
         @Override
         public String toString() {
-            return " URL : "+profileURL+" Name : "+name+" UserID : "+userID;
+            return " URL : "+PictureURL+" Name : "+Name+" UserID : "+UserID;
         }
     }
 }
