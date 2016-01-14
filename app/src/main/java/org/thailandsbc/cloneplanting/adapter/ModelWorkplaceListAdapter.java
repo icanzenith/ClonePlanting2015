@@ -48,7 +48,7 @@ public class ModelWorkplaceListAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.model_workplace_list, null);
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.frameSymbol = (FrameLayout) convertView.findViewById(R.id.frameSymbol);
-            viewHolder.texViewFullName = (TextView) convertView.findViewById(R.id.texViewFullName);
+            viewHolder.texViewFullName = (TextView) convertView.findViewById(R.id.textViewFullName);
             viewHolder.textViewSymbol = (TextView) convertView.findViewById(R.id.textViewSymbol);
 
             convertView.setTag(viewHolder);

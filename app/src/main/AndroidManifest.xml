@@ -108,7 +108,11 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".setting.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".breedernetwork.BreederNetworkActivity"
+            android:label="@string/title_activity_breeder_network"
+            android:theme="@style/AppTheme" />x
     </application>
 
 </manifest>

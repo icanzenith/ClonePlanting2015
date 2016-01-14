@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -22,12 +21,12 @@ import org.thailandsbc.cloneplanting.customview.CustomViewExampleActivity;
 import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.database.MySQLiteOpenHelper;
 import org.thailandsbc.cloneplanting.model.ColumnName;
+import org.thailandsbc.cloneplanting.utils.DataLoader;
+import org.thailandsbc.cloneplanting.utils.GsonTransformer;
 import org.thailandsbc.cloneplanting.utils.PlantStatus;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Random;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -35,7 +34,9 @@ public class TestActivity extends AppCompatActivity {
     private Button buttonGenerateLandData;
     private Button buttonDeleteAllLandData;
     private Button buttonOpenCustomView;
+    private Button buttonTestDownloadData;
     private BaseApplication baseApplication;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,15 @@ public class TestActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        buttonTestDownloadData = (Button) findViewById(R.id.buttonTestDownLoad);
+        buttonTestDownloadData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testLoadData();
+            }
+        });
+
     }
 
 
@@ -534,6 +544,12 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
+
+    private GsonTransformer gsonTransformer = new GsonTransformer();
+    private void testLoadData(){
+        DataLoader dataLoader = new DataLoader(getApplication());
+        dataLoader.getLandData();
+    }
 
 }
 

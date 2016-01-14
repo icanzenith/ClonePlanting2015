@@ -70,7 +70,7 @@ public class PersonalProfile extends AppCompatActivity {
     private void setProfile(){
         //TODO Change Profile picture
         Picasso.with(this).load("http://www.uni-regensburg.de/Fakultaeten/phil_Fak_II/Psychologie/Psy_II/beautycheck/english/prototypen/w_sexy_gr.jpg").into(imageViewProfile);
-        Picasso.with(this).load("http://detechter.com/wp-content/uploads/2013/09/5293.jpg").fit().centerCrop().into(imageViewCover);
+        Picasso.with(this).load("http://detechter.com/wp-sectorCode/uploads/2013/09/5293.jpg").fit().centerCrop().into(imageViewCover);
         textViewName.setText(baseApplication.getUserData().getFullName());
     }
 

@@ -6,7 +6,7 @@ import android.net.Uri;
  * Created by Icanzenith on 9/2/15 AD.
  */
 public class Database {
-    public static final String SCHEME = "content://";
+    public static final String SCHEME = "sectorCode://";
 
     public static final String AUTHORITY = "ThailandSugarcaneBreedingCenter";
     public static final String TABLE_FAMILY = "familyTable";

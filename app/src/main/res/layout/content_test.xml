@@ -32,6 +32,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonCustomViewExample"
         android:text="Open Custom Views"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonTestDownLoad"
+        android:text="ทดสอบการ Download ข้อมูล"/>
 
 
 

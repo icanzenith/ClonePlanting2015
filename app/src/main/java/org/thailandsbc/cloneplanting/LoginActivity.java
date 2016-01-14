@@ -66,10 +66,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialogLogin.setTitle("Login in...");
         progressDialogLogin.show();
         doLogin();
+
     }
 
 
-   AQuery aq;
+
+    AQuery aq;
     static GsonTransformer gsonTransformer = new GsonTransformer();
     private void doLogin() {
 //        String name = "http://210.1.60.178:6111/index.php/service/login1stcloneplanting?Username=" +

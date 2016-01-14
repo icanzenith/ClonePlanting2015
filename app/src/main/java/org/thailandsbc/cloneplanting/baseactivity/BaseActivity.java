@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import org.thailandsbc.cloneplanting.LoginActivity;
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.breedernetwork.BreederNetworkActivity;
 import org.thailandsbc.cloneplanting.createland.LandSelectionActivity;
 import org.thailandsbc.cloneplanting.database.MySharedPreference;
 import org.thailandsbc.cloneplanting.personal.PersonalProfile;
@@ -58,6 +59,10 @@ public class BaseActivity extends AppCompatActivity implements onFragmentInterac
                         break;
                     case R.id.navigation_item_setting:
                         intent = new Intent(BaseActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.navigation_item_network:
+                        intent = new Intent(BaseActivity.this, BreederNetworkActivity.class);
                         startActivity(intent);
                         break;
                 }

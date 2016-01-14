@@ -30,7 +30,7 @@
         android:textSize="16sp"
         android:text="Kasetsart university"
         android:layout_centerVertical="true"
-        android:id="@+id/texViewFullName"
+        android:id="@+id/textViewFullName"
         android:layout_toRightOf="@+id/frameSymbol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
