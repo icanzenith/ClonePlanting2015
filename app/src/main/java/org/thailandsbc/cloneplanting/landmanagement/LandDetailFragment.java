@@ -4,9 +4,7 @@ package org.thailandsbc.cloneplanting.landmanagement;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -20,19 +18,12 @@ import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.database.Database;
-import org.thailandsbc.cloneplanting.dialog.SelectPlaceToSendDialog;
-import org.thailandsbc.cloneplanting.model.CloneDetailData;
 import org.thailandsbc.cloneplanting.model.ColumnName;
-import org.thailandsbc.cloneplanting.model.FamilyModel;
 import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.Land;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class LandDetailFragment extends Fragment {
@@ -130,18 +121,18 @@ public class LandDetailFragment extends Fragment {
         String sortOrder = ColumnName.ReceivedClone.RowNumber+" ASC ,"+ColumnName.ReceivedClone.OrderInRow+" ASC";
         Cursor c = contentResolver.query(Database.RECEIVEDCLONE,null,selection,selectionArgs,sortOrder);
         while (c.moveToNext()){
-            Log.d(TAG, "createDataList: "+c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
+            Log.d(TAG, "createDataList: "+c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
 
             ReceiveFamilyModel f = new ReceiveFamilyModel();
 
-            f.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
+            f.setNameTent(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
             f.setFatherCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FatherCode)));
             f.setMotherCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.MotherCode)));
             f.setReceivedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)));
             f.setPlantedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.PlantedAmount)));
             f.setSurviveAmount(
                     //นับจำนวนต้นที่รอด
-                    countSurviveAmount(landDetailModel.getLandID(),c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)))
+                    countSurviveAmount(landDetailModel.getLandID(),c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)))
             );
             f.setOrder((c.getPosition()+1));
             famList.add(f);
@@ -158,7 +149,7 @@ public class LandDetailFragment extends Fragment {
         String selection =
                 ColumnName.PlantedClone.LandID+" = "+landID+" AND "+
                 ColumnName.PlantedClone.isDead+ " = 0 AND "+
-                ColumnName.PlantedClone.FamilyCode+" = ?";
+                ColumnName.PlantedClone.NameTent +" = ?";
 
         String[] selectionArgs  = {familyCode};
         String sortOrder = ColumnName.PlantedClone.CloneCode+" ASC ";
@@ -181,7 +172,7 @@ public class LandDetailFragment extends Fragment {
         textViewReceiveAmount.setText(cloneDetail.getReceivedAmount()+"");
         textViewPlantedAmount.setText(cloneDetail.getPlantedAmount()+"");
         textViewSurviveAmount.setText(cloneDetail.getSurviveAmount()+"");
-        textViewNameTent.setText(cloneDetail.getFamilyCode());
+        textViewNameTent.setText(cloneDetail.getNameTent());
     }
 
 

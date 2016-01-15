@@ -21,10 +21,12 @@ public class LandDetailModel implements Parcelable {
     private Integer SugarcaneSelectionType;
     private String YearCrossing;
     private Integer PositionInList;
-
+    private String Sector;
     private Integer MaximumRow;
     private Integer MaximumFamilyPerRow;
     private Integer MaximumClonePerFamily;
+
+
 
 
     @Override
@@ -48,6 +50,7 @@ public class LandDetailModel implements Parcelable {
         dest.writeValue(this.SugarcaneSelectionType);
         dest.writeString(this.YearCrossing);
         dest.writeValue(this.PositionInList);
+        dest.writeString(this.Sector);
         dest.writeValue(this.MaximumRow);
         dest.writeValue(this.MaximumFamilyPerRow);
         dest.writeValue(this.MaximumClonePerFamily);
@@ -71,6 +74,7 @@ public class LandDetailModel implements Parcelable {
         this.SugarcaneSelectionType = (Integer) in.readValue(Integer.class.getClassLoader());
         this.YearCrossing = in.readString();
         this.PositionInList = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.Sector = in.readString();
         this.MaximumRow = (Integer) in.readValue(Integer.class.getClassLoader());
         this.MaximumFamilyPerRow = (Integer) in.readValue(Integer.class.getClassLoader());
         this.MaximumClonePerFamily = (Integer) in.readValue(Integer.class.getClassLoader());
@@ -198,6 +202,14 @@ public class LandDetailModel implements Parcelable {
         PositionInList = positionInList;
     }
 
+    public String getSector() {
+        return Sector;
+    }
+
+    public void setSector(String sector) {
+        Sector = sector;
+    }
+
     public Integer getMaximumRow() {
         return MaximumRow;
     }
@@ -220,5 +232,9 @@ public class LandDetailModel implements Parcelable {
 
     public void setMaximumClonePerFamily(Integer maximumClonePerFamily) {
         MaximumClonePerFamily = maximumClonePerFamily;
+    }
+
+    public static Creator<LandDetailModel> getCREATOR() {
+        return CREATOR;
     }
 }

@@ -1,6 +1,5 @@
 package org.thailandsbc.cloneplanting.landmanagement;
 
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,7 @@ public class PlantedOrderListAdapter extends BaseAdapter {
 
         }
         holder.Order.setText(""+data.get(position).getOrder());
-        holder.NameTent.setText(""+data.get(position).getFamilyCode());
+        holder.NameTent.setText(""+data.get(position).getNameTent());
         return convertView;
     }
 

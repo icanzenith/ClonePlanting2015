@@ -12,8 +12,17 @@ public class GsonTransformer implements Transformer {
 	@Override
 	public <T> T transform(String url, Class<T> type, String encoding,
 			byte[] data, AjaxStatus status) {
+
+		T t =  null;
 		Gson g = new Gson();
-		return g.fromJson(new String(data), type);
+		try {
+			 t = g.fromJson(new String(data), type);
+
+		}catch (Exception e){
+			e.printStackTrace();
+
+		}
+		return t;
 	}
 
 }

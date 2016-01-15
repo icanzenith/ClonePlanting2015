@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +27,6 @@ import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CyclicBarrier;
 
 public class PlantingCloneActivity extends AppCompatActivity implements onFragmentInteractionListener {
 
@@ -112,10 +110,10 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         if (c != null) {
             while (c.moveToNext()) {
                 ReceiveFamilyModel m = new ReceiveFamilyModel();
-                m.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
+                m.setNameTent(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
                 m.setLandID(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.LandID)));
                 m.setRowNumber(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.RowNumber)));
-                m.setOrderinRow(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.OrderInRow)));
+                m.setOrderInRow(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.OrderInRow)));
                 m.setPlantedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.PlantedAmount)));
                 m.setReceivedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)));
                 m.setCreatedTime(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.createdTime)));
@@ -135,9 +133,9 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         for (int i  = 0 ; i < m.getPlantedAmount();i++ ){
             String CurrentTime = baseApplication.getTimeUTC();
             ContentValues v = new ContentValues();
-            v.put(ColumnName.PlantedClone.CloneCode,String.format(m.getFamilyCode() + "-%03d", (i + 1)));
-            Log.d("CloneCode", String.format(m.getFamilyCode() + "-%03d", (i + 1)));
-            v.put(ColumnName.PlantedClone.FamilyCode, m.getFamilyCode());
+            v.put(ColumnName.PlantedClone.CloneCode,String.format(m.getNameTent() + "-%03d", (i + 1)));
+            Log.d("CloneCode", String.format(m.getNameTent() + "-%03d", (i + 1)));
+            v.put(ColumnName.PlantedClone.NameTent, m.getNameTent());
             v.put(ColumnName.PlantedClone.LandID, mLandID);
             v.put(ColumnName.PlantedClone.isDead,0);
             v.put(ColumnName.PlantedClone.updatedTime, CurrentTime);
@@ -148,7 +146,7 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
 
     public void deleteCloneData(ReceiveFamilyModel m){
 
-        String selection = ColumnName.PlantedClone.FamilyCode+" = ? AND "+ColumnName.PlantedClone.LandID+" = "+mLandID;
+        String selection = ColumnName.PlantedClone.NameTent +" = ? AND "+ColumnName.PlantedClone.LandID+" = "+mLandID;
         long delete = getContentResolver().delete(Database.PLANTEDCLONE,selection,null);
         Log.d("TAG Delete data"," "+delete);
     }
@@ -157,7 +155,7 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
     public void updateDataToDatabase(ReceiveFamilyModel m) {
 
         ContentValues v = new ContentValues();
-        v.put(ColumnName.ReceivedClone.FamilyCode,m.getFamilyCode());
+        v.put(ColumnName.ReceivedClone.NameTent,m.getNameTent());
         v.put(ColumnName.ReceivedClone.PlantedAmount, m.getPlantedAmount());
         v.put(ColumnName.ReceivedClone.PlantedBy, baseApplication.getUserData().getUserID());
         v.put(ColumnName.ReceivedClone.PlantedTime, baseApplication.getTimeUTC());
@@ -166,8 +164,8 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         v.put(ColumnName.ReceivedClone.LandID, mLandID);
         v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.Planted);
 
-        String where = ColumnName.ReceivedClone.FamilyCode + " = ?";
-        String[] selectionArgs = {m.getFamilyCode()};
+        String where = ColumnName.ReceivedClone.NameTent + " = ?";
+        String[] selectionArgs = {m.getNameTent()};
         int update = getContentResolver().update(Database.RECEIVEDCLONE, v, where, selectionArgs);
         if (update <= 0) {
             //update fail ยังไม่ได้ตรวจรับ
@@ -194,17 +192,17 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
 
     public void editPlantedClone(ReceiveFamilyModel m){
         ContentValues v = new ContentValues();
-        v.put(ColumnName.ReceivedClone.FamilyCode,m.getFamilyCode());
+        v.put(ColumnName.ReceivedClone.NameTent,m.getNameTent());
         v.put(ColumnName.ReceivedClone.PlantedAmount, m.getPlantedAmount());
         v.put(ColumnName.ReceivedClone.PlantedBy, baseApplication.getUserData().getUserID());
         v.put(ColumnName.ReceivedClone.PlantedTime, baseApplication.getTimeUTC());
         v.put(ColumnName.ReceivedClone.RowNumber,mRowNumber);
-        v.put(ColumnName.ReceivedClone.OrderInRow,m.getOrderinRow());
+        v.put(ColumnName.ReceivedClone.OrderInRow,m.getOrderInRow());
         v.put(ColumnName.ReceivedClone.LandID, mLandID);
         v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.Planted);
 
-        String where = ColumnName.ReceivedClone.FamilyCode + " = ?";
-        String[] selectionArgs = {m.getFamilyCode()};
+        String where = ColumnName.ReceivedClone.NameTent + " = ?";
+        String[] selectionArgs = {m.getNameTent()};
         int update = getContentResolver().update(Database.RECEIVEDCLONE, v, where, selectionArgs);
         if (update <= 0) {
             //update fail ยังไม่ได้ตรวจรับ

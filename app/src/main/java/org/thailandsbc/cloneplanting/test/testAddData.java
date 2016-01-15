@@ -58,7 +58,7 @@ public class testAddData extends AppCompatActivity {
 
         for (String s : listData) {
             ContentValues v = new ContentValues();
-            v.put(ColumnName.ReceivedClone.FamilyCode, s);
+            v.put(ColumnName.ReceivedClone.NameTent, s);
             v.put(ColumnName.ReceivedClone.SentBy, "A");
             v.put(ColumnName.ReceivedClone.ReceivedBy, "C");
             v.put(ColumnName.ReceivedClone.UserReceiver, 11);

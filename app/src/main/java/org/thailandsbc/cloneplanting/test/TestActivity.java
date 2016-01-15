@@ -274,7 +274,7 @@ public class TestActivity extends AppCompatActivity {
 
             for (int i = 0; i < sentClone.length; i++) {
                 ContentValues v = new ContentValues();
-                v.put(ColumnName.SentClone.FamilyCode, sentClone[i]);
+                v.put(ColumnName.SentClone.NameTent, sentClone[i]);
                 v.put(ColumnName.SentClone.SentBy, "A");
                 v.put(ColumnName.SentClone.SentTo, place);
                 v.put(ColumnName.SentClone.SentAmount, 20);
@@ -325,7 +325,7 @@ public class TestActivity extends AppCompatActivity {
                         nameTent = listData[i];
                         ContentValues v = new ContentValues();
 
-                        v.put(ColumnName.ReceivedClone.FamilyCode, listData[i]);
+                        v.put(ColumnName.ReceivedClone.NameTent, listData[i]);
                         v.put(ColumnName.ReceivedClone.SentBy, place);
                         v.put(ColumnName.ReceivedClone.ReceivedBy, "A");
                         v.put(ColumnName.ReceivedClone.UserReceiver, 11);
@@ -419,7 +419,7 @@ public class TestActivity extends AppCompatActivity {
 
             nameTent = listData[i-2];
             ContentValues v = new ContentValues();
-            v.put(ColumnName.ReceivedClone.FamilyCode, listData[i-2]);
+            v.put(ColumnName.ReceivedClone.NameTent, listData[i-2]);
             v.put(ColumnName.ReceivedClone.SentBy, place);
             v.put(ColumnName.ReceivedClone.ReceivedBy, "A");
             v.put(ColumnName.ReceivedClone.UserReceiver, 11);
@@ -441,7 +441,7 @@ public class TestActivity extends AppCompatActivity {
 
             v.put(ColumnName.ReceivedClone.RowNumber,row);
 
-            Log.d(TAG, "insertAddReceiveCloneData_2FamPerRow: "+v.get(ColumnName.ReceivedClone.FamilyCode).toString()+" "+
+            Log.d(TAG, "insertAddReceiveCloneData_2FamPerRow: "+v.get(ColumnName.ReceivedClone.NameTent).toString()+" "+
                     v.get(ColumnName.ReceivedClone.RowNumber)+" "+
                     v.get(ColumnName.ReceivedClone.OrderInRow));
             v.put(ColumnName.ReceivedClone.PlantedAmount, mPlantedAmount);
@@ -469,7 +469,7 @@ public class TestActivity extends AppCompatActivity {
             c.put(ColumnName.PlantedClone.createdTime, baseApplication.getTimeUTC());
             c.put(ColumnName.PlantedClone.updatedTime, baseApplication.getTimeUTC());
             c.put(ColumnName.PlantedClone.LandID, landID);
-            c.put(ColumnName.PlantedClone.FamilyCode, nameTent);
+            c.put(ColumnName.PlantedClone.NameTent, nameTent);
             getContentResolver().insert(Database.PLANTEDCLONE, c);
         }
     }
@@ -549,6 +549,8 @@ public class TestActivity extends AppCompatActivity {
     private void testLoadData(){
         DataLoader dataLoader = new DataLoader(getApplication());
         dataLoader.getLandData();
+        dataLoader.getSentCloneData();
+        dataLoader.getReceiveCloneData();
     }
 
 }

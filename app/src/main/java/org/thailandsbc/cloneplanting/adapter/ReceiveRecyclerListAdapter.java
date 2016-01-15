@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.dialog.ListManagementDialog;
-import org.thailandsbc.cloneplanting.model.SendFamilyModel;
 import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
 
@@ -44,7 +43,7 @@ public class ReceiveRecyclerListAdapter extends RecyclerView.Adapter<ReceiveRecy
     public void onBindViewHolder(ViewHolder holder, int position) {
         dataSet.get(position).setPositionInList(position);
         holder.textViewOrder.setText(""+(position+1));
-        holder.textViewFamilyCode.setText(dataSet.get(position).getFamilyCode());
+        holder.textViewFamilyCode.setText(dataSet.get(position).getNameTent());
         holder.textViewAmount.setText(""+dataSet.get(position).getReceivedAmount());
     }
 

@@ -85,7 +85,7 @@ public class LandSelectionActivity extends AppCompatActivity implements onFragme
         String sortOrder = null;
 
         Cursor c = getContentResolver().query(Database.LAND, projection, selection, selectionArgs, sortOrder);
-        if (c.getCount()!=0){
+        if (c!=null){
             Log.d("TAG",""+c.getCount());
             while (c.moveToNext()){
                 LandDetailModel m = new LandDetailModel();

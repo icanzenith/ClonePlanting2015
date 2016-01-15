@@ -7,16 +7,17 @@ import android.os.Parcelable;
  * Created by Icanzenith on 9/1/15 AD.
  */
 public class    SendFamilyModel implements Parcelable {
-    private String FamilyCode;
-    private String SentBy;
-    private String SentTo;
-    private int SendAmount;
-    private String UserSender;
-    private int PositionInList;
-    private String MotherCode;
-    private String FatherCode;
-    private String createdTime;
-    private String updatedTime;
+    public String NameTent;
+    public String SentBy;
+    public String SentTo;
+    public int SentAmount;
+    public String UserSender;
+    public int PositionInList;
+    public String MotherCode;
+    public String FatherCode;
+    public String createdTime;
+    public String updatedTime;
+    public Integer ObjectID;
 
     public String getSentBy() {
         return SentBy;
@@ -66,20 +67,20 @@ public class    SendFamilyModel implements Parcelable {
         this.updatedTime = updatedTime;
     }
 
-    public String getFamilyCode() {
-        return FamilyCode;
+    public String getNameTent() {
+        return NameTent;
     }
 
-    public void setFamilyCode(String familyCode) {
-        FamilyCode = familyCode;
+    public void setNameTent(String nameTent) {
+        NameTent = nameTent;
     }
 
-    public int getSendAmount() {
-        return SendAmount;
+    public int getSentAmount() {
+        return SentAmount;
     }
 
-    public void setSendAmount(int sendAmount) {
-        SendAmount = sendAmount;
+    public void setSentAmount(int sentAmount) {
+        SentAmount = sentAmount;
     }
 
     public String getUserSender() {
@@ -106,10 +107,10 @@ public class    SendFamilyModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.FamilyCode);
+        dest.writeString(this.NameTent);
         dest.writeString(this.SentBy);
         dest.writeString(this.SentTo);
-        dest.writeInt(this.SendAmount);
+        dest.writeInt(this.SentAmount);
         dest.writeString(this.UserSender);
         dest.writeInt(this.PositionInList);
         dest.writeString(this.MotherCode);
@@ -122,10 +123,10 @@ public class    SendFamilyModel implements Parcelable {
     }
 
     private SendFamilyModel(Parcel in) {
-        this.FamilyCode = in.readString();
+        this.NameTent = in.readString();
         this.SentBy = in.readString();
         this.SentTo = in.readString();
-        this.SendAmount = in.readInt();
+        this.SentAmount = in.readInt();
         this.UserSender = in.readString();
         this.PositionInList = in.readInt();
         this.MotherCode = in.readString();

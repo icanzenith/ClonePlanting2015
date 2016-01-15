@@ -54,8 +54,8 @@ public class SendRecyclerListAdapter extends
     public void onBindViewHolder(ViewHolder holder, int position) {
         dataSet.get(position).setPositionInList(position);
         holder.textViewOrder.setText(""+(position+1));
-        holder.textViewFamilyCode.setText(dataSet.get(position).getFamilyCode());
-        holder.textViewAmount.setText("" + dataSet.get(position).getSendAmount());
+        holder.textViewFamilyCode.setText(dataSet.get(position).getNameTent());
+        holder.textViewAmount.setText("" + dataSet.get(position).getSentAmount());
     }
 
 

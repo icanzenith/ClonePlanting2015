@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -106,10 +105,10 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
             Log.d("Cursor Count",""+c.getCount());
             while (c.moveToNext()) {
                 SendFamilyModel m = new SendFamilyModel();
-                m.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.SentClone.FamilyCode)));
+                m.setNameTent(c.getString(c.getColumnIndex(ColumnName.SentClone.NameTent)));
                 m.setSentBy(userData.getWorkPlaceCode());
                 m.setSentTo(mWorkPlace.getWorkPlaceCode());
-                m.setSendAmount(c.getInt(c.getColumnIndex(ColumnName.SentClone.SentAmount)));
+                m.setSentAmount(c.getInt(c.getColumnIndex(ColumnName.SentClone.SentAmount)));
                 m.setCreatedTime(c.getString(c.getColumnIndex(ColumnName.SentClone.createdTime)));
                 m.setUpdatedTime(c.getString(c.getColumnIndex(ColumnName.SentClone.updatedTime)));
                 dataSet.add(m);
@@ -209,12 +208,12 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
 
     private void updateToDatabases(SendFamilyModel item) {
 
-        String where = ColumnName.SentClone.FamilyCode+" = ? AND "+ColumnName.SentClone.SentBy+" = ? AND "+ColumnName.SentClone.SentTo +" = ?";
-        String[] selectionArgs = {item.getFamilyCode(),userData.getWorkPlaceCode(),mWorkPlace.getWorkPlaceCode()};
+        String where = ColumnName.SentClone.NameTent+" = ? AND "+ColumnName.SentClone.SentBy+" = ? AND "+ColumnName.SentClone.SentTo +" = ?";
+        String[] selectionArgs = {item.getNameTent(),userData.getWorkPlaceCode(),mWorkPlace.getWorkPlaceCode()};
 
         ContentValues values = new ContentValues();
-        values.put(ColumnName.SentClone.FamilyCode, item.getFamilyCode());
-        values.put(ColumnName.SentClone.SentAmount, item.getSendAmount());
+        values.put(ColumnName.SentClone.NameTent, item.getNameTent());
+        values.put(ColumnName.SentClone.SentAmount, item.getSentAmount());
         values.put(ColumnName.SentClone.UserSender, userData.getUserID());
         values.put(ColumnName.SentClone.SentTo, mWorkPlace.getWorkPlaceCode());
         values.put(ColumnName.SentClone.SentBy, userData.getWorkPlaceCode());
@@ -237,8 +236,8 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
     private void insertToDatabases(SendFamilyModel item){
 
         ContentValues values = new ContentValues();
-        values.put(ColumnName.SentClone.FamilyCode, item.getFamilyCode());
-        values.put(ColumnName.SentClone.SentAmount, item.getSendAmount());
+        values.put(ColumnName.SentClone.NameTent, item.getNameTent());
+        values.put(ColumnName.SentClone.SentAmount, item.getSentAmount());
         values.put(ColumnName.SentClone.UserSender, userData.getUserID());
         values.put(ColumnName.SentClone.SentTo, mWorkPlace.getWorkPlaceCode());
         values.put(ColumnName.SentClone.SentBy, userData.getWorkPlaceCode());
@@ -254,8 +253,8 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
 
     private void deleteFromDatabase(SendFamilyModel item){
 
-        String where = ColumnName.SentClone.FamilyCode+" = ? AND "+ColumnName.SentClone.SentBy+" = ? AND "+ColumnName.SentClone.SentTo +" = ?";
-        String[] selectionArgs = {item.getFamilyCode(),userData.getWorkPlaceCode(),mWorkPlace.getWorkPlaceCode()};
+        String where = ColumnName.SentClone.NameTent+" = ? AND "+ColumnName.SentClone.SentBy+" = ? AND "+ColumnName.SentClone.SentTo +" = ?";
+        String[] selectionArgs = {item.getNameTent(),userData.getWorkPlaceCode(),mWorkPlace.getWorkPlaceCode()};
         int delete = getContentResolver().delete(Database.SENTCLONE, where, selectionArgs);
         if (delete>0){
             //Delete complete
@@ -271,8 +270,8 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
 
     private SendFamilyModel castScannerResultToSendModel(ScannerResultModel result) {
         SendFamilyModel m = new SendFamilyModel();
-        m.setFamilyCode(result.getFamilyCode());
-        m.setSendAmount(result.getAmount());
+        m.setNameTent(result.getFamilyCode());
+        m.setSentAmount(result.getAmount());
         return m;
     }
 
@@ -290,10 +289,10 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
             Log.d("Cursor Count",""+c.getCount());
             while (c.moveToNext()) {
                 SendFamilyModel m = new SendFamilyModel();
-                m.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.SentClone.FamilyCode)));
+                m.setNameTent(c.getString(c.getColumnIndex(ColumnName.SentClone.NameTent)));
                 m.setSentBy(userData.getWorkPlaceCode());
                 m.setSentTo(mWorkPlace.getWorkPlaceCode());
-                m.setSendAmount(c.getInt(c.getColumnIndex(ColumnName.SentClone.SentAmount)));
+                m.setSentAmount(c.getInt(c.getColumnIndex(ColumnName.SentClone.SentAmount)));
                 m.setCreatedTime(c.getString(c.getColumnIndex(ColumnName.SentClone.createdTime)));
                 m.setUpdatedTime(c.getString(c.getColumnIndex(ColumnName.SentClone.updatedTime)));
                 dataSet.add(m);

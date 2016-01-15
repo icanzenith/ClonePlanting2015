@@ -9,8 +9,8 @@ public class ColumnName {
     public class FamilyTable {
         public static final String _ID = "_id";
         public static final String FamilyCode = "objectId";
-        public static final String objectId = "FamilyCode";
-        public static final String SendAmount = "SendAmount";
+        public static final String objectId = "NameTent";
+        public static final String SendAmount = "SentAmount";
         public static final String SenderID = "SenderID";
         public static final String SendTo = "SendTo";
         public static final String ReceiveAmount = "ReceiveAmount";
@@ -44,24 +44,24 @@ public class ColumnName {
     }
 
     public class SentClone{
-        public static final String ObjectID="ObjectID";
-        public static final String FamilyCode = "FamilyCode";
-        public static final String SentBy = "SentBy";
-        public static final String SentTo = "SentTo";
-        public static final String SentAmount = "SentAmount";
-        public static final String UserSender = "UserSender";
-        public static final String createdTime = "createdTime";
-        public static final String updatedTime = "updatedTime";
-        public static final String MotherCode = "MotherCode";
-        public static final String FatherCode = "FatherCode";
+        public static final String ObjectID         ="ObjectID";
+        public static final String NameTent       = "NameTent";
+        public static final String SentBy           = "SentBy";
+        public static final String SentTo           = "SentTo";
+        public static final String SentAmount           = "SentAmount";
+        public static final String UserSender       = "UserSender";
+        public static final String createdTime      = "createdTime";
+        public static final String updatedTime          = "updatedTime";
+        public static final String MotherCode       = "MotherCode";
+        public static final String FatherCode   = "FatherCode";
     }
 
     public class ReceivedClone{
         public static final String ObjectID         ="ObjectID";
-        public static final String FamilyCode       = "FamilyCode";
+        public static final String NameTent         = "NameTent";
         public static final String SentBy           ="SentBy";
         public static final String ReceivedBy       = "ReceivedBy";
-        public static final String UserReceiver      = "UserReceiver";
+        public static final String UserReceiver     = "UserReceiver";
         public static final String ReceivedAmount   = "ReceivedAmount";
         public static final String createdTime      = "createdTime";
         public static final String updatedTime      = "updatedTime";
@@ -73,6 +73,7 @@ public class ColumnName {
         public static final String OrderInRow       = "OrderInRow";
         public static final String PlantedTime      = "PlantedTime";
         public static final String LandID           = "LandID";
+        public static final String SurviveAmount    = "SurviveAmount";
         public static final String PlantedAmount    = "PlantedAmount";
     }
 
@@ -82,30 +83,30 @@ public class ColumnName {
         public static final String isDead = "isDead";
         public static final String createdTime = "createdTime";
         public static final String updatedTime = "updatedTime";
-        public static final String FamilyCode = "FamilyCode";
+        public static final String NameTent = "NameTent";
         public static final String LandID = "LandID";
 
     }
 
     public class Land{
-        public static final String ObjectID="ObjectID";
-        public static final String LandID = "LandID";
-        public static final String LandName = "LandName";
-        public static final String LandLength = "LandLength";
-        public static final String LandWidth = "LandWidth";
-        public static final String LandArea = "LandArea";
-        public static final String UserCreate = "UserCreate";
-        public static final String Address ="Address";
-        public static final String Sector = "Sector";
-        public static final String Latitude ="Latitude";
-        public static final String Longitude = "Longitude";
-        public static final String YearCrossing = "YearCrossing";
-        public static final String SugarcaneSelectionType = "SugarcaneSelectionType";
-        public static final String createdTime = "createdTime";
-        public static final String updatedTime = "updatedTime";
-        public static final String MaximumRow = "MaximumRow";
-        public static final String MaximumFamilyPerRow = "MaximumFamilyPerRow";
-        public static final String MaximumClonePerFamily = "MaximumClonePerFamily";
+        public static final String ObjectID                 ="ObjectID";
+        public static final String LandID                   = "LandID";
+        public static final String LandName                 = "LandName";
+        public static final String LandLength               = "LandLength";
+        public static final String LandWidth                = "LandWidth";
+        public static final String LandArea                 = "LandArea";
+        public static final String UserCreate               = "UserCreate";
+        public static final String Address                  ="Address";
+        public static final String Sector                   = "Sector";
+        public static final String Latitude                 ="Latitude";
+        public static final String Longitude                = "Longitude";
+        public static final String YearCrossing             = "YearCrossing";
+        public static final String SugarcaneSelectionType   = "SugarcaneSelectionType";
+        public static final String createdTime              = "createdTime";
+        public static final String updatedTime              = "updatedTime";
+        public static final String MaximumRow               = "MaximumRow";
+        public static final String MaximumFamilyPerRow      = "MaximumFamilyPerRow";
+        public static final String MaximumClonePerFamily    = "MaximumClonePerFamily";
     }
 
     public class Activity{

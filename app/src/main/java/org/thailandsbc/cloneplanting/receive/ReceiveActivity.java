@@ -23,7 +23,6 @@ import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.dialog.QrCodeScannerDialog;
 import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.model.ScannerResultModel;
-import org.thailandsbc.cloneplanting.model.SendFamilyModel;
 import org.thailandsbc.cloneplanting.model.UserDataModel;
 import org.thailandsbc.cloneplanting.model.WorkPlaceModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
@@ -123,7 +122,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
             Log.d("Cursor Count 1", "" + c.getCount());
             while (c.moveToNext()) {
                 ReceiveFamilyModel m = new ReceiveFamilyModel();
-                m.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
+                m.setNameTent(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
                 m.setSentBy(sentToWorkPlace.getWorkPlaceCode());
                 m.setReceivedBy(sentToWorkPlace.getWorkPlaceCode());
                 m.setReceivedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)));
@@ -139,7 +138,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
 
     private ReceiveFamilyModel castScannerResultToReceiveModel(ScannerResultModel result) {
         ReceiveFamilyModel m = new ReceiveFamilyModel();
-        m.setFamilyCode(result.getFamilyCode());
+        m.setNameTent(result.getFamilyCode());
         m.setReceivedAmount(result.getAmount());
         return m;
     }
@@ -157,7 +156,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
             Log.d("Cursor Count", "" + c.getCount());
             while (c.moveToNext()) {
                 ReceiveFamilyModel m = new ReceiveFamilyModel();
-                m.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
+                m.setNameTent(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
                 m.setSentBy(sentToWorkPlace.getWorkPlaceCode());
                 m.setReceivedBy(sentToWorkPlace.getWorkPlaceCode());
                 m.setReceivedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)));
@@ -185,7 +184,7 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
             Log.d("Cursor Count", "" + c.getCount());
             while (c.moveToNext()) {
                 ReceiveFamilyModel m = new ReceiveFamilyModel();
-                m.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.FamilyCode)));
+                m.setNameTent(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
                 m.setSentBy(sentToWorkPlace.getWorkPlaceCode());
                 m.setReceivedBy(sentToWorkPlace.getWorkPlaceCode());
                 m.setReceivedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)));
@@ -200,14 +199,14 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
         mAdapter.notifyDataSetChanged();
     }
     private void updateToDatabases(ReceiveFamilyModel item){
-        String where = ColumnName.SentClone.FamilyCode+" = ? AND "+ColumnName.ReceivedClone.SentBy+" = ? AND "+ColumnName.ReceivedClone.ReceivedBy +" = ?";
-        String[] selectionArgs = {item.getFamilyCode(),getPlaceCodeFormFamilyCode(item.getFamilyCode()),userData.getWorkPlaceCode()};
+        String where = ColumnName.SentClone.NameTent+" = ? AND "+ColumnName.ReceivedClone.SentBy+" = ? AND "+ColumnName.ReceivedClone.ReceivedBy +" = ?";
+        String[] selectionArgs = {item.getNameTent(),getPlaceCodeFormFamilyCode(item.getNameTent()),userData.getWorkPlaceCode()};
         ContentValues values = new ContentValues();
-        values.put(ColumnName.ReceivedClone.FamilyCode           , item.getFamilyCode());
+        values.put(ColumnName.ReceivedClone.NameTent           , item.getNameTent());
         values.put(ColumnName.ReceivedClone.ReceivedAmount       , item.getReceivedAmount());
         values.put(ColumnName.ReceivedClone.UserReceiver         , userData.getUserID());
         values.put(ColumnName.ReceivedClone.ReceivedBy           , userData.getWorkPlaceCode() );
-        values.put(ColumnName.ReceivedClone.SentBy               , getPlaceCodeFormFamilyCode(item.getFamilyCode()));
+        values.put(ColumnName.ReceivedClone.SentBy               , getPlaceCodeFormFamilyCode(item.getNameTent()));
 //        values.put(ColumnName.ReceivedClone.createdTime          , baseApplication.getTimeUTC());
         values.put(ColumnName.ReceivedClone.updatedTime, baseApplication.getTimeUTC());
         int update = getContentResolver().update(Database.RECEIVEDCLONE, values, where, selectionArgs);
@@ -226,11 +225,11 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
     private void insertToDatabases(ReceiveFamilyModel item) {
 
         ContentValues values = new ContentValues();
-        values.put(ColumnName.ReceivedClone.FamilyCode           , item.getFamilyCode());
+        values.put(ColumnName.ReceivedClone.NameTent           , item.getNameTent());
         values.put(ColumnName.ReceivedClone.ReceivedAmount       , item.getReceivedAmount());
         values.put(ColumnName.ReceivedClone.UserReceiver         , userData.getUserID());
         values.put(ColumnName.ReceivedClone.ReceivedBy           , userData.getWorkPlaceCode() );
-        values.put(ColumnName.ReceivedClone.SentBy               , getPlaceCodeFormFamilyCode(item.getFamilyCode()));
+        values.put(ColumnName.ReceivedClone.SentBy               , getPlaceCodeFormFamilyCode(item.getNameTent()));
         values.put(ColumnName.ReceivedClone.createdTime          , baseApplication.getTimeUTC());
         values.put(ColumnName.ReceivedClone.updatedTime          , baseApplication.getTimeUTC());
         Uri newUri = getContentResolver().insert(Database.RECEIVEDCLONE, values);
@@ -275,8 +274,8 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
     }
     private void deleteFromDatabase(ReceiveFamilyModel item){
 
-        String where = ColumnName.ReceivedClone.FamilyCode+" = ? AND "+ColumnName.ReceivedClone.SentBy+" = ? AND "+ColumnName.ReceivedClone.ReceivedBy +" = ?";
-        String[] selectionArgs = {item.getFamilyCode(),getPlaceCodeFormFamilyCode(item.getFamilyCode()),userData.getWorkPlaceCode()};
+        String where = ColumnName.ReceivedClone.NameTent+" = ? AND "+ColumnName.ReceivedClone.SentBy+" = ? AND "+ColumnName.ReceivedClone.ReceivedBy +" = ?";
+        String[] selectionArgs = {item.getNameTent(),getPlaceCodeFormFamilyCode(item.getNameTent()),userData.getWorkPlaceCode()};
         int delete = getContentResolver().delete(Database.RECEIVEDCLONE, where, selectionArgs);
         if (delete>0){
             //Delete complete

@@ -99,7 +99,7 @@ public class EditDialog extends DialogFragment implements View.OnClickListener{
         if (v.getId()==R.id.buttonOK){
             if (TAG.equals(SelectionMode.MODE_EDIT_SENT_CLONE)){
                 SendFamilyModel item = (SendFamilyModel) Object;
-                item.setSendAmount(Integer.parseInt(editTextAmount.getText().toString()));
+                item.setSentAmount(Integer.parseInt(editTextAmount.getText().toString()));
                 mListener.onFragmentInteraction(TAG, Object);
                 dismiss();
             }

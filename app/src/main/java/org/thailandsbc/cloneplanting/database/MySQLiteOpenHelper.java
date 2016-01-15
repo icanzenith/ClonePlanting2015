@@ -94,7 +94,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     private final String CREATE_TABLE_SENTCLONE = "" +
             "CREATE TABLE SentClone(" +
-            ColumnName.SentClone.FamilyCode + " TEXT," +
+            ColumnName.SentClone.NameTent + " TEXT," +
             ColumnName.SentClone.SentBy + " TEXT," +
             ColumnName.SentClone.SentTo + " TEXT," +
             ColumnName.SentClone.SentAmount + " INTEGER," +
@@ -106,11 +106,10 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
 
     //ข้อมูลการรับ เป็น Family และ ข้อมูลตำแหน่งที่ปลูก
-    //TODO Change FamilyCode to NameTent
     private final String CREATE_TABLE_RECEIVEDCLONE = "" +
             "CREATE TABLE ReceivedClone(" +
             ColumnName.ReceivedClone.ObjectID + " INTEGER PRIMARY KEY," +
-            ColumnName.ReceivedClone.FamilyCode + TEXT +
+            ColumnName.ReceivedClone.NameTent + TEXT +
             ColumnName.ReceivedClone.SentBy + TEXT +
             ColumnName.ReceivedClone.ReceivedBy + TEXT +
             ColumnName.ReceivedClone.UserReceiver + TEXT +
@@ -125,6 +124,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.ReceivedClone.OrderInRow + INTEGER +
             ColumnName.ReceivedClone.PlantedTime + TEXT +
             ColumnName.ReceivedClone.PlantedAmount + INTEGER+
+            ColumnName.ReceivedClone.SurviveAmount + INTEGER+
             ColumnName.ReceivedClone.LandID + " INTEGER, " +
             "FOREIGN KEY("+ColumnName.ReceivedClone.LandID+") REFERENCES Land("+ColumnName.Activity.LandID+"))";
 
@@ -136,7 +136,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.PlantedClone.isDead+INTEGER+
             ColumnName.PlantedClone.createdTime+TEXT+
             ColumnName.PlantedClone.updatedTime+TEXT+
-            ColumnName.PlantedClone.FamilyCode+TEXT+
+            ColumnName.PlantedClone.NameTent +TEXT+
             ColumnName.PlantedClone.LandID+
             " INTEGER)";
 

@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -64,7 +63,7 @@ public class CheckCloneActivity extends AppCompatActivity {
         mAdapter = new CloneListAdapter(getCloneCodeList(receiveFamilyModel), this);
 
         textViewRowNumber.setText("แถวที่ "+receiveFamilyModel.getRowNumber());
-        textViewOrderInRow.setText("ลำดับที่ "+receiveFamilyModel.getOrderinRow());
+        textViewOrderInRow.setText("ลำดับที่ "+receiveFamilyModel.getOrderInRow());
     }
 
     private void setRecyclerView() {
@@ -74,15 +73,15 @@ public class CheckCloneActivity extends AppCompatActivity {
 
     private ArrayList<CloneData> getCloneCodeList(ReceiveFamilyModel m) {
         ArrayList<CloneData> cloneListData = new ArrayList<>();
-        String selection = ColumnName.PlantedClone.FamilyCode + " = ? AND " + ColumnName.PlantedClone.LandID + " = " + m.getLandID();
-        String[] selectionArgs = {m.getFamilyCode()};
+        String selection = ColumnName.PlantedClone.NameTent + " = ? AND " + ColumnName.PlantedClone.LandID + " = " + m.getLandID();
+        String[] selectionArgs = {m.getNameTent()};
         String sortOrder = ColumnName.PlantedClone.CloneCode + " ASC";
         Cursor c = getContentResolver().query(Database.PLANTEDCLONE, null, selection, selectionArgs, sortOrder);
         if (c != null) {
             while (c.moveToNext()) {
                 CloneData clone = new CloneData();
                 clone.setCloneCode(c.getString(c.getColumnIndex(ColumnName.PlantedClone.CloneCode)));
-                clone.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.PlantedClone.FamilyCode)));
+                clone.setFamilyCode(c.getString(c.getColumnIndex(ColumnName.PlantedClone.NameTent)));
                 clone.setCreateTime(c.getString(c.getColumnIndex(ColumnName.PlantedClone.createdTime)));
                 if (c.getInt(c.getColumnIndex(ColumnName.PlantedClone.isDead)) == 1) {
                     clone.setIsDead(true);
