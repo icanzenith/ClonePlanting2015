@@ -538,7 +538,7 @@ public class TestActivity extends AppCompatActivity {
             }else{
                 order = 2;
             }
-            Log.d(TAG, "testStringData: "+listData[i-2]+"Row = "+row+" Order = "+order);
+//            Log.d(TAG, "testStringData: "+listData[i-2]+"Row = "+row+" Order = "+order);
         }
 
 
@@ -548,9 +548,10 @@ public class TestActivity extends AppCompatActivity {
     private GsonTransformer gsonTransformer = new GsonTransformer();
     private void testLoadData(){
         DataLoader dataLoader = new DataLoader(getApplication());
-        dataLoader.getLandData();
-        dataLoader.getSentCloneData();
-        dataLoader.getReceiveCloneData();
+//        dataLoader.getLandData();
+//        dataLoader.getSentCloneData();
+//        dataLoader.getReceiveCloneData();
+        dataLoader.getPlantedCloneData();
     }
 
 }

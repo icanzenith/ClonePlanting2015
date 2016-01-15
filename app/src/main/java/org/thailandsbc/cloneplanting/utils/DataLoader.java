@@ -16,6 +16,7 @@ import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.model.SendFamilyModel;
+import org.thailandsbc.cloneplanting.planting.PlantedCloneModel;
 import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 
 import java.util.ArrayList;
@@ -180,9 +181,6 @@ public class DataLoader {
     public void
     getReceiveCloneData(){
         final long startTime = System.nanoTime();
-
-
-
         String sentCloneURL = "https://api.myjson.com/bins/1ka45";
         aq.transformer(gsonTransformer).ajax(sentCloneURL,null,ReceiveCloneData.class,new AjaxCallback<ReceiveCloneData>(){
             @Override
@@ -230,4 +228,38 @@ public class DataLoader {
         public ArrayList<ReceiveFamilyModel> ReceiveFamilyList = new ArrayList<>();
     }
 
+    public void
+    getPlantedCloneData(){
+        final long startTime = System.nanoTime();
+        String url = "https://raw.githubusercontent.com/icanzenith/ClonePlanting2015/master/app/assets/plantedclone.json";
+        aq.transformer(gsonTransformer).ajax(url,null,PlantedCloneList.class,new AjaxCallback<PlantedCloneList>(){
+            @Override
+            public void callback(String url, PlantedCloneList object, AjaxStatus status) {
+                ContentResolver contentResolver = context.getContentResolver();
+                super.callback(url, object, status);
+                Log.d(TAG, "callback: Callback Status : "+status.getMessage());
+                if (status.getCode() == 200){
+                    Log.d(TAG, "callback: SectorData : ");
+                    Log.d(TAG, "callback: Object Size"+object.PlantedCloneList.size());
+                    for (PlantedCloneModel model :object.PlantedCloneList){
+                        ContentValues c = new ContentValues();
+                        c.put(ColumnName.PlantedClone.ObjectID, model.ObjectID);
+                        c.put(ColumnName.PlantedClone.CloneCode, model.CloneCode);
+                        c.put(ColumnName.PlantedClone.isDead,model.isDead);
+                        c.put(ColumnName.PlantedClone.createdTime,model.createdTime);
+                        c.put(ColumnName.PlantedClone.updatedTime,model.updatedTime);
+                        contentResolver.insert(Database.PLANTEDCLONE,c);
+                        Log.d(TAG, "callback: PlantedCloneData "+c.toString());
+                    }
+                }
+                long endTime = System.nanoTime();
+                long duration = (endTime - startTime);
+                Log.d(TAG, "callback PlantedClone: timeUse "+(duration/1000000)+" ms");
+            }
+        });
+    }
+
+    class PlantedCloneList {
+        public ArrayList<PlantedCloneModel> PlantedCloneList = new ArrayList<>();
+    }
 }
