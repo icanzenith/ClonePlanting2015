@@ -13,6 +13,7 @@ import com.androidquery.callback.AjaxStatus;
 import org.thailandsbc.cloneplanting.breedernetwork.content.BreederContent;
 import org.thailandsbc.cloneplanting.breedernetwork.content.SectorContent;
 import org.thailandsbc.cloneplanting.database.Database;
+import org.thailandsbc.cloneplanting.model.ActivityData;
 import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.model.SendFamilyModel;
@@ -261,5 +262,31 @@ public class DataLoader {
 
     class PlantedCloneList {
         public ArrayList<PlantedCloneModel> PlantedCloneList = new ArrayList<>();
+    }
+
+    public void
+    getActivityData(){
+        final long startTime = System.nanoTime();
+        String url = "https://raw.githubusercontent.com/icanzenith/ClonePlanting2015/master/app/assets/activity.json";
+        aq.transformer(gsonTransformer).ajax(url,null,ActivityData.class,new AjaxCallback<ActivityData>(){
+            @Override
+            public void callback(String url, ActivityData object, AjaxStatus status) {
+                ContentResolver contentResolver = context.getContentResolver();
+                super.callback(url, object, status);
+                Log.d(TAG, "callback: Callback Status : "+status.getMessage());
+                if (status.getCode() == 200){
+                    Log.d(TAG, "callback: SectorData : ");
+                    Log.d(TAG, "callback: Object Size"+object.data.size());
+                    for (ActivityData.PostData model :object.data){
+
+
+                        Log.d(TAG, "callback: Postdata "+model.postId);
+                    }
+                }
+                long endTime = System.nanoTime();
+                long duration = (endTime - startTime);
+                Log.d(TAG, "callback PlantedClone: timeUse "+(duration/1000000)+" ms");
+            }
+        });
     }
 }
