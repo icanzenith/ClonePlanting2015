@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Downloader;
+
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.adapter.NewsFeedRecyclerAdapter;
 import org.thailandsbc.cloneplanting.dialog.HomeMenuDialog;
+import org.thailandsbc.cloneplanting.model.ActivityData;
 import org.thailandsbc.cloneplanting.model.NewsFeedModel;
 import org.thailandsbc.cloneplanting.model.UserDataModel;
+import org.thailandsbc.cloneplanting.utils.DataLoader;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
 import java.util.ArrayList;
@@ -24,7 +28,7 @@ import java.util.ArrayList;
 public class NewsFeedFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_USERDATA = "UserData";
 
-    private ArrayList<NewsFeedModel> mNewsFeedData;
+    private ArrayList<ActivityData.PostData> mNewsFeedData;
 
     private UserDataModel mUserData;
 
@@ -96,6 +100,7 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
 
         if (mNewsFeedData.size()!=0) {
             createRecyclerList();
+
         }else{
             createAEmptyStateList();
         }
@@ -117,6 +122,7 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
         mAdapter = new NewsFeedRecyclerAdapter();
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
+
 
     }
 

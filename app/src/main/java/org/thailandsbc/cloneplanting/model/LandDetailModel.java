@@ -7,24 +7,24 @@ import android.os.Parcelable;
  * Created by Icanzenith on 10/30/2015 AD.
  */
 public class LandDetailModel implements Parcelable {
-    private Integer LandID;
-    private String LandName;
-    private Double Latitude;
-    private Double Longitude;
-    private Float LandArea;
-    private Float LandWidth;
-    private Float LandLength;
-    private Integer UserCreate;
-    private String createdTime;
-    private String updatedTime;
-    private String Address;
-    private Integer SugarcaneSelectionType;
-    private String YearCrossing;
-    private Integer PositionInList;
-    private String Sector;
-    private Integer MaximumRow;
-    private Integer MaximumFamilyPerRow;
-    private Integer MaximumClonePerFamily;
+    public Integer LandID;
+    public String LandName;
+    public Double Latitude;
+    public Double Longitude;
+    public Float LandArea;
+    public Float LandWidth;
+    public Float LandLength;
+    public Integer UserCreate;
+    public String createdTime;
+    public String updatedTime;
+    public String Address;
+    public Integer SugarcaneSelectionType;
+    public String YearCrossing;
+    public Integer PositionInList;
+    public String Sector;
+    public Integer MaximumRow;
+    public Integer MaximumFamilyPerRow;
+    public Integer MaximumClonePerFamily;
 
 
 

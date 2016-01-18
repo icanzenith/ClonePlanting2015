@@ -7,25 +7,26 @@ import android.os.Parcelable;
  * Created by Icanzenith on 9/1/15 AD.
  */
 public class ReceiveFamilyModel implements Parcelable {
-    public String  NameTent                     ;
-    public String  SentBy                       ;
-    public String  ReceivedBy                       ;
-    public int     UserReceiver                 ;
-    public int     ReceivedAmount                   ;
+    public int     ObjectID             ;
+    public String  NameTent             ;
+    public String  SentBy               ;
+    public String  ReceivedBy           ;
+    public int     UserReceiver         ;
+    public int     ReceivedAmount       ;
     public String  createdTime          ;
     public String  updatedTime          ;
     public String  MotherCode           ;
     public String  FatherCode           ;
     public int     isPlanted            ;
     public int     PlantedBy            ;
-    public int     PlantedAmount            ;
+    public int     PlantedAmount        ;
     public int     RowNumber            ;
     public int     OrderInRow           ;
     public String  PlantedTime          ;
-    public int     LandID           ;
-    public int     PositionInList           ;
-    public int     SurviveAmount            ;
-    public int     Order            ;
+    public int     LandID               ;
+    public int     PositionInList       ;
+    public int     SurviveAmount        ;
+    public int     Order                ;
 
 
     @Override
@@ -35,6 +36,7 @@ public class ReceiveFamilyModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.ObjectID);
         dest.writeString(this.NameTent);
         dest.writeString(this.SentBy);
         dest.writeString(this.ReceivedBy);
@@ -60,6 +62,7 @@ public class ReceiveFamilyModel implements Parcelable {
     }
 
     protected ReceiveFamilyModel(Parcel in) {
+        this.ObjectID = in.readInt();
         this.NameTent = in.readString();
         this.SentBy = in.readString();
         this.ReceivedBy = in.readString();
@@ -241,5 +244,13 @@ public class ReceiveFamilyModel implements Parcelable {
 
     public void setOrder(int order) {
         Order = order;
+    }
+
+    public int getObjectID() {
+        return ObjectID;
+    }
+
+    public void setObjectID(int objectID) {
+        ObjectID = objectID;
     }
 }

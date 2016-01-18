@@ -1,5 +1,6 @@
 package org.thailandsbc.cloneplanting.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.model.ActivityData;
+import org.thailandsbc.cloneplanting.utils.DataLoader;
+import org.thailandsbc.cloneplanting.utils.WorkPlaceData;
 
 import java.util.ArrayList;
 
@@ -18,15 +24,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecyclerAdapter.ViewHolder> {
 
-    public NewsFeedRecyclerAdapter() {
+    private ArrayList<ActivityData.PostData> data;
+    private Context mContext;
 
+    public NewsFeedRecyclerAdapter(Context context) {
+        DataLoader d = new DataLoader(context);
+        d.setAdapter(this);
+        data = d.getActivityData();
+        mContext = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.model_newsfeed_list, parent, false);
-
         ViewHolder viewHolder = new ViewHolder(v);
         v.setTag(viewHolder);
 
@@ -35,25 +46,35 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.mIem = data.get(position);
+        holder.textViewUserFullName.setText(data.get(position).from.name);
+        Picasso.with(mContext).load(holder.mIem.from.pictureURL);
+        holder.textViewWorkPlaceCode.setText(data.get(position).from.workplaceCode);
+        holder.textViewWorkPlaceFullName.setText(
+                WorkPlaceData.PLACE_CODE.get(
+                        data.get(position).from.workplaceCode));
+        holder.textViewDate.setText(data.get(position).createdTime);
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewWorkPlaceCode;
-        TextView textViewMessage;
-        TextView textViewUserFullName;
-        TextView textViewWorkPlaceFullName;
-        ImageView likeStatus;
-        CircleImageView imageViewProfile;
-        ImageView location;
-        TextView textViewTime;
-        TextView textViewDate;
-        ImageView imageViewPicPost;
+        public final TextView textViewWorkPlaceCode;
+        public final TextView textViewMessage;
+        public final TextView textViewUserFullName;
+        public final TextView textViewWorkPlaceFullName;
+        public final ImageView likeStatus;
+        public final CircleImageView imageViewProfile;
+        public final ImageView location;
+        public final TextView textViewTime;
+        public final TextView textViewDate;
+        public final ImageView imageViewPicPost;
+        public ActivityData.PostData mIem;
 
         public ViewHolder(View v) {
             super(v);
@@ -70,5 +91,14 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
         }
 
 
+    }
+
+    public ArrayList<ActivityData.PostData> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<ActivityData.PostData> data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 }

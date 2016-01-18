@@ -29,11 +29,11 @@ public class DataLoader {
     private GsonTransformer gsonTransformer = new GsonTransformer();
     private RecyclerView.Adapter adapter;
 
-    public
-    DataLoader(Context context) {
+    public DataLoader(Context context) {
         this.context = context;
         aq = new AQuery(context);
     }
+
 
     public void
     getLandData(){
@@ -264,29 +264,30 @@ public class DataLoader {
         public ArrayList<PlantedCloneModel> PlantedCloneList = new ArrayList<>();
     }
 
-    public void
+    public ArrayList<ActivityData.PostData>
     getActivityData(){
+
+        final ActivityData[] activityData = new ActivityData[1];
         final long startTime = System.nanoTime();
         String url = "https://raw.githubusercontent.com/icanzenith/ClonePlanting2015/master/app/assets/activity.json";
         aq.transformer(gsonTransformer).ajax(url,null,ActivityData.class,new AjaxCallback<ActivityData>(){
             @Override
             public void callback(String url, ActivityData object, AjaxStatus status) {
-                ContentResolver contentResolver = context.getContentResolver();
                 super.callback(url, object, status);
+                ContentResolver contentResolver = context.getContentResolver();
                 Log.d(TAG, "callback: Callback Status : "+status.getMessage());
                 if (status.getCode() == 200){
                     Log.d(TAG, "callback: SectorData : ");
                     Log.d(TAG, "callback: Object Size"+object.data.size());
-                    for (ActivityData.PostData model :object.data){
-
-
-                        Log.d(TAG, "callback: Postdata "+model.postId);
-                    }
+                    activityData[0] = new ActivityData(object.data);
+                    notifyAdapter();
                 }
                 long endTime = System.nanoTime();
                 long duration = (endTime - startTime);
                 Log.d(TAG, "callback PlantedClone: timeUse "+(duration/1000000)+" ms");
             }
         });
+        return activityData[0].data;
+
     }
 }

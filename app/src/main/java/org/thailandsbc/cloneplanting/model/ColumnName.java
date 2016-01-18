@@ -26,6 +26,7 @@ public class ColumnName {
         public static final String Disease = "Disease";
         public static final String Father = "Father";
         public static final String Mother = "Mother";
+        public static final String isUploaded       = "isUploaded";
 
     }
 
@@ -36,6 +37,7 @@ public class ColumnName {
          public static final String  MESSAGE        = "Message"      ;
          public static final String  MESSAGECODE    = "MessageCode"  ;
          public static final String  TIMESTAMP      = "TimeStamp"    ;
+        public static final String isUploaded       = "isUploaded";
     }
 
     public class Sector{
@@ -54,6 +56,7 @@ public class ColumnName {
         public static final String updatedTime          = "updatedTime";
         public static final String MotherCode       = "MotherCode";
         public static final String FatherCode   = "FatherCode";
+        public static final String isUploaded       = "isUploaded";
     }
 
     public class ReceivedClone{
@@ -75,16 +78,18 @@ public class ColumnName {
         public static final String LandID           = "LandID";
         public static final String SurviveAmount    = "SurviveAmount";
         public static final String PlantedAmount    = "PlantedAmount";
+        public static final String isUploaded       = "isUploaded";
     }
 
     public class PlantedClone{
-        public static final String ObjectID="ObjectID";
-        public static final String CloneCode = "CloneCode";
-        public static final String isDead = "isDead";
-        public static final String createdTime = "createdTime";
-        public static final String updatedTime = "updatedTime";
-        public static final String NameTent = "NameTent";
-        public static final String LandID = "LandID";
+        public static final String ObjectID         ="ObjectID";
+        public static final String CloneCode        = "CloneCode";
+        public static final String isDead           = "isDead";
+        public static final String createdTime      = "createdTime";
+        public static final String updatedTime      = "updatedTime";
+        public static final String NameTent         = "NameTent";
+        public static final String LandID           = "LandID";
+        public static final String isUploaded       = "isUploaded";
 
     }
 
@@ -107,6 +112,7 @@ public class ColumnName {
         public static final String MaximumRow               = "MaximumRow";
         public static final String MaximumFamilyPerRow      = "MaximumFamilyPerRow";
         public static final String MaximumClonePerFamily    = "MaximumClonePerFamily";
+        public static final String isUploaded       = "isUploaded";
     }
 
     public class Activity{
@@ -119,6 +125,7 @@ public class ColumnName {
         public static final String updatedTime ="updateTime";
         public static final String LandID ="LandID";
         public static final String Message="Message";
+        public static final String isUploaded       = "isUploaded";
     }
 
     public class Comment{
@@ -129,6 +136,7 @@ public class ColumnName {
         public static final String Message      = "Message";
         public static final String createdTime  = "createdTime";
         public static final String updatedTime  = "updatedTime";
+        public static final String isUploaded       = "isUploaded";
     }
 
     public class Picture{
@@ -138,6 +146,7 @@ public class ColumnName {
         public static final String PictureURL   = "PictureURL";
         public static final String createdTime  = "createdTime";
         public static final String updatedTime  = "updatedTime";
+        public static final String isUploaded       = "isUploaded";
 
     }
 

@@ -552,6 +552,7 @@ public class TestActivity extends AppCompatActivity {
 //        dataLoader.getSentCloneData();
 //        dataLoader.getReceiveCloneData();
         dataLoader.getPlantedCloneData();
+        dataLoader.getActivityData();
     }
 
 }
