@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Downloader;
 
+import org.thailandsbc.cloneplanting.BaseApplication;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.adapter.NewsFeedRecyclerAdapter;
 import org.thailandsbc.cloneplanting.dialog.HomeMenuDialog;
@@ -119,7 +120,7 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
         //Create Sample DataSet
 //        List<ReceiveFamilyModel> dataSet = createDataSet();
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new NewsFeedRecyclerAdapter();
+        mAdapter = new NewsFeedRecyclerAdapter((BaseApplication) getActivity().getApplication());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
 

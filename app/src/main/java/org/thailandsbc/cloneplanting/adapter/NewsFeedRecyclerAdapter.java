@@ -10,12 +10,17 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.thailandsbc.cloneplanting.BaseApplication;
 import org.thailandsbc.cloneplanting.R;
 import org.thailandsbc.cloneplanting.model.ActivityData;
 import org.thailandsbc.cloneplanting.utils.DataLoader;
 import org.thailandsbc.cloneplanting.utils.WorkPlaceData;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -25,13 +30,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecyclerAdapter.ViewHolder> {
 
     private ArrayList<ActivityData.PostData> data;
-    private Context mContext;
+    private BaseApplication baseApplication;
 
-    public NewsFeedRecyclerAdapter(Context context) {
-        DataLoader d = new DataLoader(context);
+    public NewsFeedRecyclerAdapter(BaseApplication application) {
+        data = new ArrayList<>();
+        DataLoader d = new DataLoader(application);
         d.setAdapter(this);
-        data = d.getActivityData();
-        mContext = context;
+        d.getActivityData();
+        baseApplication= application;
+
     }
 
     @Override
@@ -48,13 +55,30 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mIem = data.get(position);
         holder.textViewUserFullName.setText(data.get(position).from.name);
-        Picasso.with(mContext).load(holder.mIem.from.pictureURL);
+        Picasso.with(baseApplication).load(holder.mIem.from.pictureURL).fit().into(holder.imageViewProfile);
         holder.textViewWorkPlaceCode.setText(data.get(position).from.workplaceCode);
+        if (data.get(position).picture.get(0).url!=null){
+            Picasso.with(baseApplication).
+                    load(data.get(position).picture.get(0).url).
+                    fit().
+                    into(
+                    holder.imageViewPicPost
+            );
+        }
         holder.textViewWorkPlaceFullName.setText(
                 WorkPlaceData.PLACE_CODE.get(
                         data.get(position).from.workplaceCode));
-        holder.textViewDate.setText(data.get(position).createdTime);
+        holder.textViewMessage.setText(data.get(position).from.message);
+//        holder.textViewDate.setText(createTimeFormat(data.get(position).createdTime));
 
+        for (int i = 0;i <  data.get(position).liker.size();i++){
+            //TODO get MyID
+            int myId = baseApplication.getUserData().getUserID();
+            if (myId == data.get(position).liker.get(i).id){
+                //I am like this post
+                //TODO Change like Color
+            }
+        }
 
     }
 
@@ -88,6 +112,7 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
             textViewMessage = (TextView) v.findViewById(R.id.textViewMessage);
             textViewWorkPlaceFullName = (TextView) v.findViewById(R.id.textViewWorkPlaceFullName);
             textViewUserFullName = (TextView) v.findViewById(R.id.textViewUserFullName);
+
         }
 
 
@@ -100,5 +125,19 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
     public void setData(ArrayList<ActivityData.PostData> data) {
         this.data = data;
         notifyDataSetChanged();
+    }
+
+    public String createTimeFormat(String dateUTC){
+        String time = "noTime";
+        //Format Jan 10,2016
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM dd,yyyy");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date myDate = simpleDateFormat.parse(dateUTC);
+            time = myDate.toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
     }
 }

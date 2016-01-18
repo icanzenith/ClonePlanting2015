@@ -10,6 +10,7 @@ import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
 
+import org.thailandsbc.cloneplanting.adapter.NewsFeedRecyclerAdapter;
 import org.thailandsbc.cloneplanting.breedernetwork.content.BreederContent;
 import org.thailandsbc.cloneplanting.breedernetwork.content.SectorContent;
 import org.thailandsbc.cloneplanting.database.Database;
@@ -264,7 +265,7 @@ public class DataLoader {
         public ArrayList<PlantedCloneModel> PlantedCloneList = new ArrayList<>();
     }
 
-    public ArrayList<ActivityData.PostData>
+    public void
     getActivityData(){
 
         final ActivityData[] activityData = new ActivityData[1];
@@ -279,7 +280,7 @@ public class DataLoader {
                 if (status.getCode() == 200){
                     Log.d(TAG, "callback: SectorData : ");
                     Log.d(TAG, "callback: Object Size"+object.data.size());
-                    activityData[0] = new ActivityData(object.data);
+                    ((NewsFeedRecyclerAdapter)adapter).getData().addAll(object.data);
                     notifyAdapter();
                 }
                 long endTime = System.nanoTime();
@@ -287,7 +288,6 @@ public class DataLoader {
                 Log.d(TAG, "callback PlantedClone: timeUse "+(duration/1000000)+" ms");
             }
         });
-        return activityData[0].data;
 
     }
 }
