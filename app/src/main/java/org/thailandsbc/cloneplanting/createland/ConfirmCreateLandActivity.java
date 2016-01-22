@@ -1,12 +1,9 @@
 package org.thailandsbc.cloneplanting.createland;
 
-import android.content.ContentValues;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,15 +17,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.thailandsbc.cloneplanting.BaseApplication;
 import org.thailandsbc.cloneplanting.R;
-import org.thailandsbc.cloneplanting.database.Database;
-import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.model.LandDetailModel;
+import org.thailandsbc.cloneplanting.utils.Uploader;
+
 
 public class ConfirmCreateLandActivity extends AppCompatActivity implements OnMapReadyCallback{
 
     private LandDetailModel landDetail;
     private GoogleMap mMap;
     private BaseApplication b;
+    private Uploader uploader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,39 +46,51 @@ public class ConfirmCreateLandActivity extends AppCompatActivity implements OnMa
         });
         landDetail = getIntent().getParcelableExtra("LandDetail");
         InitializeViews();
+        uploader = new Uploader(ConfirmCreateLandActivity.this);
     }
 
     private void insertToDatabase() {
+        //setdata to landDetail
+        landDetail.Sector = b.getUserData().getWorkPlaceCode();
+        landDetail.UserCreate = b.getUserData().getUserID();
+        landDetail.MaximumRow = getMaximumRow(landDetail);
+        landDetail.MaximumClonePerFamily = MaximumClonePerFamily;
+        landDetail.MaximumFamilyPerRow = getMaximumFamilyPerRow(landDetail);
+        landDetail.createdTime = b.getTimeUTC();
+        landDetail.updatedTime = b.getTimeUTC();
+        uploader.uploadLandData(landDetail);
 
-        ContentValues values = new ContentValues();
-        values.put(ColumnName.Land.LandName,landDetail.getLandName());
-        values.put(ColumnName.Land.LandArea,landDetail.getLandArea());
-        values.put(ColumnName.Land.LandWidth,landDetail.getLandWidth());
-        values.put(ColumnName.Land.LandLength,landDetail.getLandLength());
-        values.put(ColumnName.Land.Address,landDetail.getAddress());
-        values.put(ColumnName.Land.createdTime,b.getTimeUTC());
-        values.put(ColumnName.Land.updatedTime,b.getTimeUTC());
-        values.put(ColumnName.Land.UserCreate,b.getUserData().getUserID());
-        values.put(ColumnName.Land.Latitude,landDetail.getLatitude());
-        values.put(ColumnName.Land.Longitude,landDetail.getLongitude());
-        values.put(ColumnName.Land.Sector, b.getUserData().getWorkPlaceCode());
-        values.put(ColumnName.Land.SugarcaneSelectionType,landDetail.getSugarcaneSelectionType());
-        values.put(ColumnName.Land.MaximumRow,getMaximumRow(landDetail));
-        values.put(ColumnName.Land.MaximumClonePerFamily, MaximumClonePerFamily);
-        values.put(ColumnName.Land.MaximumFamilyPerRow, getMaximumFamilyPerRow(landDetail));
+        //
 
-        Uri s = getContentResolver().insert(Database.LAND,values);
-
-        ContentValues values2 = new ContentValues();
-        values2.put(ColumnName.Land.LandID, Integer.valueOf(s.getLastPathSegment()));
-        String selection = ColumnName.Land.ObjectID+" = "+Integer.valueOf(s.getLastPathSegment());
-        Log.d("tag LastPath",selection);
-        int rowNumber = getContentResolver().update(Database.LAND, values2, selection, null);
-        Log.d("tag clone number","RowNumber"+rowNumber);
-
-        //TODO Finish This an previous Activity
-        this.setResult(RESULT_OK);
-        finish();
+//        ContentValues values = new ContentValues();
+//        values.put(ColumnName.Land.LandName                 ,landDetail.LandName);
+//        values.put(ColumnName.Land.LandArea                 ,landDetail.LandArea);
+//        values.put(ColumnName.Land.LandWidth                ,landDetail.LandWidth);
+//        values.put(ColumnName.Land.LandLength               ,landDetail.LandLength);
+//        values.put(ColumnName.Land.Address                  ,landDetail.Address);
+//        values.put(ColumnName.Land.createdTime              ,landDetail.createdTime);
+//        values.put(ColumnName.Land.updatedTime              ,landDetail.updatedTime);
+//        values.put(ColumnName.Land.UserCreate               ,landDetail.UserCreate);
+//        values.put(ColumnName.Land.Latitude                 ,landDetail.Latitude);
+//        values.put(ColumnName.Land.Longitude                ,landDetail.Longitude);
+//        values.put(ColumnName.Land.Sector                   ,landDetail.Sector);
+//        values.put(ColumnName.Land.SugarcaneSelectionType   ,landDetail.SugarcaneSelectionType);
+//        values.put(ColumnName.Land.MaximumRow               ,landDetail.MaximumRow);
+//        values.put(ColumnName.Land.MaximumClonePerFamily    ,landDetail.MaximumClonePerFamily);
+//        values.put(ColumnName.Land.MaximumFamilyPerRow      ,landDetail.MaximumFamilyPerRow);
+//
+//        Uri s = getContentResolver().insert(Database.LAND,values);
+//
+//        ContentValues values2 = new ContentValues();
+//        values2.put(ColumnName.Land.LandID, Integer.valueOf(s.getLastPathSegment()));
+//        String selection = ColumnName.Land.ObjectID+" = "+Integer.valueOf(s.getLastPathSegment());
+//        Log.d("tag LastPath",selection);
+//        int rowNumber = getContentResolver().update(Database.LAND, values2, selection, null);
+//        Log.d("tag clone number","RowNumber"+rowNumber);
+//
+//        //TODO Finish This an previous Activity
+//        this.setResult(RESULT_OK);
+//        finish();
     }
 
     private void InitializeViews() {

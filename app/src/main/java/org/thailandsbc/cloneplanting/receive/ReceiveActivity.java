@@ -27,6 +27,7 @@ import org.thailandsbc.cloneplanting.model.UserDataModel;
 import org.thailandsbc.cloneplanting.model.WorkPlaceModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
+import org.thailandsbc.cloneplanting.utils.Uploader;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
 import java.util.ArrayList;
@@ -202,12 +203,12 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
         String where = ColumnName.SentClone.NameTent+" = ? AND "+ColumnName.ReceivedClone.SentBy+" = ? AND "+ColumnName.ReceivedClone.ReceivedBy +" = ?";
         String[] selectionArgs = {item.getNameTent(),getPlaceCodeFormFamilyCode(item.getNameTent()),userData.getWorkPlaceCode()};
         ContentValues values = new ContentValues();
-        values.put(ColumnName.ReceivedClone.NameTent           , item.getNameTent());
+        values.put(ColumnName.ReceivedClone.NameTent             , item.getNameTent());
         values.put(ColumnName.ReceivedClone.ReceivedAmount       , item.getReceivedAmount());
         values.put(ColumnName.ReceivedClone.UserReceiver         , userData.getUserID());
         values.put(ColumnName.ReceivedClone.ReceivedBy           , userData.getWorkPlaceCode() );
         values.put(ColumnName.ReceivedClone.SentBy               , getPlaceCodeFormFamilyCode(item.getNameTent()));
-//        values.put(ColumnName.ReceivedClone.createdTime          , baseApplication.getTimeUTC());
+        values.put(ColumnName.ReceivedClone.isUploaded           , Uploader.UPLOADED);
         values.put(ColumnName.ReceivedClone.updatedTime, baseApplication.getTimeUTC());
         int update = getContentResolver().update(Database.RECEIVEDCLONE, values, where, selectionArgs);
         if (update <= 0){
@@ -216,7 +217,6 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
 
         }else{
             //Update Complete
-            //TODO Test
             Toast.makeText(ReceiveActivity.this, "อัพเดทข้อมูลพันธุ์เรียบร้อย", Toast.LENGTH_LONG).show();
             refreshListData();
         }
@@ -232,12 +232,11 @@ public class ReceiveActivity extends AppCompatActivity implements onFragmentInte
         values.put(ColumnName.ReceivedClone.SentBy               , getPlaceCodeFormFamilyCode(item.getNameTent()));
         values.put(ColumnName.ReceivedClone.createdTime          , baseApplication.getTimeUTC());
         values.put(ColumnName.ReceivedClone.updatedTime          , baseApplication.getTimeUTC());
+        values.put(ColumnName.ReceivedClone.isUploaded           ,Uploader.NOT_UPLOADED);
         Uri newUri = getContentResolver().insert(Database.RECEIVEDCLONE, values);
         mAdapter.addNewDataItem(item);
         Log.d("Uri", newUri.toString());
         Log.d("Uri",newUri.getLastPathSegment());
-
-        //TODO GENERATE Clone
     }
 
     private void InitializeSpinner(){

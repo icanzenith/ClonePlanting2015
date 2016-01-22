@@ -101,6 +101,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.SentClone.UserSender + " INTEGER," +
             ColumnName.SentClone.createdTime + " TEXT," +
             ColumnName.SentClone.updatedTime + " TEXT," +
+            ColumnName.SentClone.isUploaded+INTEGER+
             ColumnName.SentClone.MotherCode + " TEXT," +
             ColumnName.SentClone.FatherCode + " TEXT)";
 
@@ -116,6 +117,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.ReceivedClone.ReceivedAmount + TEXT +
             ColumnName.ReceivedClone.createdTime + TEXT +
             ColumnName.ReceivedClone.updatedTime + TEXT +
+            ColumnName.ReceivedClone.isUploaded+INTEGER+
             ColumnName.ReceivedClone.MotherCode + TEXT +
             ColumnName.ReceivedClone.FatherCode + TEXT +
             ColumnName.ReceivedClone.isPlanted + INTEGER +
@@ -136,6 +138,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.PlantedClone.isDead+INTEGER+
             ColumnName.PlantedClone.createdTime+TEXT+
             ColumnName.PlantedClone.updatedTime+TEXT+
+            ColumnName.PlantedClone.isUploaded+INTEGER+
             ColumnName.PlantedClone.NameTent +TEXT+
             ColumnName.PlantedClone.LandID+
             " INTEGER)";
@@ -156,7 +159,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Land.YearCrossing+TEXT+
             ColumnName.Land.SugarcaneSelectionType+INTEGER+
             ColumnName.Land.createdTime+TEXT+
-            ColumnName.Land.updatedTime+TEXT+
+            ColumnName.Land.updatedTime+TEXT +
+            ColumnName.Land.isUploaded+INTEGER+
             ColumnName.Land.MaximumRow+INTEGER+
             ColumnName.Land.MaximumFamilyPerRow+INTEGER+
             ColumnName.Land.MaximumClonePerFamily+
@@ -171,6 +175,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.Activity.Sector+TEXT+
             ColumnName.Activity.createdTime+TEXT+
             ColumnName.Activity.updatedTime+TEXT+
+            ColumnName.Activity.isUploaded+INTEGER+
             ColumnName.Activity.LandID+INTEGER+
             ColumnName.Activity.Message+" TEXT,"+
             "FOREIGN KEY("+ColumnName.Activity.LandID+") REFERENCES Land("+ColumnName.Activity.LandID+

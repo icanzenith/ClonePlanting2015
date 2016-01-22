@@ -22,8 +22,10 @@ import org.thailandsbc.cloneplanting.database.Database;
 import org.thailandsbc.cloneplanting.database.MySQLiteOpenHelper;
 import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.utils.DataLoader;
+import org.thailandsbc.cloneplanting.utils.ExcelUtils;
 import org.thailandsbc.cloneplanting.utils.GsonTransformer;
 import org.thailandsbc.cloneplanting.utils.PlantStatus;
+import org.thailandsbc.cloneplanting.utils.Uploader;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,6 +101,21 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 testLoadData();
+            }
+        });
+
+        Button buttonCreateExcelFile = (Button) findViewById(R.id.buttonCreateExcelFile);
+        buttonCreateExcelFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               createExcelFile();
+            }
+        });
+        Button buttonUpload = (Button) findViewById(R.id.buttonUpload);
+        buttonUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testUploadCloneData();
             }
         });
 
@@ -332,6 +349,7 @@ public class TestActivity extends AppCompatActivity {
                         v.put(ColumnName.ReceivedClone.ReceivedAmount, 35);
                         v.put(ColumnName.ReceivedClone.createdTime, baseApplication.getTimeUTC());
                         v.put(ColumnName.ReceivedClone.updatedTime, baseApplication.getTimeUTC());
+                        v.put(ColumnName.ReceivedClone.isUploaded , Uploader.NOT_UPLOADED);
                         v.put(ColumnName.ReceivedClone.MotherCode, getParentRandom());
                         v.put(ColumnName.ReceivedClone.FatherCode, getParentRandom());
                         v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.Planted);
@@ -555,6 +573,25 @@ public class TestActivity extends AppCompatActivity {
         dataLoader.getActivityData();
     }
 
+
+    private void createExcelFile(){
+        //TODO 1 Create Excel File
+        //TODO 2 Create Excel File with multiSheet
+        //TODO 3 Create Excel File make Row And Column
+
+        //1
+        ExcelUtils excelUtils = new ExcelUtils(TestActivity.this);
+        excelUtils.createWorkBook();
+
+
+    }
+
+    private void testUploadCloneData(){
+
+        Uploader u= new Uploader(this);
+//        u.uploadAllSentCloneData();
+        u.uploadAllReceiveCloneData();
+    }
 }
 
 

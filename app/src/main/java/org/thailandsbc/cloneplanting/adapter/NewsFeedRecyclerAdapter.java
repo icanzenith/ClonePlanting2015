@@ -1,6 +1,7 @@
 package org.thailandsbc.cloneplanting.adapter;
 
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,13 +32,30 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
 
     private ArrayList<ActivityData.PostData> data;
     private BaseApplication baseApplication;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private DataLoader d;
+    private RecyclerView.LayoutManager manager;
 
-    public NewsFeedRecyclerAdapter(BaseApplication application) {
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
+    }
+
+    public void setSwipeRefreshLayout(SwipeRefreshLayout swipeRefreshLayout) {
+        this.swipeRefreshLayout = swipeRefreshLayout;
+    }
+
+    public NewsFeedRecyclerAdapter(BaseApplication application, RecyclerView.LayoutManager manager) {
+
         data = new ArrayList<>();
-        DataLoader d = new DataLoader(application);
+        d = new DataLoader(application);
         d.setAdapter(this);
         d.getActivityData();
         baseApplication= application;
+        this.manager = manager;
+    }
+
+    public void setToToplist(){
+        manager.scrollToPosition(0);
 
     }
 
@@ -69,7 +87,7 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
                 WorkPlaceData.PLACE_CODE.get(
                         data.get(position).from.workplaceCode));
         holder.textViewMessage.setText(data.get(position).from.message);
-//        holder.textViewDate.setText(createTimeFormat(data.get(position).createdTime));
+        holder.textViewDate.setText(baseApplication.getTimeUTC());
 
         for (int i = 0;i <  data.get(position).liker.size();i++){
             //TODO get MyID
@@ -85,6 +103,11 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void refreshList() {
+        d.getActivityData();
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -140,4 +163,6 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
         }
         return time;
     }
+
+
 }

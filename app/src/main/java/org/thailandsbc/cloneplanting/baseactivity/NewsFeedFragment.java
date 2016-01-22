@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +31,8 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_USERDATA = "UserData";
 
     private ArrayList<ActivityData.PostData> mNewsFeedData;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private UserDataModel mUserData;
 
@@ -106,6 +109,16 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
             createAEmptyStateList();
         }
 
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.refreshList();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
 
     }
 
@@ -117,12 +130,12 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
 
     private void createRecyclerList() {
 
-        //Create Sample DataSet
-//        List<ReceiveFamilyModel> dataSet = createDataSet();
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new NewsFeedRecyclerAdapter((BaseApplication) getActivity().getApplication());
+        mAdapter = new NewsFeedRecyclerAdapter((BaseApplication) getActivity().getApplication(),mLayoutManager);
+        mAdapter.setSwipeRefreshLayout(swipeRefreshLayout);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
+
 
 
     }

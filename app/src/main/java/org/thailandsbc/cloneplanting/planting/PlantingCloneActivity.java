@@ -23,6 +23,7 @@ import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.PlantStatus;
 import org.thailandsbc.cloneplanting.utils.QRMode;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
+import org.thailandsbc.cloneplanting.utils.Uploader;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
 
 import java.util.ArrayList;
@@ -140,6 +141,7 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
             v.put(ColumnName.PlantedClone.isDead,0);
             v.put(ColumnName.PlantedClone.updatedTime, CurrentTime);
             v.put(ColumnName.PlantedClone.createdTime, CurrentTime);
+            v.put(ColumnName.PlantedClone.isUploaded , Uploader.NOT_UPLOADED);
             Uri uri = getContentResolver().insert(Database.PLANTEDCLONE,v);
         }
     }
@@ -159,6 +161,7 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         v.put(ColumnName.ReceivedClone.PlantedAmount, m.getPlantedAmount());
         v.put(ColumnName.ReceivedClone.PlantedBy, baseApplication.getUserData().getUserID());
         v.put(ColumnName.ReceivedClone.PlantedTime, baseApplication.getTimeUTC());
+        v.put(ColumnName.PlantedClone.isUploaded , Uploader.NOT_UPLOADED);
         v.put(ColumnName.ReceivedClone.RowNumber,mRowNumber);
         v.put(ColumnName.ReceivedClone.OrderInRow,  (getPlantedList().size()+1));
         v.put(ColumnName.ReceivedClone.LandID, mLandID);
@@ -196,11 +199,11 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         v.put(ColumnName.ReceivedClone.PlantedAmount, m.getPlantedAmount());
         v.put(ColumnName.ReceivedClone.PlantedBy, baseApplication.getUserData().getUserID());
         v.put(ColumnName.ReceivedClone.PlantedTime, baseApplication.getTimeUTC());
+        v.put(ColumnName.ReceivedClone.isUploaded , Uploader.NOT_UPLOADED);
         v.put(ColumnName.ReceivedClone.RowNumber,mRowNumber);
         v.put(ColumnName.ReceivedClone.OrderInRow,m.getOrderInRow());
         v.put(ColumnName.ReceivedClone.LandID, mLandID);
         v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.Planted);
-
         String where = ColumnName.ReceivedClone.NameTent + " = ?";
         String[] selectionArgs = {m.getNameTent()};
         int update = getContentResolver().update(Database.RECEIVEDCLONE, v, where, selectionArgs);

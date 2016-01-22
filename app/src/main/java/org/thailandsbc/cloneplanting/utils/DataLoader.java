@@ -3,6 +3,7 @@ package org.thailandsbc.cloneplanting.utils;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -112,6 +113,12 @@ public class DataLoader {
     public void
     notifyAdapter(){
             adapter.notifyDataSetChanged();
+    }
+
+    public void
+    notifyAdapterInsert(int count){
+        adapter.notifyItemRangeInserted(0,count);
+
     }
     class FriendListData{
         public ArrayList<BreederContent.BreederItem> FriendListData= new ArrayList<>();
@@ -267,7 +274,6 @@ public class DataLoader {
 
     public void
     getActivityData(){
-
         final ActivityData[] activityData = new ActivityData[1];
         final long startTime = System.nanoTime();
         String url = "https://raw.githubusercontent.com/icanzenith/ClonePlanting2015/master/app/assets/activity.json";
@@ -280,8 +286,14 @@ public class DataLoader {
                 if (status.getCode() == 200){
                     Log.d(TAG, "callback: SectorData : ");
                     Log.d(TAG, "callback: Object Size"+object.data.size());
-                    ((NewsFeedRecyclerAdapter)adapter).getData().addAll(object.data);
-                    notifyAdapter();
+                    for (int i = 0; i < object.data.size();i++){
+                        ((NewsFeedRecyclerAdapter)adapter).getData().add(i,object.data.get(i));
+                    }
+
+                    SwipeRefreshLayout swipeRefreshLayout = ((NewsFeedRecyclerAdapter) adapter).getSwipeRefreshLayout();
+                    swipeRefreshLayout.setRefreshing(false);
+                    notifyAdapterInsert(object.data.size());
+                    ((NewsFeedRecyclerAdapter) adapter).setToToplist();
                 }
                 long endTime = System.nanoTime();
                 long duration = (endTime - startTime);

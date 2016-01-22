@@ -219,6 +219,7 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
         values.put(ColumnName.SentClone.SentBy, userData.getWorkPlaceCode());
         values.put(ColumnName.SentClone.createdTime, baseApplication.getTimeUTC());
         values.put(ColumnName.SentClone.updatedTime, baseApplication.getTimeUTC());
+        values.put(ColumnName.SentClone.isUploaded,0);
 
         int update = getContentResolver().update(Database.SENTCLONE, values, where, selectionArgs);
         if (update <= 0){
@@ -243,6 +244,7 @@ public class SendActivity extends AppCompatActivity implements onFragmentInterac
         values.put(ColumnName.SentClone.SentBy, userData.getWorkPlaceCode());
         values.put(ColumnName.SentClone.createdTime, baseApplication.getTimeUTC());
         values.put(ColumnName.SentClone.updatedTime, baseApplication.getTimeUTC());
+        values.put(ColumnName.SentClone.isUploaded,0);
         Uri newUri = getContentResolver().insert(Database.SENTCLONE, values);
         mAdapter.addNewDataItem(item);
 
