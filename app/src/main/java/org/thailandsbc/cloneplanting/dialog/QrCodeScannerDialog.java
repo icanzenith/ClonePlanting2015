@@ -1,6 +1,9 @@
 package org.thailandsbc.cloneplanting.dialog;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -14,10 +17,16 @@ import android.widget.TextView;
 import com.google.zxing.Result;
 
 import org.thailandsbc.cloneplanting.R;
+import org.thailandsbc.cloneplanting.database.Database;
+import org.thailandsbc.cloneplanting.model.ColumnName;
 import org.thailandsbc.cloneplanting.model.ScannerResultModel;
+import org.thailandsbc.cloneplanting.planting.NameTentListActivity;
 import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.QRMode;
+import org.thailandsbc.cloneplanting.utils.Request;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
+
+import java.util.ArrayList;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -36,6 +45,7 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
 
     private Button buttonFinish;
     private Button buttonCancle;
+    private Button buttonOpenList;
 
     private onFragmentInteractionListener mListener;
 
@@ -86,11 +96,15 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         mScannerView = (ZXingScannerView) v.findViewById(R.id.scannerView);
         textViewScannerTitle = (TextView) v.findViewById(R.id.textViewScannerTitle);
 
+
         buttonFinish = (Button) v.findViewById(R.id.buttonFinish);
         buttonCancle = (Button) v.findViewById(R.id.buttonCancel);
+        buttonOpenList = (Button) v.findViewById(R.id.buttonOpenList);
+        buttonOpenList.setVisibility(View.INVISIBLE);
 
         buttonFinish.setOnClickListener(this);
         buttonCancle.setOnClickListener(this);
+        buttonOpenList.setOnClickListener(this);
     }
 
     private void setModeTitle(String ModeMenu) {
@@ -105,8 +119,16 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
 
         if (ModeMenu.equals(QRMode.MODE_PLANT_FAMILY)) {
             textViewScannerTitle.setText(getResources().getString(R.string.qr_scanner_dialog_title_plant));
+            setOpenListButtonOpen();
+
         }
     }
+
+    private void setOpenListButtonOpen() {
+        buttonOpenList.setVisibility(View.VISIBLE);
+
+    }
+
 
     @Override
     public void onResume() {
@@ -131,8 +153,14 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
             case R.id.buttonCancel:
                 getDialog().dismiss();
                 break;
+            case R.id.buttonOpenList:
+                Intent intent = new Intent(getActivity(), NameTentListActivity.class);
+                startActivityForResult(intent,Request.SELECT_FROM_LIST);
+                break;
         }
     }
+
+
 
     private void onFinishScan() {
         mAmount = Integer.parseInt(editTextAmount.getText().toString());
@@ -141,7 +169,7 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
             result.setNameTent(mFamilyCode);
             result.setPlantedAmount(mAmount);
             mListener.onFragmentInteraction(mScannerMode,result);
-        }else{
+        }else {
             ScannerResultModel result = new ScannerResultModel();
             result.setFamilyCode(mFamilyCode);
             result.setAmount(mAmount);
@@ -149,6 +177,20 @@ public class QrCodeScannerDialog extends DialogFragment implements ZXingScannerV
         }
         dismiss();
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Request.SELECT_FROM_LIST){
+            mFamilyCode = data.getStringExtra(ColumnName.ReceivedClone.NameTent);
+            textViewQRCodeResult.setText(mFamilyCode);
+            textViewQRCodeResult.setVisibility(View.VISIBLE);
+            ReceiveFamilyModel result = new ReceiveFamilyModel();
+            result.setNameTent(mFamilyCode);
+            result.setPlantedAmount(mAmount);
+
+        }
     }
 
     @Override

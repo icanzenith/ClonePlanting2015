@@ -125,6 +125,7 @@ public class NewsFeedRecyclerAdapter extends RecyclerView.Adapter<NewsFeedRecycl
 
         public ViewHolder(View v) {
             super(v);
+
             imageViewProfile = (CircleImageView) v.findViewById(R.id.imageViewProfile);
             textViewWorkPlaceCode = (TextView) v.findViewById(R.id.textViewWorkPlaceCode);
             likeStatus = (ImageView) v.findViewById(R.id.likeStatus);

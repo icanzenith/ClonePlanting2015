@@ -23,6 +23,7 @@
 
     <include layout="@layout/content_check_clone" />
 
+
     <android.support.design.widget.FloatingActionButton
         android:visibility="invisible"
         android:id="@+id/fab"

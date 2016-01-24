@@ -50,6 +50,7 @@ public class ConfirmCreateLandActivity extends AppCompatActivity implements OnMa
     }
 
     private void insertToDatabase() {
+
         //setdata to landDetail
         landDetail.Sector = b.getUserData().getWorkPlaceCode();
         landDetail.UserCreate = b.getUserData().getUserID();
@@ -59,38 +60,8 @@ public class ConfirmCreateLandActivity extends AppCompatActivity implements OnMa
         landDetail.createdTime = b.getTimeUTC();
         landDetail.updatedTime = b.getTimeUTC();
         uploader.uploadLandData(landDetail);
-
-        //
-
-//        ContentValues values = new ContentValues();
-//        values.put(ColumnName.Land.LandName                 ,landDetail.LandName);
-//        values.put(ColumnName.Land.LandArea                 ,landDetail.LandArea);
-//        values.put(ColumnName.Land.LandWidth                ,landDetail.LandWidth);
-//        values.put(ColumnName.Land.LandLength               ,landDetail.LandLength);
-//        values.put(ColumnName.Land.Address                  ,landDetail.Address);
-//        values.put(ColumnName.Land.createdTime              ,landDetail.createdTime);
-//        values.put(ColumnName.Land.updatedTime              ,landDetail.updatedTime);
-//        values.put(ColumnName.Land.UserCreate               ,landDetail.UserCreate);
-//        values.put(ColumnName.Land.Latitude                 ,landDetail.Latitude);
-//        values.put(ColumnName.Land.Longitude                ,landDetail.Longitude);
-//        values.put(ColumnName.Land.Sector                   ,landDetail.Sector);
-//        values.put(ColumnName.Land.SugarcaneSelectionType   ,landDetail.SugarcaneSelectionType);
-//        values.put(ColumnName.Land.MaximumRow               ,landDetail.MaximumRow);
-//        values.put(ColumnName.Land.MaximumClonePerFamily    ,landDetail.MaximumClonePerFamily);
-//        values.put(ColumnName.Land.MaximumFamilyPerRow      ,landDetail.MaximumFamilyPerRow);
-//
-//        Uri s = getContentResolver().insert(Database.LAND,values);
-//
-//        ContentValues values2 = new ContentValues();
-//        values2.put(ColumnName.Land.LandID, Integer.valueOf(s.getLastPathSegment()));
-//        String selection = ColumnName.Land.ObjectID+" = "+Integer.valueOf(s.getLastPathSegment());
-//        Log.d("tag LastPath",selection);
-//        int rowNumber = getContentResolver().update(Database.LAND, values2, selection, null);
-//        Log.d("tag clone number","RowNumber"+rowNumber);
-//
-//        //TODO Finish This an previous Activity
-//        this.setResult(RESULT_OK);
-//        finish();
+        this.setResult(RESULT_OK);
+        finish();
     }
 
     private void InitializeViews() {

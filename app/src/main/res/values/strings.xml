@@ -75,7 +75,7 @@
     </string-array>
     <string name="title_activity_confirm_create_land">ConfirmCreateLandActivity</string>
     <string name="qr_scanner_dialog_title_plant">กรุณาระบุจำนวนที่ปลูก</string>
-    <string name="title_activity_check_clone">CheckCloneActivity</string>
+    <string name="title_activity_check_clone">ตรวจสอบต้นที่ตาย</string>
     <string name="title_activity_personal_profile">PersonalProfile</string>
     <string name="timline">TimeLine</string>
     <string name="personal_profile">ข้อมูลส่วนตัว</string>
@@ -153,5 +153,15 @@
         <item>โรค</item>
     </string-array>
     <string name="title_activity_breeder_network">เครือข่าย</string>
+    <string name="Cancel">Cancel</string>
+    <string name="gps_network_not_enabled">กรุณาเปิด GPS</string>
+    <string name="open_location_settings">Open</string>
+    <string name="logout">Logout</string>
+    <string name="message_logout">ยืนยันการออกจากระบบ</string>
+    <string name="title_activity_name_tent_list_fragment">NameTentListFragment</string>
+    <string name="ok">ต้องการ</string>
+    <string name="not_ok">ไม่ต้องการ</string>
+    <string name="cancle_create_land">ยกเลิกการสร้างแปลง</string>
+    <string name="continue_do">ทำต่อ</string>
 
 </resources>

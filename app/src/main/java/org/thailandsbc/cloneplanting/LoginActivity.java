@@ -19,6 +19,7 @@ import org.thailandsbc.cloneplanting.baseactivity.BaseActivity;
 import org.thailandsbc.cloneplanting.database.MySharedPreference;
 import org.thailandsbc.cloneplanting.model.UserDataModel;
 import org.thailandsbc.cloneplanting.utils.GsonTransformer;
+import org.thailandsbc.cloneplanting.utils.WorkPlaceData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         m = new MySharedPreference(this);
         if (m.isLoggedIn()) {
             Intent loginIntent = new Intent(LoginActivity.this, BaseActivity.class);
-            userDataModel=m.getUserData();
+            userDataModel = m.getUserData();
 //            loginIntent.putExtra(TAG_USERDATA, userDataModel.createSample());
             startActivity(loginIntent);
             finish();
@@ -59,10 +60,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private ProgressDialog progressDialogLogin;
+
     @Override
     public void onClick(View v) {
 
-        progressDialogLogin = new ProgressDialog(this,0);
+        progressDialogLogin = new ProgressDialog(this, 0);
         progressDialogLogin.setTitle("Login in...");
         progressDialogLogin.show();
         doLogin();
@@ -70,23 +72,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-
     AQuery aq;
     static GsonTransformer gsonTransformer = new GsonTransformer();
+
     private void doLogin() {
 //        String name = "http://210.1.60.178:6111/index.php/service/login1stcloneplanting?Username=" +
 //                ""+editTextUsername.getText().toString()+
 //                "&&Password="+editTextPassword.getText().toString();
-        String name = "http://210.1.60.178:6111/index.php/service/login1stcloneplanting?Username=111&Password=111";
+//        String name = "http://210.1.60.178:6111/index.php/service/login1stcloneplanting";
+        String name = "https://raw.githubusercontent.com/icanzenith/jsonrawtest/master/userdata.json";
 
-        Log.d("Call Back URL",name);
+        Log.d("Call Back URL", name);
 
         aq = new AQuery(this);
+
         Map<String, String> params = new HashMap();
         params.put("Username", editTextUsername.getText().toString());
         params.put("Password", editTextPassword.getText().toString());
-
-        aq.transformer(gsonTransformer).ajax(name, null,UserLoginModel.class, new AjaxCallback<UserLoginModel>() {
+        //TODO Change Parameter to not null
+        aq.transformer(gsonTransformer).ajax(name, null, UserLoginModel.class, new AjaxCallback<UserLoginModel>() {
             @Override
             public void callback(String url, UserLoginModel object, AjaxStatus status) {
                 super.callback(url, object, status);
@@ -96,14 +100,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d("Callback", status.getMessage());
                     Log.d("Callback UserData", "" + object.getUserData().getName());
                     Log.d("Callback UserData", "" + object.getUserData().getSector());
-//                    Log.d("Callback UserData", ""+object.getUserData().getPicURL().toString());
-                    Log.d("Callback UserData", ""+object.getUserData().getTel());
-                    Log.d("Callback UserData", ""+object.getUserData().getUserID());
+                    Log.d("Callback UserData", "" + object.getUserData().getPicURL());
+                    Log.d("Callback UserData", "" + object.getUserData().getTel());
+                    Log.d("Callback UserData", "" + object.getUserData().getUserID());
 
-                    if (object!=null){
+                    if (object != null) {
 //                        Log.d("Callback UserData", ""+object.getName().toString());
                         Gson gson = new Gson();
-                        Log.d("Callback UserData", ""+gson.toJson(object).toString());
+                        Log.d("Callback UserData", "" + gson.toJson(object).toString());
                     }
 
                 } else {
@@ -120,22 +124,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void CreateSessionLogin(UserData object) {
+        try {
+            UserDataModel data = new UserDataModel();
+            Log.d("object", object.getName() + "");
+            data.setUserID(object.getUserID());
+            data.setFullName(object.getName());
+            data.setWorkPlaceCode(object.getSector());
+            data.setProfilePictureURL(object.getPicURL());
+            data.setWorkPlaceFullName(WorkPlaceData.PLACE_CODE.get(object.getSector()));
 
-        UserDataModel data = new UserDataModel();
-        Log.d("object",object.getName()+"");
-        data.setUserID(object.getUserID());
-        data.setFullName(object.getName());
-        data.setWorkPlaceCode(object.getSector());
-//        data.setProfilePictureURL(object.getPicURL());
-        m.CreatedSessionLogin(data);
-//        m.CreatedSessionLogin(data.createSample());
-        progressDialogLogin.dismiss();
-        Intent loginIntent = new Intent(LoginActivity.this, BaseActivity.class);
-        startActivity(loginIntent);
-        finish();
+            m.CreatedSessionLogin(data);
+            progressDialogLogin.dismiss();
+            Intent loginIntent = new Intent(LoginActivity.this, BaseActivity.class);
+            startActivity(loginIntent);
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplication(),"Login ล้มเหลว",Toast.LENGTH_LONG).show();
+        }
+
     }
-
-
 
 
     private class UserLoginModel {
@@ -149,7 +157,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             UserData = userData;
         }
     }
-    class UserData{
+
+    class UserData {
 
         public int UserID;
         public String Name;

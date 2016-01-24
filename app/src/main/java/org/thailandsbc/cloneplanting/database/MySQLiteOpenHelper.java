@@ -105,6 +105,22 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.SentClone.MotherCode + " TEXT," +
             ColumnName.SentClone.FatherCode + " TEXT)";
 
+    private final String CREATE_TABLE_PLANTED_FAMILY = "" +
+            "CREATE TABLE PlantedFamily(" +
+            ColumnName.PlantedFamily.ReceivedCloneID+INTEGER +
+            ColumnName.PlantedFamily.ObjectID       +INTEGER +
+            ColumnName.PlantedFamily.NameTent       +TEXT +
+            ColumnName.PlantedFamily.LandID         +INTEGER +
+            ColumnName.PlantedFamily.RowNumber      +INTEGER +
+            ColumnName.PlantedFamily.OrderInRow     +INTEGER +
+            ColumnName.PlantedFamily.PlantedBy      +INTEGER +
+            ColumnName.PlantedFamily.PlantedAmount  +INTEGER +
+            ColumnName.PlantedFamily.SurviveAmount  +INTEGER +
+            ColumnName.PlantedFamily.updatedTime    +TEXT +
+            ColumnName.PlantedFamily.createdTime    +TEXT +
+            ColumnName.PlantedFamily.isUploaded     +"INTEGER"+
+            ")";
+
 
     //ข้อมูลการรับ เป็น Family และ ข้อมูลตำแหน่งที่ปลูก
     private final String CREATE_TABLE_RECEIVEDCLONE = "" +
@@ -121,14 +137,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             ColumnName.ReceivedClone.MotherCode + TEXT +
             ColumnName.ReceivedClone.FatherCode + TEXT +
             ColumnName.ReceivedClone.isPlanted + INTEGER +
-            ColumnName.ReceivedClone.PlantedBy + TEXT +
-            ColumnName.ReceivedClone.RowNumber + INTEGER +
-            ColumnName.ReceivedClone.OrderInRow + INTEGER +
-            ColumnName.ReceivedClone.PlantedTime + TEXT +
-            ColumnName.ReceivedClone.PlantedAmount + INTEGER+
-            ColumnName.ReceivedClone.SurviveAmount + INTEGER+
-            ColumnName.ReceivedClone.LandID + " INTEGER, " +
-            "FOREIGN KEY("+ColumnName.ReceivedClone.LandID+") REFERENCES Land("+ColumnName.Activity.LandID+"))";
+            //TODO DELETE COLUMN
+            ColumnName.ReceivedClone.PlantedAmount + " INTEGER"+
+            ")";
 
     private final String CREATE_TABLE_PLANTEDCLONE = "" +
             "CREATE TABLE PlantedClone(" +

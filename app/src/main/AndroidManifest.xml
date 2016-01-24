@@ -7,14 +7,16 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -35,16 +37,20 @@
         <activity
             android:name=".baseactivity.BaseActivity"
             android:label="@string/title_activity_base"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".SendActivity"
-            android:label="@string/title_activity_send" />
+            android:label="@string/title_activity_send"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FamilyDetailsActivity"
-            android:label="@string/title_activity_family_details" />
+            android:label="@string/title_activity_family_details"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".receive.ReceiveActivity"
-            android:label="@string/title_activity_receive" />
+            android:label="@string/title_activity_receive"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name=".database.ClonePlantingContentProvider"
@@ -55,62 +61,82 @@
         <activity
             android:name=".BlankActivity"
             android:label="@string/title_activity_blank"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".planting.PlantingCloneActivity"
             android:label="@string/title_activity_planting_clone"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".test.testAddData"
             android:label="Test"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".planting.RowListActivity"
             android:label="@string/title_activity_row_list_adapter"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".createland.LandSelectionActivity"
             android:label="@string/title_activity_land_selection"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".createland.CreateLandActivity"
             android:label="@string/title_activity_create_land"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".createland.ConfirmCreateLandActivity"
             android:label="@string/title_activity_confirm_create_land"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".checkclone.CheckCloneActivity"
             android:label="@string/title_activity_check_clone"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".personal.PersonalProfile"
             android:label="@string/title_activity_personal_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".personal.EditProfileActivity"
             android:label="@string/title_activity_edit_profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".test.TestActivity"
             android:label="@string/title_activity_test"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".landmanagement.LandManagementActivity"
             android:label="@string/title_activity_land_management"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".customview.CustomViewExampleActivity"
             android:label="@string/title_activity_custom_view_example"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".setting.SettingsActivity"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".breedernetwork.BreederNetworkActivity"
             android:label="@string/title_activity_breeder_network"
-            android:theme="@style/AppTheme" />x
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        x
+        <activity
+            android:name=".planting.NameTentListActivity"
+            android:label="@string/title_activity_name_tent_list_fragment"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

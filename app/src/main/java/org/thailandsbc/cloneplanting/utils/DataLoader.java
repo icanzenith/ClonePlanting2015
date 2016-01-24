@@ -212,14 +212,8 @@ public class DataLoader {
                         c.put(ColumnName.ReceivedClone.MotherCode,      model.MotherCode        );
                         c.put(ColumnName.ReceivedClone.FatherCode,      model.FatherCode        );
                         c.put(ColumnName.ReceivedClone.isPlanted,       model.isPlanted         );
-                        c.put(ColumnName.ReceivedClone.PlantedBy,       model.PlantedBy         );
                         c.put(ColumnName.ReceivedClone.PlantedAmount,   model.PlantedAmount     );
-                        c.put(ColumnName.ReceivedClone.RowNumber,       model.RowNumber         );
-                        c.put(ColumnName.ReceivedClone.OrderInRow,      model.OrderInRow        );
-                        c.put(ColumnName.ReceivedClone.PlantedTime,     model.PlantedTime       );
-                        c.put(ColumnName.ReceivedClone.LandID,          model.LandID            );
-                        c.put(ColumnName.ReceivedClone.SurviveAmount,   model.SurviveAmount     );
-                        c.put(ColumnName.ReceivedClone.OrderInRow,      model.OrderInRow        );
+                        //TODO Add Left Amount
 
                         contentResolver.insert(Database.RECEIVEDCLONE,c);
                         Log.d(TAG, "callback: SentCloneData "+c.toString());
@@ -276,7 +270,7 @@ public class DataLoader {
     getActivityData(){
         final ActivityData[] activityData = new ActivityData[1];
         final long startTime = System.nanoTime();
-        String url = "https://raw.githubusercontent.com/icanzenith/ClonePlanting2015/master/app/assets/activity.json";
+        String url = "https://raw.githubusercontent.com/icanzenith/jsonrawtest/master/activity.json";
         aq.transformer(gsonTransformer).ajax(url,null,ActivityData.class,new AjaxCallback<ActivityData>(){
             @Override
             public void callback(String url, ActivityData object, AjaxStatus status) {

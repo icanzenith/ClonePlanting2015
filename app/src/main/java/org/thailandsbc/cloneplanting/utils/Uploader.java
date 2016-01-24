@@ -70,12 +70,8 @@ public class Uploader {
         params.put(ColumnName.ReceivedClone.MotherCode,     data.MotherCode    );
         params.put(ColumnName.ReceivedClone.FatherCode,     data.FatherCode    );
         params.put(ColumnName.ReceivedClone.isPlanted,      data.isPlanted     );
-        params.put(ColumnName.ReceivedClone.PlantedBy,      data.PlantedBy     );
-        params.put(ColumnName.ReceivedClone.RowNumber,      data.RowNumber     );
-        params.put(ColumnName.ReceivedClone.OrderInRow,     data.OrderInRow    );
-        params.put(ColumnName.ReceivedClone.PlantedTime,    data.PlantedTime   );
-        params.put(ColumnName.ReceivedClone.LandID,         data.LandID        );
-        params.put(ColumnName.ReceivedClone.SurviveAmount,  data.SurviveAmount );
+       //TODO Add Left Amount
+
 
 
         aq.transformer(gsonTransformer).ajax(uploadURL,params, JSONObject.class,new AjaxCallback<JSONObject>(){
@@ -239,7 +235,7 @@ public class Uploader {
                         if (object.getInt("status")==200){
                             ContentResolver cr = context.getContentResolver();
                             ContentValues v = new ContentValues();
-                            v.put(ColumnName.Land.LandID                ,object.getInt("landid")               );
+                            v.put(ColumnName.Land.LandID                ,object.getInt("id")               );
                             v.put(ColumnName.Land.LandName              ,data.LandName              );
                             v.put(ColumnName.Land.LandLength            ,data.LandLength            );
                             v.put(ColumnName.Land.LandWidth             ,data.LandWidth             );

@@ -98,6 +98,16 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         fabHome.setOnClickListener(this);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mAdapter.refreshList();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        createRecyclerList();
         buttonRefresh = (Button) v.findViewById(R.id.buttonRefresh);
         buttonRefresh.setOnClickListener(this);
         imageViewEmptyState = (ImageView) v.findViewById(R.id.emptyState);
@@ -109,14 +119,7 @@ public class NewsFeedFragment extends Fragment implements View.OnClickListener{
             createAEmptyStateList();
         }
 
-        swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mAdapter.refreshList();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+
 
 
 

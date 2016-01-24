@@ -15,6 +15,7 @@ public class Database {
     public static final String TABLE_SENTCLONE        =   "SentClone";
     public static final String TABLE_RECEIVEDCLONE    =   "ReceivedClone";
     public static final String TABLE_PLANTEDCLONE     =   "PlantedClone";
+    public static final String TABLE_PLANTEDFAMILY     =   "PlantedFamily";
     public static final String TABLE_LAND             =   "Land";
     public static final String TABLE_ACTIVITY         =   "Activity";
     public static final String TABLE_COMMENT          =   "Comment";
@@ -25,6 +26,7 @@ public class Database {
     public static final Uri SECTOR             =      Uri.parse(SCHEME+AUTHORITY+"/"+TABLE_SECTOR       );
     public static final Uri SENTCLONE          =      Uri.parse(SCHEME+AUTHORITY+"/"+TABLE_SENTCLONE    );
     public static final Uri RECEIVEDCLONE      =      Uri.parse(SCHEME+AUTHORITY+"/"+TABLE_RECEIVEDCLONE);
+    public static final Uri PLANTEDFAMILY      =      Uri.parse(SCHEME+AUTHORITY+"/"+TABLE_PLANTEDFAMILY);
     public static final Uri PLANTEDCLONE       =      Uri.parse(SCHEME+AUTHORITY+"/"+TABLE_PLANTEDCLONE );
     public static final Uri LAND               =      Uri.parse(SCHEME+AUTHORITY+"/"+TABLE_LAND         );
     public static final Uri ACTIVITY           =      Uri.parse(SCHEME+AUTHORITY+"/"+TABLE_ACTIVITY     );

@@ -71,14 +71,33 @@ public class ColumnName {
         public static final String MotherCode       = "MotherCode";
         public static final String FatherCode       = "FatherCode";
         public static final String isPlanted        = "isPlanted";
-        public static final String PlantedBy        = "PlantedBy";
+//        public static final String PlantedBy        = "PlantedBy";
+//        public static final String RowNumber        = "RowNumber";
+//        public static final String OrderInRow       = "OrderInRow";
+//        public static final String PlantedTime      = "PlantedTime";
+//        public static final String LandID           = "LandID";
+//        public static final String SurviveAmount    = "SurviveAmount";
+        public static final String PlantedAmount    = "PlantedAmount";
+        public static final String LeftAmount       = "LeftAmount";
+        public static final String isUploaded       = "isUploaded";
+    }
+
+    public class PlantedFamily{
+
+        public static final String ReceivedCloneID  = "ReceivedCloneID";
+        public static final String ObjectID         ="ObjectID";
+        public static final String NameTent         = "NameTent";
+        public static final String LandID           = "LandID";
         public static final String RowNumber        = "RowNumber";
         public static final String OrderInRow       = "OrderInRow";
-        public static final String PlantedTime      = "PlantedTime";
-        public static final String LandID           = "LandID";
-        public static final String SurviveAmount    = "SurviveAmount";
+        public static final String PlantedBy        = "PlantedBy";
         public static final String PlantedAmount    = "PlantedAmount";
+        public static final String SurviveAmount    = "SurviveAmount";
+        public static final String updatedTime      = "updatedTime";
+        public static final String createdTime      = "createdTime";
         public static final String isUploaded       = "isUploaded";
+
+
     }
 
     public class PlantedClone{
@@ -112,7 +131,7 @@ public class ColumnName {
         public static final String MaximumRow               = "MaximumRow";
         public static final String MaximumFamilyPerRow      = "MaximumFamilyPerRow";
         public static final String MaximumClonePerFamily    = "MaximumClonePerFamily";
-        public static final String isUploaded       = "isUploaded";
+        public static final String isUploaded               = "isUploaded";
     }
 
     public class Activity{

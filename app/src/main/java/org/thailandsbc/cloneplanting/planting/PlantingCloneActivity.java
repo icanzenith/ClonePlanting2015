@@ -1,10 +1,17 @@
 package org.thailandsbc.cloneplanting.planting;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +29,7 @@ import org.thailandsbc.cloneplanting.model.LandDetailModel;
 import org.thailandsbc.cloneplanting.receive.ReceiveFamilyModel;
 import org.thailandsbc.cloneplanting.utils.PlantStatus;
 import org.thailandsbc.cloneplanting.utils.QRMode;
+import org.thailandsbc.cloneplanting.utils.Request;
 import org.thailandsbc.cloneplanting.utils.SelectionMode;
 import org.thailandsbc.cloneplanting.utils.Uploader;
 import org.thailandsbc.cloneplanting.utils.onFragmentInteractionListener;
@@ -103,18 +111,18 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         ArrayList<ReceiveFamilyModel> data = new ArrayList<>();
 
         String[] projection = null;
-        String selection = ColumnName.ReceivedClone.LandID + " = " + mLandID + " AND " + ColumnName.ReceivedClone.RowNumber + " = " + mRowNumber;
+        String selection = ColumnName.PlantedFamily.LandID + " = " + mLandID + " AND " + ColumnName.PlantedFamily.RowNumber + " = " + mRowNumber;
         String[] selectionArgs = null;
-        String sortOrder = ColumnName.ReceivedClone.OrderInRow + " ASC";
+        String sortOrder = ColumnName.PlantedFamily.OrderInRow + " ASC";
         Cursor c = getContentResolver().query(Database.RECEIVEDCLONE, projection, selection, selectionArgs, sortOrder);
         Log.d("Tag", "Count " + c.getCount());
         if (c != null) {
             while (c.moveToNext()) {
                 ReceiveFamilyModel m = new ReceiveFamilyModel();
                 m.setNameTent(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
-                m.setLandID(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.LandID)));
-                m.setRowNumber(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.RowNumber)));
-                m.setOrderInRow(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.OrderInRow)));
+                m.setLandID(c.getInt(c.getColumnIndex(ColumnName.PlantedFamily.LandID)));
+                m.setRowNumber(c.getInt(c.getColumnIndex(ColumnName.PlantedFamily.RowNumber)));
+                m.setOrderInRow(c.getInt(c.getColumnIndex(ColumnName.PlantedFamily.OrderInRow)));
                 m.setPlantedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.PlantedAmount)));
                 m.setReceivedAmount(c.getInt(c.getColumnIndex(ColumnName.ReceivedClone.ReceivedAmount)));
                 m.setCreatedTime(c.getString(c.getColumnIndex(ColumnName.ReceivedClone.createdTime)));
@@ -157,15 +165,16 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
     public void updateDataToDatabase(ReceiveFamilyModel m) {
 
         ContentValues v = new ContentValues();
-        v.put(ColumnName.ReceivedClone.NameTent,m.getNameTent());
-        v.put(ColumnName.ReceivedClone.PlantedAmount, m.getPlantedAmount());
-        v.put(ColumnName.ReceivedClone.PlantedBy, baseApplication.getUserData().getUserID());
-        v.put(ColumnName.ReceivedClone.PlantedTime, baseApplication.getTimeUTC());
-        v.put(ColumnName.PlantedClone.isUploaded , Uploader.NOT_UPLOADED);
-        v.put(ColumnName.ReceivedClone.RowNumber,mRowNumber);
-        v.put(ColumnName.ReceivedClone.OrderInRow,  (getPlantedList().size()+1));
-        v.put(ColumnName.ReceivedClone.LandID, mLandID);
-        v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.Planted);
+        v.put(ColumnName.PlantedFamily.NameTent,m.getNameTent());
+        v.put(ColumnName.PlantedFamily.PlantedAmount, m.getPlantedAmount());
+        v.put(ColumnName.PlantedFamily.PlantedBy, baseApplication.getUserData().getUserID());
+        v.put(ColumnName.PlantedFamily.createdTime, baseApplication.getTimeUTC());
+        v.put(ColumnName.PlantedFamily.isUploaded , Uploader.NOT_UPLOADED);
+        v.put(ColumnName.PlantedFamily.RowNumber,mRowNumber);
+        v.put(ColumnName.PlantedFamily.OrderInRow,  (getPlantedList().size()+1));
+        v.put(ColumnName.PlantedFamily.LandID, mLandID);
+        //TODO REFER TO Status
+//        v.put(ColumnName.PlantedFamily.isPlanted, PlantStatus.Planted);
 
         String where = ColumnName.ReceivedClone.NameTent + " = ?";
         String[] selectionArgs = {m.getNameTent()};
@@ -173,7 +182,26 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
         if (update <= 0) {
             //update fail ยังไม่ได้ตรวจรับ
             Log.d("Tag Update", "update fail " + v.toString());
+            // 1. Instantiate an AlertDialog.Builder with its constructor
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage("ไม่มีเบอร์นี้อยู่ในระบบ")
+                    .setTitle("การแจ้งเตือน").setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            }).setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            // 3. Get the AlertDialog from create()
+            AlertDialog dialog = builder.create();
+            dialog.show();
         } else {
             //update complete
             Log.d("Tag Update","update complete "+ v.toString());
@@ -195,18 +223,18 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
 
     public void editPlantedClone(ReceiveFamilyModel m){
         ContentValues v = new ContentValues();
-        v.put(ColumnName.ReceivedClone.NameTent,m.getNameTent());
-        v.put(ColumnName.ReceivedClone.PlantedAmount, m.getPlantedAmount());
-        v.put(ColumnName.ReceivedClone.PlantedBy, baseApplication.getUserData().getUserID());
-        v.put(ColumnName.ReceivedClone.PlantedTime, baseApplication.getTimeUTC());
-        v.put(ColumnName.ReceivedClone.isUploaded , Uploader.NOT_UPLOADED);
-        v.put(ColumnName.ReceivedClone.RowNumber,mRowNumber);
-        v.put(ColumnName.ReceivedClone.OrderInRow,m.getOrderInRow());
-        v.put(ColumnName.ReceivedClone.LandID, mLandID);
-        v.put(ColumnName.ReceivedClone.isPlanted, PlantStatus.Planted);
-        String where = ColumnName.ReceivedClone.NameTent + " = ?";
+        v.put(ColumnName.PlantedFamily.NameTent,m.getNameTent());
+        v.put(ColumnName.PlantedFamily.PlantedAmount, m.getPlantedAmount());
+        v.put(ColumnName.PlantedFamily.PlantedBy, baseApplication.getUserData().getUserID());
+        v.put(ColumnName.PlantedFamily.createdTime, baseApplication.getTimeUTC());
+        v.put(ColumnName.PlantedFamily.isUploaded , Uploader.NOT_UPLOADED);
+        v.put(ColumnName.PlantedFamily.RowNumber,mRowNumber);
+        v.put(ColumnName.PlantedFamily.OrderInRow,m.getOrderInRow());
+        v.put(ColumnName.PlantedFamily.LandID, mLandID);
+        String where = ColumnName.PlantedFamily.NameTent + " = ?";
         String[] selectionArgs = {m.getNameTent()};
-        int update = getContentResolver().update(Database.RECEIVEDCLONE, v, where, selectionArgs);
+        //TODO
+        int update = getContentResolver().update(Database.PLANTEDFAMILY, v, where, selectionArgs);
         if (update <= 0) {
             //update fail ยังไม่ได้ตรวจรับ
             Log.d("Tag Update", "update fail " + v.toString());
@@ -235,6 +263,15 @@ public class PlantingCloneActivity extends AppCompatActivity implements onFragme
             //update data
             editPlantedClone((ReceiveFamilyModel) object);
             //update list
+        }
+        if (TAG.equals(SelectionMode.MODE_SELECT_FORMLIST)){
+            Intent intent = new Intent(
+                    PlantingCloneActivity.this,
+                    NameTentListActivity.class );
+            startActivityForResult(
+                    intent,
+                    Request.SELECT_FROM_LIST
+            );
 
         }
     }

@@ -1,15 +1,22 @@
 package org.thailandsbc.cloneplanting.createland;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +36,13 @@ import org.thailandsbc.cloneplanting.model.LandDetailModel;
 
 public class CreateLandActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener, View.OnClickListener,
-        LocationListener,GoogleApiClient.ConnectionCallbacks,GoogleMap.OnMyLocationChangeListener {
+        LocationListener,GoogleApiClient.ConnectionCallbacks,GoogleMap.OnMyLocationChangeListener
+{
+    LocationManager lm;
+
+
+    boolean gps_enabled = false;
+    boolean network_enabled = false;
 
     LandDetailModel mLandDetail;
 
@@ -53,6 +66,10 @@ public class CreateLandActivity extends AppCompatActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_land);
+
+        CheckLocation();
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("สร้างแปลง");
         setSupportActionBar(toolbar);
@@ -61,6 +78,64 @@ public class CreateLandActivity extends AppCompatActivity implements OnMapReadyC
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+    }
+
+    private void CheckLocation() {
+        lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {}
+
+        if(!gps_enabled && !network_enabled) {
+            // เตือน User ว่า ต้องเปิด GPS
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setMessage(this.getResources().getString(R.string.gps_network_not_enabled));
+            dialog.setPositiveButton(this.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    // TODO Auto-generated method stub
+                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    CreateLandActivity.this.startActivity(myIntent);
+                    //get gps
+                }
+            });
+            dialog.setNegativeButton(this.getString(R.string.Cancel), new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    // TODO Auto-generated method stub
+                    CreateLandActivity.this.finish();
+
+                }
+            });
+            dialog.show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage(this.getResources().getString(R.string.cancle_create_land));
+        dialog.setPositiveButton(this.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                //ทำต่อไป
+            }
+        });
+        dialog.setNegativeButton(this.getString(R.string.continue_do), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                //ยกเลิกการบันทึกแปลง
+                CreateLandActivity.this.finish();
+
+            }
+        });
+        dialog.show();
 
     }
 

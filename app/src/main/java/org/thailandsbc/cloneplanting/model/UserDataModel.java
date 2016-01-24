@@ -12,7 +12,7 @@ public class UserDataModel implements Parcelable {
         public enum TAG
         {
             UserID,WorkPlaceCode,WorkPlaceFullName,
-            FullName,Email,Position,Address,TelNumber
+            FullName,Email,Position,Address,TelNumber,URL_PICTURE_PROFILE
         }
 
     private Integer UserID;

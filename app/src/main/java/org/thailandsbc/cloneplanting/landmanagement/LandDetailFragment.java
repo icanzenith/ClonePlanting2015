@@ -116,9 +116,9 @@ public class LandDetailFragment extends Fragment {
         ArrayList<ReceiveFamilyModel> famList = new ArrayList<>();
         ContentResolver contentResolver = getActivity().getContentResolver();
 
-        String selection = ColumnName.ReceivedClone.LandID+" = "+landDetailModel.getLandID();
+        String selection = ColumnName.PlantedFamily.LandID+" = "+landDetailModel.getLandID();
         String[] selectionArgs  = null;
-        String sortOrder = ColumnName.ReceivedClone.RowNumber+" ASC ,"+ColumnName.ReceivedClone.OrderInRow+" ASC";
+        String sortOrder = ColumnName.PlantedFamily.LandID+" ASC ,"+ColumnName.PlantedFamily.OrderInRow+" ASC";
         Cursor c = contentResolver.query(Database.RECEIVEDCLONE,null,selection,selectionArgs,sortOrder);
         while (c.moveToNext()){
             Log.d(TAG, "createDataList: "+c.getString(c.getColumnIndex(ColumnName.ReceivedClone.NameTent)));
